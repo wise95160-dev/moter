@@ -20,7 +20,7 @@
 
   <style>
     /* ==========================================================================
-       1. 기본 리셋 및 GitHub Pages 오프라인/온라인 독립형 스타일시트 (외부 CDN 불필요)
+       1. 기본 리셋 및 GitHub Pages 오프라인/온라인 독립형 스타일시트
        ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -59,7 +59,7 @@
     }
 
     /* ==========================================================================
-       2. 레이아웃 및 유틸리티 클래스 (Tailwind 호환 내장 클래스)
+       2. 레이아웃 및 유틸리티 클래스
        ========================================================================== */
     .relative { position: relative; }
     .fixed { position: fixed; }
@@ -85,16 +85,10 @@
     .justify-between { justify-content: space-between; }
 
     .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-    .grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 
-    .gap-0\.5 { gap: 2px; }
     .gap-1 { gap: 4px; }
     .gap-1\.5 { gap: 6px; }
     .gap-2 { gap: 8px; }
-    .gap-3 { gap: 12px; }
 
     .w-full { width: 100%; }
     .h-full { height: 100%; }
@@ -104,8 +98,6 @@
     .h-4 { height: 16px; }
     .w-9 { width: 36px; }
     .h-9 { height: 36px; }
-    .h-10 { height: 40px; }
-    .h-auto { height: auto; }
 
     .max-w-xl { max-width: 576px; }
     .max-w-5xl { max-width: 1024px; }
@@ -114,16 +106,12 @@
     .overflow-hidden { overflow: hidden; }
     .overflow-y-auto { overflow-y: auto; }
 
-    /* 여백(Padding / Margin) */
-    .p-1 { padding: 4px; }
     .p-2 { padding: 8px; }
     .p-3 { padding: 12px; }
     .p-3\.5 { padding: 14px; }
     .p-4 { padding: 16px; }
     .p-6 { padding: 24px; }
 
-    .px-1 { padding-left: 4px; padding-right: 4px; }
-    .px-1\.5 { padding-left: 6px; padding-right: 6px; }
     .px-2 { padding-left: 8px; padding-right: 8px; }
     .px-2\.5 { padding-left: 10px; padding-right: 10px; }
     .px-3 { padding-left: 12px; padding-right: 12px; }
@@ -131,31 +119,24 @@
     .px-4 { padding-left: 16px; padding-right: 16px; }
     .px-5 { padding-left: 20px; padding-right: 20px; }
 
-    .py-0\.5 { padding-top: 2px; padding-bottom: 2px; }
     .py-1 { padding-top: 4px; padding-bottom: 4px; }
     .py-1\.5 { padding-top: 6px; padding-bottom: 6px; }
     .py-2 { padding-top: 8px; padding-bottom: 8px; }
     .py-2\.5 { padding-top: 10px; padding-bottom: 10px; }
-    .py-3 { padding-top: 12px; padding-bottom: 12px; }
 
-    .pt-1 { padding-top: 4px; }
     .pt-3 { padding-top: 12px; }
-    .pb-2 { padding-bottom: 8px; }
     .pb-3 { padding-bottom: 12px; }
 
     .mb-1 { margin-bottom: 4px; }
     .mb-1\.5 { margin-bottom: 6px; }
-    .mb-2 { margin-bottom: 8px; }
     .mb-4 { margin-bottom: 16px; }
     .mt-1 { margin-top: 4px; }
     .mt-5 { margin-top: 20px; }
-    .ml-1 { margin-left: 4px; }
 
     .space-y-1\.5 > * + * { margin-top: 6px; }
     .space-y-2 > * + * { margin-top: 8px; }
     .space-y-3 > * + * { margin-top: 12px; }
 
-    /* 모서리 라운딩 */
     .rounded { border-radius: 4px; }
     .rounded-lg { border-radius: 8px; }
     .rounded-xl { border-radius: 12px; }
@@ -163,7 +144,6 @@
     .rounded-3xl { border-radius: 24px; }
     .rounded-full { border-radius: 9999px; }
 
-    /* 테두리 */
     .border { border: 1px solid #cbd5e1; }
     .border-2 { border: 2px solid #0f172a; }
     .border-b { border-bottom: 1px solid #e2e8f0; }
@@ -173,98 +153,56 @@
     .border-slate-200 { border-color: #e2e8f0; }
     .border-slate-300 { border-color: #cbd5e1; }
     .border-slate-600 { border-color: #475569; }
-    .border-slate-800 { border-color: #1e293b; }
     .border-slate-900 { border-color: #0f172a; }
     .border-amber-200 { border-color: #fde68a; }
     .border-amber-300 { border-color: #fcd34d; }
     .border-amber-400 { border-color: #fbbf24; }
-    .border-amber-700 { border-color: #b45309; }
-    .border-indigo-600 { border-color: #4f46e5; }
-    .border-purple-300 { border-color: #d8b4fe; }
-    .border-purple-600 { border-color: #9333ea; }
-    .border-purple-700 { border-color: #7e22ce; }
-    .border-lime-300 { border-color: #bef264; }
-    .border-rose-600 { border-color: #e11d48; }
-    .border-sky-600 { border-color: #0284c7; }
 
-    /* 배경색 */
     .bg-white { background-color: #ffffff; }
     .bg-slate-50 { background-color: #f8fafc; }
     .bg-slate-100 { background-color: #f1f5f9; }
     .bg-slate-200 { background-color: #e2e8f0; }
     .bg-slate-900 { background-color: #0f172a; }
-    .bg-slate-950 { background-color: #020617; }
     .bg-amber-50 { background-color: #fffbeb; }
     .bg-amber-100 { background-color: #fef3c7; }
     .bg-amber-400 { background-color: #fbbf24; }
-    .bg-yellow-50 { background-color: #fefce8; }
     .bg-yellow-300 { background-color: #fde047; }
-    .bg-lime-50 { background-color: #f7fee7; }
     .bg-lime-400 { background-color: #a3e635; }
-    .bg-emerald-500 { background-color: #10b981; }
     .bg-emerald-600 { background-color: #059669; }
-    .bg-sky-300 { background-color: #7dd3fc; }
-    .bg-sky-500 { background-color: #0ea5e9; }
     .bg-indigo-600 { background-color: #4f46e5; }
-    .bg-purple-500 { background-color: #a855f7; }
-    .bg-purple-600 { background-color: #9333ea; }
-    .bg-purple-900 { background-color: #581c87; }
-    .bg-purple-950 { background-color: #3b0764; }
-    .bg-rose-500 { background-color: #f43f5e; }
     .bg-rose-600 { background-color: #e11d48; }
-    .bg-ac-grad { background: linear-gradient(90deg, #9333ea 0%, #c026d3 100%); }
     .bg-backdrop { background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); }
-    .bg-white\/20 { background-color: rgba(255, 255, 255, 0.22); }
 
-    /* 호버 상태 */
     .hover\:bg-slate-100:hover { background-color: #f1f5f9; }
-    .hover\:bg-slate-200:hover { background-color: #e2e8f0; }
     .hover\:bg-slate-800:hover { background-color: #1e293b; }
     .hover\:bg-amber-100:hover { background-color: #fef3c7; }
     .hover\:bg-amber-200:hover { background-color: #fde68a; }
-    .hover\:bg-amber-300:hover { background-color: #fcd34d; }
     .hover\:bg-yellow-400:hover { background-color: #facc15; }
-    .hover\:bg-emerald-400:hover { background-color: #34d399; }
     .hover\:bg-emerald-500:hover { background-color: #10b981; }
-    .hover\:bg-indigo-50:hover { background-color: #eef2ff; }
-    .hover\:bg-indigo-100:hover { background-color: #e0e7ff; }
     .hover\:bg-indigo-500:hover { background-color: #6366f1; }
-    .hover\:bg-purple-500:hover { background-color: #a855f7; }
-    .hover\:bg-rose-50:hover { background-color: #fff1f2; }
     .hover\:bg-rose-100:hover { background-color: #ffe4e6; }
     .hover\:text-rose-700:hover { color: #be123c; }
 
-    /* 텍스트 스타일 */
     .text-white { color: #ffffff; }
     .text-slate-500 { color: #64748b; }
     .text-slate-600 { color: #475569; }
     .text-slate-700 { color: #334155; }
     .text-slate-800 { color: #1e293b; }
     .text-slate-900 { color: #0f172a; }
-    .text-slate-950 { color: #020617; }
     .text-amber-600 { color: #d97706; }
     .text-amber-900 { color: #78350f; }
     .text-amber-950 { color: #451a03; }
     .text-lime-700 { color: #4d7c0f; }
     .text-sky-700 { color: #0369a1; }
-    .text-sky-900 { color: #0c4a6e; }
-    .text-indigo-100 { color: #e0e7ff; }
     .text-indigo-700 { color: #4338ca; }
-    .text-purple-100 { color: #f3e8ff; }
-    .text-purple-200 { color: #e9d5ff; }
-    .text-purple-900 { color: #581c87; }
     .text-rose-600 { color: #e11d48; }
 
-    .text-\[9px\] { font-size: 9px; }
-    .text-\[10px\] { font-size: 10px; }
-    .text-\[11px\] { font-size: 11px; }
     .text-xs { font-size: 12px; }
     .text-sm { font-size: 14px; }
     .text-base { font-size: 16px; }
     .text-lg { font-size: 18px; }
     .text-xl { font-size: 20px; }
 
-    .font-normal { font-weight: 400; }
     .font-bold { font-weight: 700; }
     .font-extrabold { font-weight: 800; }
     .font-black { font-weight: 900; }
@@ -274,7 +212,6 @@
     .text-right { text-align: right; }
     .leading-relaxed { line-height: 1.6; }
 
-    /* 그림자 */
     .shadow-sm { box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.06); }
     .shadow { box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.12); }
     .shadow-md { box-shadow: 0 4px 10px -2px rgba(15, 23, 42, 0.15); }
@@ -286,7 +223,7 @@
     .pointer-events-auto { pointer-events: auto; }
     .cursor-pointer { cursor: pointer; }
 
-    /* 우측 설정창 고정 폭 (기존 360px의 70% 크기인 252px로 축소 및 내부 비율 최적화) */
+    /* 우측 설정창 고정 폭 (70% 크기 252px) */
     .settings-drawer {
       width: 252px;
       max-width: 75vw;
@@ -305,10 +242,8 @@
     .settings-drawer .rounded-2xl { border-radius: 12px; }
     .settings-drawer .text-sm { font-size: 12px; }
     .settings-drawer .text-xs { font-size: 10.5px; }
-    .settings-drawer .text-\[11px\] { font-size: 9.5px; }
-    .settings-drawer .text-\[10px\] { font-size: 9px; }
 
-    /* 전류 세기 및 360도 각도 슬라이더 */
+    /* 전류 세기 슬라이더 */
     .amp-slider, .angle-slider {
       -webkit-appearance: none;
       appearance: none;
@@ -331,9 +266,7 @@
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-    .amp-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.12);
-    }
+    .amp-slider::-webkit-slider-thumb:hover { transform: scale(1.12); }
 
     .angle-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -345,40 +278,24 @@
       border: 2.5px solid #ffffff;
       box-shadow: 0 2px 6px rgba(15, 23, 42, 0.35);
       cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-    .angle-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
     }
 
-    /* 체크박스 액센트 */
     .accent-amber { accent-color: #d97706; }
     .accent-rose { accent-color: #e11d48; }
     .accent-lime { accent-color: #65a30d; }
+    .accent-sky { accent-color: #0284c7; }
     .accent-slate { accent-color: #334155; }
 
-    /* 설정창 스크롤바 */
-    .custom-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 999px;
-    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
 
-    /* 애니메이션 효과 */
     @keyframes pulse-play {
       0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
       50% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
     }
-    .play-resume-pulse {
-      animation: pulse-play 1.4s infinite;
-    }
+    .play-resume-pulse { animation: pulse-play 1.4s infinite; }
 
-    /* 반응형 보조 */
     @media (max-width: 640px) {
       .hide-mobile { display: none !important; }
       .settings-drawer {
@@ -394,59 +311,38 @@
 </head>
 <body class="relative flex flex-col h-screen w-screen overflow-hidden bg-white">
 
-  <!-- ================= 1. 상단 헤더 바 (교과서 4단계 순환 카드 + 오른손 법칙 카드 + 단일 일시정지/재생 토글 + 설정창 토글) ================= -->
+  <!-- ================= 1. 상단 헤더 바 ================= -->
   <header class="w-full bg-slate-50 border-b border-slate-200 px-3 py-2 flex flex-wrap items-center justify-between gap-2 z-30 shrink-0">
-    <!-- 좌측: 단원 배지 및 타이틀 -->
     <div class="flex items-center gap-2">
       <span class="px-2.5 py-1 rounded-lg bg-yellow-300 border-2 border-slate-900 text-slate-950 font-black text-xs shadow-sm">
         중2 과학 7-3-2
       </span>
-      <h1 class="text-base font-black tracking-tight text-slate-900">
-        전동기의 원리
-      </h1>
+      <h1 class="text-base font-black tracking-tight text-slate-900">전동기의 원리</h1>
     </div>
 
-    <!-- 중앙: 교과서 4단계 순환 카드 + 오른손 법칙 확인 카드 (클릭 시 해당 각도로 이동 후 일시정지 관찰) -->
+    <!-- 교과서 4단계 순환 카드 -->
     <div class="flex flex-wrap items-center gap-1 bg-white border border-slate-300 rounded-2xl p-1 shadow-sm">
-      <button onclick="selectTextbookScene(0)" id="sceneBtn0" class="px-2 py-1 rounded-xl font-bold text-[11px] text-slate-600 hover:bg-slate-100" title="전류가 흐르지 않는 기본 구조">
-        0. 전류 OFF
-      </button>
-      <button onclick="selectTextbookScene(1)" id="sceneBtn1" class="px-2.5 py-1 rounded-xl font-black text-[11px] bg-indigo-600 text-white shadow" title="35°: 같은 극끼리 서로 미는 힘 작용">
-        ① 미는 힘(척력)
-      </button>
+      <button onclick="selectTextbookScene(0)" id="sceneBtn0" class="px-2 py-1 rounded-xl font-bold text-[11px] text-slate-600 hover:bg-slate-100">0. 전류 OFF</button>
+      <button onclick="selectTextbookScene(1)" id="sceneBtn1" class="px-2.5 py-1 rounded-xl font-black text-[11px] bg-indigo-600 text-white shadow">① 미는 힘(척력)</button>
       <span class="text-slate-500 font-black text-xs hide-mobile">➔</span>
-      <button onclick="selectTextbookScene(2)" id="sceneBtn2" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100" title="145°: 다른 극끼리 서로 당기는 힘 작용">
-        ② 당기는 힘(인력)
-      </button>
+      <button onclick="selectTextbookScene(2)" id="sceneBtn2" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100">② 당기는 힘(인력)</button>
       <span class="text-slate-500 font-black text-xs hide-mobile">➔</span>
-      <button onclick="selectTextbookScene(3)" id="sceneBtn3" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-900 bg-amber-100 hover:bg-amber-200" title="180° 수평: 전류 방향과 코일의 N·S극이 바뀌는 순간">
-        ⚡ 전류 방향 전환 순간
-      </button>
+      <button onclick="selectTextbookScene(3)" id="sceneBtn3" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-900 bg-amber-100 hover:bg-amber-200">⚡ 전류 방향 전환 순간</button>
       <span class="text-slate-500 font-black text-xs hide-mobile">➔</span>
-      <button onclick="selectTextbookScene(4)" id="sceneBtn4" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100" title="215°: 극이 바뀐 후 다시 서로 미는 힘 작용 (★위치 주목)">
-        ③ 미는 힘(반바퀴 후)
-      </button>
+      <button onclick="selectTextbookScene(4)" id="sceneBtn4" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100">③ 미는 힘</button>
       <span class="text-slate-500 font-black text-xs hide-mobile">➔</span>
-      <button onclick="selectTextbookScene(5)" id="sceneBtn5" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100" title="325°: 반바퀴 후 서로 당기는 힘 작용 (★위치 주목)">
-        ④ 당기는 힘(반바퀴 후)
-      </button>
-      <button onclick="selectTextbookScene(6)" id="sceneBtn6" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-950 bg-amber-50 border border-amber-300 hover:bg-amber-100" title="코일을 감아쥐는 오른손 법칙으로 N극·S극 찾기">
-        ✋ 오른손 법칙 확인
-      </button>
+      <button onclick="selectTextbookScene(5)" id="sceneBtn5" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100">④ 당기는 힘</button>
+      <button onclick="selectTextbookScene(6)" id="sceneBtn6" class="px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-950 bg-amber-50 border border-amber-300 hover:bg-amber-100">✋ 오른손 법칙 확인</button>
     </div>
 
-    <!-- 우측: 단일 [⏸️ 일시정지 / ▶️ 재생] 토글 버튼 & 도움말 & 설정창 닫기/열기 -->
     <div class="flex items-center gap-1.5">
-      <button id="topPlayPauseBtn" onclick="togglePlayPause()" class="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1" title="단축키: 스페이스바(Space)">
+      <button id="topPlayPauseBtn" onclick="togglePlayPause()" class="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1">
         <span id="topPlayPauseIcon">⏸️</span>
         <span id="topPlayPauseText">일시정지</span>
       </button>
-
-      <button onclick="openModal('modalHelp')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs shadow-sm flex items-center gap-1">
-        <span class="text-amber-600 font-black">?</span>
-        <span class="hide-mobile">도움말</span>
+      <button onclick="openModal('modalHelp')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs shadow-sm">
+        <span class="text-amber-600 font-black">?</span> 도움말
       </button>
-
       <button id="headerSettingsBtn" onclick="toggleSettingsPanel()" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-md flex items-center gap-1.5">
         <span>⚙️</span>
         <span id="headerSettingsBtnText">설정창 닫기 ✕</span>
@@ -454,71 +350,44 @@
     </div>
   </header>
 
-  <!-- ================= 2. 메인 영역 (교과서 정면 캔버스 + 접을 수 있는 우측 설정창) ================= -->
+  <!-- ================= 2. 메인 영역 ================= -->
   <div class="relative flex-1 flex overflow-hidden w-full bg-white">
-
-    <!-- 좌측/중앙: 교과서 전동기 원리 정면 시뮬레이션 영역 -->
     <main id="canvasWrapper" class="relative flex-1 h-full flex flex-col items-center justify-between overflow-hidden bg-white">
-
-      <!-- 상단 상태 배너 (현재 작용하는 힘과 일시정지 상태 표시) -->
       <div class="w-full max-w-5xl px-4 pt-3 flex flex-wrap items-center justify-between gap-2 z-10 pointer-events-none">
         <div id="statusBanner" class="pointer-events-auto flex flex-wrap items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-2xl px-3.5 py-2 shadow-sm">
-          <!-- 회전 중 / 일시정지 상태 배지 -->
           <span id="pauseStatePill" class="px-2.5 py-0.5 rounded-lg bg-emerald-600 text-white font-black text-xs flex items-center gap-1">
-            <span>🔄</span>
-            <span>회전 중</span>
+            <span>🔄</span> <span>회전 중</span>
           </span>
-          <!-- 현재 단계 배지 -->
-          <span id="statusStageBadge" class="px-2.5 py-0.5 rounded-lg bg-lime-400 border border-slate-900 text-slate-950 font-black text-xs">
-            서로 미는 힘 (척력)
-          </span>
-          <p id="statusDescText" class="text-xs font-extrabold text-slate-800" style="margin:0;">
-            자석과 코일의 같은 극(N-N, S-S) 사이에 <span class="text-lime-700 underline">서로 미는 힘</span>이 작용하여 회전합니다.
-          </p>
+          <span id="statusStageBadge" class="px-2.5 py-0.5 rounded-lg bg-lime-400 border border-slate-900 text-slate-950 font-black text-xs">서로 미는 힘 (척력)</span>
+          <p id="statusDescText" class="text-xs font-extrabold text-slate-800" style="margin:0;">자석과 코일의 같은 극 사이에 <span class="text-lime-700 underline">서로 미는 힘</span>이 작용하여 회전합니다.</p>
         </div>
 
-        <!-- 코일 오른손 법칙 빠른 토글 버튼 & 설정창 열기 플로팅 버튼 -->
         <div class="pointer-events-auto flex items-center gap-2">
           <button id="quickRightHandBtn" onclick="toggleRightHandOverlay()" class="px-3 py-2 rounded-2xl border-2 border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-950 font-black text-xs shadow-sm flex items-center gap-1.5">
-            <span>✋</span>
-            <span id="quickRightHandText">오른손(극 찾기) 보기</span>
+            <span>✋</span> <span id="quickRightHandText">오른손(극 찾기) 보기</span>
           </button>
-
           <button id="floatingOpenSettingsBtn" onclick="toggleSettingsPanel(true)" class="hidden px-3.5 py-2 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-lg items-center gap-1.5">
-            <span>⚙️</span>
-            <span>설정창 열기</span>
+            <span>⚙️</span> <span>설정창 열기</span>
           </button>
         </div>
       </div>
 
-      <!-- 중앙: 교과서 그림 100% 재현 2D 캔버스 -->
       <div id="stageBox" class="relative flex-1 w-full flex items-center justify-center overflow-hidden">
         <canvas id="motorCanvas" class="block w-full h-full"></canvas>
       </div>
 
-      <!-- 하단 중앙 플로팅 컨트롤 바 (단일 [⏸️ 일시정지 / ▶️ 재생] 토글 버튼 + 미세 각도 조절 + 속도 + 방향 반전) -->
       <div class="w-full max-w-5xl px-4 pb-3 z-10">
         <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl px-3.5 py-2.5 shadow-lg space-y-2">
-
-          <!-- 1열: 통합 단일 [⏸️ 일시정지 / ▶️ 재생 (계속 회전)] 토글 버튼 & 미세 각도 조절 (-15° / +15° / 360° 슬라이더) -->
           <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200">
-            <!-- 단일 토글 버튼 (회전 중일 때는 '⏸️ 일시정지', 멈추면 '▶️ 재생 (계속 회전)'으로 즉시 전환) -->
             <div class="flex items-center gap-2">
-              <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-sm shadow-md flex items-center gap-2" title="전류·N/S극·힘 화살표를 유지한 채 회전을 멈추거나 다시 재생합니다 (단축키: Space)">
-                <span id="btmPlayPauseIcon">⏸️</span>
-                <span id="btmPlayPauseText">일시정지</span>
+              <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-sm shadow-md flex items-center gap-2">
+                <span id="btmPlayPauseIcon">⏸️</span> <span id="btmPlayPauseText">일시정지</span>
               </button>
-              <span class="hide-mobile text-[11px] font-bold text-slate-500">
-                (단축키: <kbd class="px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-black text-slate-700">Space</kbd>)
-              </span>
+              <span class="hide-mobile text-[11px] font-bold text-slate-500">(단축키: Space)</span>
             </div>
 
-            <!-- 일시정지 중 미세 각도 조절 도구 (-15°, 360° 슬라이더, +15°) -->
             <div class="flex flex-1 min-w-slider max-w-xl items-center gap-2 bg-white border border-slate-300 rounded-xl px-2.5 py-1.5 shadow-inner">
-              <button onclick="rotateCoilByStep(-15)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">
-                ⏪ -15°
-              </button>
-
+              <button onclick="rotateCoilByStep(-15)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">⏪ -15°</button>
               <div class="flex-1 flex flex-col gap-0.5 px-1">
                 <div class="flex items-center justify-between text-[10px] font-black text-slate-600">
                   <span>코일 각도 직접 조절 (0°~360°)</span>
@@ -526,125 +395,77 @@
                 </div>
                 <input type="range" id="angleSlider" min="0" max="360" step="1" value="35" oninput="setCoilAngleFromSlider(this.value)" class="angle-slider" />
               </div>
-
-              <button onclick="rotateCoilByStep(15)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">
-                ⏩ +15°
-              </button>
+              <button onclick="rotateCoilByStep(15)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">⏩ +15°</button>
             </div>
           </div>
 
-          <!-- 2열: 3단계 회전 속도 선택 (최대 1.0배속) & 자석 반전 · 전류 반전 · 정류자 토글 -->
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <!-- 3단계 회전 속도(배속) 선택 버튼 (0.25x ~ 1.0x) -->
-            <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-xl p-1">
-              <span class="text-[11px] font-black text-slate-500 px-1.5 hide-mobile">속도:</span>
-              <button onclick="setSpeedMultiplier(0.25)" id="btmSpd025" class="px-2 py-1 rounded-lg font-bold text-xs text-slate-600 hover:bg-slate-100">0.25x</button>
-              <button onclick="setSpeedMultiplier(0.5)" id="btmSpd05" class="px-2 py-1 rounded-lg font-bold text-xs text-slate-600 hover:bg-slate-100">0.5x</button>
-              <button onclick="setSpeedMultiplier(1.0)" id="btmSpd10" class="px-2 py-1 rounded-lg font-black text-xs bg-indigo-600 text-white shadow">1.0x</button>
-            </div>
-
-            <!-- 빠른 자석 방향 / 전류 방향 / 반바퀴 자동 전환(정류자) 토글 -->
-            <div class="flex items-center gap-1.5">
-              <button onclick="flipMagnetPoles()" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold text-xs flex items-center gap-1">
-                <span>🧲</span>
-                <span id="btmMagnetLabel">[N] ⋯ [S]</span>
-              </button>
-              <button onclick="flipCurrentDirection()" class="px-3 py-1.5 rounded-xl bg-yellow-300 hover:bg-yellow-400 border border-slate-900 text-slate-950 font-black text-xs shadow-sm flex items-center gap-1">
-                <span>⚡</span>
-                <span id="btmCurrentLabel">전류 정방향 (↑)</span>
-              </button>
-              <button id="btmCommutatorBtn" onclick="setCommutatorMode(!state.commutatorAutoFlip)" class="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 border border-slate-900 text-slate-950 font-black text-xs shadow-sm">
-                🔄 반바퀴 자동 전환 ON
-              </button>
-            </div>
+          <div class="flex flex-wrap items-center justify-end gap-2">
+            <button onclick="flipMagnetPoles()" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold text-xs flex items-center gap-1">
+              <span>🧲</span> <span id="btmMagnetLabel">[N] ⋯ [S]</span>
+            </button>
+            <button onclick="flipCurrentDirection()" class="px-3 py-1.5 rounded-xl bg-yellow-300 hover:bg-yellow-400 border border-slate-900 text-slate-950 font-black text-xs shadow-sm flex items-center gap-1">
+              <span>⚡</span> <span id="btmCurrentLabel">전류 정방향 (↑)</span>
+            </button>
+            <button id="btmCommutatorBtn" onclick="setCommutatorMode(!state.commutatorAutoFlip)" class="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 border border-slate-900 text-slate-950 font-black text-xs shadow-sm">
+              🔄 반바퀴 자동 전환 ON
+            </button>
           </div>
-
         </div>
       </div>
-
     </main>
 
-    <!-- ================= 3. 우측 설정창 (닫기/열기 완벽 지원) ================= -->
+    <!-- ================= 3. 우측 설정창 ================= -->
     <aside id="settingsPanel" class="settings-drawer h-full bg-slate-50 border-l border-slate-200 shadow-2xl flex flex-col justify-between z-20 shrink-0">
-
-      <!-- 설정창 상단 헤더 + [✕ 닫기] 버튼 -->
       <div class="px-4 py-3 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
-          <span class="text-base">⚙️</span>
+          <span>⚙️</span>
           <h2 class="text-sm font-black text-slate-900" style="margin:0;">전동기 실험 조작 설정창</h2>
         </div>
         <button onclick="toggleSettingsPanel(false)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-rose-100 hover:text-rose-700 text-slate-700 font-black text-xs border border-slate-300 flex items-center gap-1">
-          <span>✕</span>
-          <span>닫기</span>
+          <span>✕</span> <span>닫기</span>
         </button>
       </div>
 
-      <!-- 설정창 내부 스크롤 영역 -->
       <div class="p-3.5 space-y-3 overflow-y-auto custom-scroll flex-1">
-
-        <!-- [섹션 0] 단일 [⏸️ 일시정지 / ▶️ 재생] 토글 버튼 및 미세 각도 조절 컨트롤 -->
+        <!-- 일시정지 모듈 -->
         <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 shadow-sm space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-xs font-black text-slate-900">⏸️ 회전 일시정지 & 각도 관찰</span>
-            <span id="panelPauseBadge" class="px-2 py-0.5 rounded bg-emerald-600 text-white font-black text-[10px]">
-              🔄 회전 중
-            </span>
+            <span id="panelPauseBadge" class="px-2 py-0.5 rounded bg-emerald-600 text-white font-black text-[10px]">🔄 회전 중</span>
           </div>
-
-          <!-- 우측 설정창 단일 토글 버튼 -->
           <button id="panelPlayPauseBtn" onclick="togglePlayPause()" class="w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-md flex items-center justify-center gap-1.5">
-            <span id="panelPlayPauseIcon">⏸️</span>
-            <span id="panelPlayPauseText">일시정지 (전류·힘 유지)</span>
+            <span id="panelPlayPauseIcon">⏸️</span> <span id="panelPlayPauseText">일시정지 (전류·힘 유지)</span>
           </button>
-
           <div class="flex items-center justify-between gap-1.5 pt-1">
-            <button onclick="rotateCoilByStep(-15)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 font-black text-xs text-slate-800">
-              ⏪ -15°
-            </button>
-            <button onclick="selectTextbookScene(3)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-amber-100 border border-amber-400 font-black text-[11px] text-amber-900">
-              ⚡ 수평(180°)
-            </button>
-            <button onclick="rotateCoilByStep(15)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 font-black text-xs text-slate-800">
-              ⏩ +15°
-            </button>
+            <button onclick="rotateCoilByStep(-15)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 font-black text-xs text-slate-800">⏪ -15°</button>
+            <button onclick="selectTextbookScene(3)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-amber-100 border border-amber-400 font-black text-[11px] text-amber-900">⚡ 수평(180°)</button>
+            <button onclick="rotateCoilByStep(15)" class="flex-1 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 font-black text-xs text-slate-800">⏩ +15°</button>
           </div>
         </div>
 
-        <!-- [섹션 1] 전류 회로도 (스위치 ON/OFF & 건전지 극 변환 클릭) -->
+        <!-- 전류 회로도 -->
         <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm">
           <div class="flex items-center justify-between text-xs font-bold mb-1.5">
             <span class="text-slate-800">🔌 전류 회로도 (스위치·건전지 클릭)</span>
             <span class="text-amber-600 font-black text-[11px]">클릭 조작</span>
           </div>
-
           <svg viewBox="0 0 280 96" class="w-full h-auto">
-            <!-- 상단 코일·자석 미니 심볼 -->
             <rect x="52" y="8" width="22" height="24" rx="3" fill="#E65132" stroke="#9E2412" stroke-width="1.8" />
             <text id="miniLeftMag" x="63" y="24" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">N</text>
-
             <rect x="206" y="8" width="22" height="24" rx="3" fill="#5496D4" stroke="#274F7D" stroke-width="1.8" />
             <text id="miniRightMag" x="217" y="24" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">S</text>
-
             <rect x="104" y="10" width="72" height="20" rx="6" fill="#e2e8f0" stroke="#475569" stroke-width="1.8" />
             <polygon points="134,14 148,20 134,26" fill="#FFEE00" stroke="#111111" stroke-width="1.3" />
-
-            <!-- 회로 도선 -->
             <polyline points="112,30 112,42 32,42 32,74 76,74" fill="none" stroke="#334155" stroke-width="2.5" />
             <polyline points="134,74 166,74" fill="none" stroke="#334155" stroke-width="2.5" />
             <polyline points="230,74 248,74 248,42 168,42 168,30" fill="none" stroke="#334155" stroke-width="2.5" />
-
-            <!-- 스위치 -->
             <g onclick="togglePowerSwitch()" class="cursor-pointer">
               <rect x="72" y="56" width="64" height="28" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" />
               <circle cx="86" cy="74" r="4" fill="#334155" />
               <circle cx="122" cy="74" r="4" fill="#334155" />
               <line id="svgSwitchBlade" x1="86" y1="74" x2="122" y2="74" stroke="#15803d" stroke-width="3.5" stroke-linecap="round" />
             </g>
-            <text id="svgSwitchLabel" x="104" y="94" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle" onclick="togglePowerSwitch()" class="cursor-pointer">
-              스위치 닫힘 (전류 ON)
-            </text>
-
-            <!-- 건전지 -->
+            <text id="svgSwitchLabel" x="104" y="94" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle" onclick="togglePowerSwitch()" class="cursor-pointer">스위치 닫힘 (전류 ON)</text>
             <g onclick="flipCurrentDirection()" class="cursor-pointer">
               <rect x="164" y="54" width="70" height="32" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5" />
               <rect x="175" y="61" width="48" height="18" rx="3" fill="#334155" stroke="#0f172a" stroke-width="1.5" />
@@ -652,81 +473,51 @@
               <text id="svgBatLeftSign" x="187" y="74" font-size="12" font-weight="900" fill="#facc15" text-anchor="middle">+</text>
               <text id="svgBatRightSign" x="211" y="74" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">-</text>
             </g>
-            <text x="199" y="94" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle" onclick="flipCurrentDirection()" class="cursor-pointer">
-              건전지 (전류 방향 전환)
-            </text>
+            <text x="199" y="94" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle" onclick="flipCurrentDirection()" class="cursor-pointer">건전지 (전류 방향 전환)</text>
           </svg>
         </div>
 
-        <!-- [섹션 2] ① 자석의 방향 & ② 전류의 방향 조절 -->
+        <!-- ① 자석 방향 & ② 전류 방향 조절 -->
         <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm space-y-2">
-          <div class="text-xs font-black text-slate-800">🧭 ① 자석의 방향 & ② 전류의 방향 조절</div>
+          <div class="text-xs font-black text-slate-800">🧭 자석 & 전류 방향 조절</div>
           <div class="grid grid-cols-2 gap-2">
             <button onclick="flipMagnetPoles()" class="py-2.5 px-2 rounded-xl border-2 border-slate-800 bg-slate-50 hover:bg-slate-100 text-slate-900 font-black text-xs shadow-sm flex flex-col items-center gap-0.5">
-              <div class="flex items-center gap-1">
-                <span>🧲</span>
-                <span>자석의 방향 바꾸기</span>
+              <div class="flex flex-col items-center leading-tight">
+                <span>자석 방향</span>
+                <span>바꾸기</span>
               </div>
-              <span id="magnetBtnSub" class="text-[10px] font-bold text-slate-600">현재: [N] ⋯ [S]</span>
+              <span id="magnetBtnSub" class="text-[10px] font-bold text-slate-600 mt-0.5">현재: [N] ⋯ [S]</span>
             </button>
-
             <button onclick="flipCurrentDirection()" class="py-2.5 px-2 rounded-xl border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 font-black text-xs shadow-sm flex flex-col items-center gap-0.5">
-              <div class="flex items-center gap-1">
-                <span>⚡</span>
-                <span>전류의 방향 바꾸기</span>
+              <div class="flex flex-col items-center leading-tight">
+                <span>전류 방향</span>
+                <span>바꾸기</span>
               </div>
-              <span id="currentBtnSub" class="text-[10px] font-bold text-slate-800">현재: 정방향 (↑)</span>
+              <span id="currentBtnSub" class="text-[10px] font-bold text-slate-800 mt-0.5">현재: 정방향 (↑)</span>
             </button>
           </div>
         </div>
 
-        <!-- [섹션 3] ③ 전류의 세기 조절 (0 OFF / 1 약 / 2 중 / 3 강) -->
+        <!-- ③ 전류의 세기 조절 (연속 슬라이드바) -->
         <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-xs font-black text-slate-800">🎚️ ③ 전류의 세기 조절 (힘·속도 비례)</span>
-            <span id="ampReadoutBadge" class="px-2.5 py-0.5 rounded-full bg-yellow-300 border border-slate-900 text-slate-950 font-black text-xs">
-              3 중
-            </span>
+          <div class="flex items-center justify-between gap-1 mb-2">
+            <span class="text-xs font-black text-slate-800">🎚️ ③ 전류의 세기 조절</span>
+            <span id="ampReadoutBadge" class="px-2 py-0.5 rounded-full bg-yellow-300 border border-slate-900 text-slate-950 font-black text-[11px] shrink-0">3 중</span>
           </div>
-
-          <div class="grid grid-cols-6 gap-1 mb-2">
-            <button onclick="setCurrentLevel(0)" id="ampBtn0" class="py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100">0 OFF</button>
-            <button onclick="setCurrentLevel(1)" id="ampBtn1" class="py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100">1 미약</button>
-            <button onclick="setCurrentLevel(2)" id="ampBtn2" class="py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100">2 약</button>
-            <button onclick="setCurrentLevel(3)" id="ampBtn3" class="py-1.5 rounded-lg font-black text-[10px] border-2 border-slate-900 bg-yellow-300 text-slate-950 shadow">3 중</button>
-            <button onclick="setCurrentLevel(4)" id="ampBtn4" class="py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100">4 강</button>
-            <button onclick="setCurrentLevel(5)" id="ampBtn5" class="py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100">5 초강</button>
-          </div>
-
-          <input type="range" id="ampSlider" min="0" max="5" step="1" value="3" oninput="setCurrentLevel(this.value)" class="amp-slider" />
-        </div>
-
-        <!-- [섹션 4] 코일 회전 속도(배속) 선택 (최대 1.0배속) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-3 shadow-sm">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-xs font-black text-slate-800">⏱️ 코일 회전 속도 선택</span>
-            <span id="speedReadoutBadge" class="px-2 py-0.5 rounded-full bg-indigo-600 text-white font-black text-[11px]">
-              1.0배속 (기본)
-            </span>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1">
-            <button onclick="setSpeedMultiplier(0.25)" id="spdBtn025" class="py-1.5 px-1 rounded-xl font-black text-[11px] border border-slate-300 bg-white text-slate-700 hover:bg-indigo-50 flex flex-col items-center">
-              <span>0.25x</span>
-              <span class="text-[9px] font-normal text-slate-500">초저속</span>
-            </button>
-            <button onclick="setSpeedMultiplier(0.5)" id="spdBtn05" class="py-1.5 px-1 rounded-xl font-black text-[11px] border border-slate-300 bg-white text-slate-700 hover:bg-indigo-50 flex flex-col items-center">
-              <span>0.5x</span>
-              <span class="text-[9px] font-normal text-slate-500">느리게</span>
-            </button>
-            <button onclick="setSpeedMultiplier(1.0)" id="spdBtn10" class="py-1.5 px-1 rounded-xl font-black text-[11px] border-2 border-indigo-600 bg-indigo-600 text-white shadow flex flex-col items-center">
-              <span>1.0x</span>
-              <span class="text-[9px] font-normal text-indigo-100">기본</span>
-            </button>
+          <div class="px-1 pt-1 pb-0.5">
+            <input type="range" id="ampSlider" min="0" max="5" step="0.01" value="3" oninput="setCurrentLevel(this.value)" class="amp-slider" />
+            <div class="flex justify-between text-[10px] font-bold text-slate-500 mt-1.5 px-0.5">
+              <span onclick="setCurrentLevel(0)" class="cursor-pointer hover:text-slate-900">OFF</span>
+              <span onclick="setCurrentLevel(1)" class="cursor-pointer hover:text-slate-900">미약</span>
+              <span onclick="setCurrentLevel(2)" class="cursor-pointer hover:text-slate-900">약</span>
+              <span onclick="setCurrentLevel(3)" class="cursor-pointer hover:text-slate-900">중</span>
+              <span onclick="setCurrentLevel(4)" class="cursor-pointer hover:text-slate-900">강</span>
+              <span onclick="setCurrentLevel(5)" class="cursor-pointer hover:text-slate-900">초강</span>
+            </div>
           </div>
         </div>
 
-        <!-- [섹션 5] ④ 자동 전류 방향 전환 기능 (단일 ON/OFF 토글 버튼) -->
+        <!-- ④ 자동 전류 방향 전환 (단일 ON/OFF 토글) -->
         <div class="bg-amber-50 border border-amber-300 rounded-2xl p-3 space-y-2 shadow-sm">
           <div class="text-xs font-black text-amber-950">🔄 ④ 자동 전류 방향 전환</div>
           <button id="btnCommutatorToggle" onclick="setCommutatorMode(!state.commutatorAutoFlip)" class="w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm flex items-center justify-between">
@@ -735,39 +526,43 @@
           </button>
         </div>
 
-        <!-- [섹션 6] 표시 옵션 체크박스 -->
+        <!-- 👁️ 표시 옵션 (한 줄 정렬) -->
         <div class="bg-white border border-slate-200 rounded-2xl p-3 space-y-1.5 shadow-sm">
           <div class="text-xs font-black text-slate-800 mb-1">👁️ 표시 옵션</div>
 
-          <label class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 cursor-pointer hover:bg-amber-100">
-            <input type="checkbox" id="chkRightHand" onchange="toggleRightHandOverlay(this.checked)" class="w-4 h-4 accent-amber rounded" />
-            <span class="text-xs font-bold text-amber-950">✋ 오른손(극 찾기) 보기</span>
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-amber-50 border border-amber-200 cursor-pointer hover:bg-amber-100">
+            <input type="checkbox" id="chkRightHand" onchange="toggleRightHandOverlay(this.checked)" class="w-4 h-4 accent-amber rounded shrink-0" />
+            <span class="text-[11px] font-bold text-amber-950" style="white-space: nowrap;">✋ 오른손(극 찾기) 보기</span>
           </label>
 
-          <label class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
-            <input type="checkbox" id="chkPoleColors" checked onchange="state.showPoleColors = this.checked" class="w-4 h-4 accent-rose rounded" />
-            <span class="text-xs font-bold text-slate-800">🎨 코일·자석 극성 색상(빨강/파랑) 표시</span>
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
+            <input type="checkbox" id="chkMagneticField" checked onchange="state.showMagneticField = this.checked" class="w-4 h-4 accent-sky rounded shrink-0" />
+            <span class="text-[11px] font-bold text-slate-800" style="white-space: nowrap;">🧲 자석·코일 자기력선 상호작용 표시</span>
           </label>
 
-          <label class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
-            <input type="checkbox" id="chkGreenForceArrows" checked onchange="state.showGreenForceArrows = this.checked" class="w-4 h-4 accent-lime rounded" />
-            <span class="text-xs font-bold text-slate-800">💚 힘 화살표(연두색) 표시</span>
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
+            <input type="checkbox" id="chkPoleColors" checked onchange="state.showPoleColors = this.checked" class="w-4 h-4 accent-rose rounded shrink-0" />
+            <span class="text-[11px] font-bold text-slate-800" style="white-space: nowrap;">🎨 코일의 극성 표시 (빨강/파랑)</span>
           </label>
 
-          <label class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
-            <input type="checkbox" id="chkPinkCenterArrow" checked onchange="state.showPinkCenterArrow = this.checked" class="w-4 h-4 accent-rose rounded" />
-            <span class="text-xs font-bold text-slate-800">🩷 코일 중앙 분홍색 큰 전류 화살표 표시</span>
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
+            <input type="checkbox" id="chkGreenForceArrows" checked onchange="state.showGreenForceArrows = this.checked" class="w-4 h-4 accent-lime rounded shrink-0" />
+            <span class="text-[11px] font-bold text-slate-800" style="white-space: nowrap;">💚 힘 화살표(연두색) 표시</span>
           </label>
 
-          <label class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
-            <input type="checkbox" id="chkCalloutLabels" checked onchange="state.showCallouts = this.checked" class="w-4 h-4 accent-slate rounded" />
-            <span class="text-xs font-bold text-slate-800">🏷️ 교과서 명칭 지시선 (자석·코일·★) 표시</span>
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
+            <input type="checkbox" id="chkPinkCenterArrow" checked onchange="state.showPinkCenterArrow = this.checked" class="w-4 h-4 accent-rose rounded shrink-0" />
+            <span class="text-[11px] font-bold text-slate-800" style="white-space: nowrap;">🩷 중앙 큰 전류 화살표 표시</span>
+          </label>
+
+          <label class="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
+            <input type="checkbox" id="chkCalloutLabels" checked onchange="state.showCallouts = this.checked" class="w-4 h-4 accent-slate rounded shrink-0" />
+            <span class="text-[11px] font-bold text-slate-800" style="white-space: nowrap;">🏷️ 교과서 명칭 지시선(자석·코일) 표시</span>
           </label>
         </div>
 
       </div>
     </aside>
-
   </div>
 
   <!-- ================= 4. 도움말 모달 ================= -->
@@ -783,77 +578,52 @@
 
       <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
         <div class="bg-amber-50 border border-amber-300 rounded-2xl p-3.5">
-          <h3 class="font-black text-slate-900 mb-1" style="margin-top:0;">1. 단일 [⏸️ 일시정지 / ▶️ 재생] 토글 버튼과 미세 각도 관찰</h3>
-          <p style="margin:0;">
-            • 회전 중 <b>[⏸️ 일시정지]</b> 버튼(또는 <b>스페이스바</b>)을 누르면 <b>노란색 전류 화살표, 코일의 N·S극 색상, 연두색 힘 화살표를 모두 그대로 유지</b>한 채 회전만 멈추고, 버튼은 즉시 <b>[▶️ 재생 (계속 회전)]</b>으로 바뀝니다.<br>
-            • 일시정지 상태에서 <b>[⏪ -15°]</b>, <b>[⏩ +15°]</b> 버튼이나 <b>0°~360° 각도 슬라이더</b>를 움직여 각 위치에서 작용하는 힘을 관찰해 보세요.
-          </p>
+          <h3 class="font-black text-slate-900 mb-1" style="margin-top:0;">1. 일시정지 및 미세 각도 관찰</h3>
+          <p style="margin:0;">회전 중 <b>[⏸️ 일시정지]</b>를 누르면 전류 화살표, 코일의 극성, 연두색 힘 화살표가 유지된 채 멈춥니다. 슬라이더나 각도 조절 버튼으로 각 위치별 힘을 분석해 보세요.</p>
         </div>
-
         <div class="bg-yellow-50 border border-amber-300 rounded-2xl p-3.5">
-          <h3 class="font-black text-slate-900 mb-1" style="margin-top:0;">2. 노란색 전류 화살표와 코일의 양 끝 극(N·S)</h3>
-          <p style="margin:0;">
-            • 6줄의 황금색 코일 도선 위를 따라 움직이는 <b>노란색 화살표(▶)</b>와 중앙의 <b>분홍색 큰 화살표</b>는 코일에 흐르는 전류의 방향을 나타냅니다.<br>
-            • <b>[✋ 오른손 법칙 확인]</b>을 클릭하면 네 손가락을 전류 방향으로 감아쥘 때 엄지손가락이 가리키는 쪽이 코일의 <b>N극(빨간색)</b>이 되는 것을 확인할 수 있습니다.
-          </p>
-        </div>
-
-        <div class="bg-lime-50 border border-lime-300 rounded-2xl p-3.5">
-          <h3 class="font-black text-slate-900 mb-1" style="margin-top:0;">3. 연두색 화살표(미는 힘·당기는 힘)와 노란 별표(★)</h3>
-          <p style="margin:0;">
-            • 같은 극끼리 가까워지면 <b>서로 미는 힘(척력, 반대 방향 연두색 화살표)</b>이, 다른 극끼리 가까워지면 <b>서로 당기는 힘(인력, 마주 보는 연두색 화살표)</b>이 작용합니다.<br>
-            • 코일 모서리의 <b>노란색 별표(★)</b>를 따라가 보면, 코일이 수평을 지날 때마다 전류의 방향이 바뀌어 별표(★)가 있는 끝의 극이 <b>N극 ↔ S극</b>으로 바뀌면서 한 방향으로 계속 회전하는 원리를 이해할 수 있습니다.
-          </p>
+          <h3 class="font-black text-slate-900 mb-1" style="margin-top:0;">2. 전류 방향과 오른손 법칙</h3>
+          <p style="margin:0;">코일 도선 위를 흐르는 <b>노란색 화살표(▶)</b>와 <b>[✋ 오른손 법칙 확인]</b>을 통해 감아쥐는 방향에 따른 N극(빨간색) 형성을 확인할 수 있습니다.</p>
         </div>
       </div>
 
       <div class="mt-5 text-right">
-        <button onclick="closeModal('modalHelp')" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm shadow">
-          확인
-        </button>
+        <button onclick="closeModal('modalHelp')" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm shadow">확인</button>
       </div>
     </div>
   </div>
 
-  <!-- ================= 5. 교과서 2D 시뮬레이션 및 물리 엔진 스크립트 ================= -->
+  <!-- ================= 5. 시뮬레이션 엔진 스크립트 ================= -->
   <script>
-    /********************************************************************
-     * 1. 전역 상태 정의 (직류 DC 전동기 전용)
-     ********************************************************************/
-    const LEVEL_TO_AMP = { 0: 0, 1: 2.0, 2: 4.5, 3: 8.0, 4: 13.5, 5: 20.0 };
+    const LEVEL_TO_AMP = { 0: 0, 1: 1.5, 2: 5.0, 3: 11.0, 4: 18.0, 5: 28.0 };
     const LEVEL_LABELS = { 0: '0 OFF', 1: '1 미약', 2: '2 약', 3: '3 중', 4: '4 강', 5: '5 초강' };
 
     const state = {
       isPlaying: true,
       switchOn: true,
-      currentLevel: 3,             // 전류 세기 단계 (0: OFF ~ 5: 초강)
-      currentAmp: 8.0,             // 물리 연산용 전류값
-      speedMultiplier: 1.0,        // 회전 속도 배속 (0.25 ~ 1.0)
-      batteryPolarity: 1,          // +1: 정방향 (↑), -1: 역방향 (↓)
-      statorPolarity: 1,           // +1: [N] ⋯ [S], -1: [S] ⋯ [N]
-
-      commutatorAutoFlip: true,    // 수평(0°, 180°) 지날 때마다 전류 방향 자동 반전
-      instantCurrent: 8.0,
-
-      // 코일 각도 (라디안)
+      currentLevel: 3,
+      currentAmp: 11.0,
+      batteryPolarity: 1,
+      statorPolarity: 1,
+      commutatorAutoFlip: true,
+      instantCurrent: 11.0,
       coilAngle: (35 * Math.PI) / 180,
       angularVel: 0,
-      wireArrowPhase: 0,           // 코일 도선 위의 노란색 화살표 이동 위상
+      wireArrowPhase: 0,
       flipFlashTimer: 0,
-
-      showRightHand: false,        // ✋ 오른손(극 찾기) 보기
-      showPoleColors: true,        // 🎨 코일·자석 극성 색상(빨강/파랑) 표시
-      showGreenForceArrows: true,  // 💚 힘 화살표(연두색) 표시
-      showPinkCenterArrow: true,   // 🩷 코일 중앙 분홍색 큰 전류 화살표 표시
-      showCallouts: true,          // 🏷️ 교과서 명칭 지시선 표시
-      settingsOpen: true,          // 우측 설정창 열림/닫힘 상태
+      showRightHand: false,
+      showMagneticField: true,
+      showPoleColors: true,
+      showGreenForceArrows: true,
+      showPinkCenterArrow: true,
+      showCallouts: true,
+      settingsOpen: true,
       activeSceneBtn: 1
     };
 
     const canvas = document.getElementById('motorCanvas');
     const ctx = canvas.getContext('2d');
 
-    // 구형 브라우저 roundRect 폴리필 (호환성 보장)
     if (!CanvasRenderingContext2D.prototype.roundRect) {
       CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
         const radius = typeof r === 'number' ? r : 8;
@@ -867,9 +637,6 @@
       };
     }
 
-    /********************************************************************
-     * 2. 캔버스 반응형 리사이즈 및 키보드 단축키 이벤트
-     ********************************************************************/
     function resizeCanvas() {
       const stageBox = document.getElementById('stageBox');
       if (!stageBox || !canvas) return;
@@ -894,11 +661,7 @@
       }
     });
 
-    /********************************************************************
-     * 3. 물리 및 전류/자극 계산 업데이트 (직류 DC 전동기)
-     ********************************************************************/
     function updatePhysics(dt) {
-      // 1) 외부 공급 직류 전류 계산 (일시정지 상태여도 스위치 ON이면 전류·자극·힘 화살표 모두 유지!)
       let iExt = 0;
       if (!state.switchOn || state.currentLevel === 0 || state.currentAmp === 0) {
         iExt = 0;
@@ -907,38 +670,29 @@
       }
       state.instantCurrent = iExt;
 
-      // 2) 정규화된 코일 회전 각도 (0 ~ 2*PI)
       const normAngle = ((state.coilAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-
-      // 정류자 작용: 코일이 수평(0° 또는 180°)을 지날 때마다 코일 내부에 흐르는 전류 방향 반전
       const inSecondHalf = normAngle >= Math.PI;
       const commFactor = state.commutatorAutoFlip ? (inSecondHalf ? -1 : 1) : 1;
-
-      // 코일 도선 내부 전류 (A끝 기준 흐름 방향)
       const iCoilLocal = iExt * commFactor;
 
-      // A끝(별표 ★가 있는 쪽)의 자극 부호: +1이면 N극(빨강), -1이면 S극(파랑), 0이면 무자화(회색)
       let endAPole = 0;
       if (Math.abs(iCoilLocal) > 0.08) {
         endAPole = iCoilLocal >= 0 ? 1 : -1;
       }
 
-      // 3) 노란색 전류 화살표 이동 위상 업데이트 (일시정지 시에도 노란색 전류 화살표 흐름 유지)
       if (Math.abs(iCoilLocal) > 0.08) {
-        const speedFactor = state.isPlaying ? state.speedMultiplier : 0.45;
-        const arrowSpeed = (iCoilLocal / 5.0) * 1.45 * speedFactor;
+        const arrowSpeed = (iCoilLocal / 5.0) * 1.45 * (state.isPlaying ? 1.0 : 0.45);
         state.wireArrowPhase = ((state.wireArrowPhase + arrowSpeed * dt) % 1 + 1) % 1;
       }
 
-      // 4) 코일 회전 각속도 및 각도 업데이트 (일시정지 상태에서는 코일 회전이 즉시 멈춤)
       if (state.isPlaying) {
         if (Math.abs(iExt) < 0.08) {
           state.angularVel *= Math.pow(0.05, dt);
         } else if (state.commutatorAutoFlip) {
           const prevHalf = Math.floor(normAngle / Math.PI);
           const rotDir = state.batteryPolarity * state.statorPolarity;
-          const baseOmega = 0.45 + (state.currentAmp / 10.0) * 2.1;
-          const targetVel = rotDir * baseOmega * state.speedMultiplier;
+          const baseOmega = 0.22 + (state.currentAmp / 10.0) * 1.6;
+          const targetVel = rotDir * baseOmega;
           state.angularVel += (targetVel - state.angularVel) * Math.min(1, dt * 10.0);
           state.coilAngle += state.angularVel * dt;
 
@@ -947,13 +701,11 @@
             state.flipFlashTimer = 0.7;
           }
         } else {
-          // 정류자 OFF: 다른 극끼리 마주보는 수평 위치(0 또는 PI)에서 진동하다 멈춤
           const attractAngle = (endAPole * state.statorPolarity > 0) ? Math.PI : 0;
           let diff = attractAngle - normAngle;
           if (diff > Math.PI) diff -= Math.PI * 2;
           if (diff < -Math.PI) diff += Math.PI * 2;
-
-          const pullTorque = diff * (2.8 + state.currentAmp * 1.1) * state.speedMultiplier;
+          const pullTorque = diff * (2.8 + state.currentAmp * 1.1);
           state.angularVel += pullTorque * dt;
           state.angularVel *= Math.pow(0.1, dt);
           state.coilAngle += state.angularVel * dt;
@@ -966,10 +718,7 @@
         state.flipFlashTimer = Math.max(0, state.flipFlashTimer - dt);
       }
 
-      // 5) 360° 각도 슬라이더 및 각도 표시 동기화
       syncAngleUI(normAngle);
-
-      // 6) 상단 상태 설명 배너 업데이트
       updateStatusBanner(endAPole, normAngle);
 
       return { endAPole, iCoilLocal, normAngle };
@@ -979,12 +728,8 @@
       const deg = Math.round((normAngle * 180) / Math.PI) % 360;
       const slider = document.getElementById('angleSlider');
       const badge = document.getElementById('angleReadoutBadge');
-      if (slider && document.activeElement !== slider) {
-        slider.value = deg;
-      }
-      if (badge) {
-        badge.textContent = `${deg}°`;
-      }
+      if (slider && document.activeElement !== slider) slider.value = deg;
+      if (badge) badge.textContent = `${deg}°`;
     }
 
     function updateStatusBanner(endAPole, normAngle) {
@@ -1007,24 +752,20 @@
         return;
       }
 
-      // 코일의 왼쪽 끝과 왼쪽 자석 사이의 상호작용 판별
       const leftEndPole = Math.cos(normAngle) >= 0 ? endAPole : -endAPole;
       const isRepulsion = (leftEndPole * state.statorPolarity) > 0;
 
       if (isRepulsion) {
         badge.textContent = '서로 미는 힘 (척력 ↔)';
         badge.className = 'px-2.5 py-0.5 rounded-lg bg-lime-400 border border-slate-900 text-slate-950 font-black text-xs';
-        desc.innerHTML = '자석과 코일의 <b>같은 극(N-N, S-S)</b> 사이에 <span class="text-lime-700 underline">서로 미는 힘(척력)</span>이 작용하여 코일이 회전합니다.';
+        desc.innerHTML = '자석과 코일의 <b>같은 극(N-N, S-S)</b> 사이에 <span class="text-lime-700 underline">서로 미는 힘(척력)</span>이 작용합니다.';
       } else {
         badge.textContent = '서로 당기는 힘 (인력 ➔⬅)';
         badge.className = 'px-2.5 py-0.5 rounded-lg bg-sky-300 border border-slate-900 text-slate-950 font-black text-xs';
-        desc.innerHTML = '자석과 코일의 <b>다른 극(N-S)</b> 사이에 <span class="text-sky-700 underline">서로 당기는 힘(인력)</span>이 작용하여 코일이 회전합니다.';
+        desc.innerHTML = '자석과 코일의 <b>다른 극(N-S)</b> 사이에 <span class="text-sky-700 underline">서로 당기는 힘(인력)</span>이 작용합니다.';
       }
     }
 
-    /********************************************************************
-     * 4. 첨부된 교과서 그림 6장 100% 재현 2D 렌더링 엔진
-     ********************************************************************/
     function renderTextbookMotor(phys) {
       const w = canvas.width;
       const h = canvas.height;
@@ -1038,28 +779,30 @@
       ctx.translate(w / 2, h / 2);
       ctx.scale(scale, scale);
 
-      // 1) 양쪽 오목한 영구 자석 그리기
       drawTextbookStatorMagnets();
 
-      // 2) 중앙 코일 (회색/그라데이션 철심 + 노란 별표 ★ + 6줄 황금 코일 + 선명한 노란색 전류 화살표 + 분홍색 중앙 화살표)
+      if (state.showMagneticField) {
+        drawStatorMagneticField(false, phys);
+      }
+
       drawTextbookCoilAndCurrentArrows(phys);
 
-      // 3) 자석과 코일 사이의 연두색 입체 힘 화살표 (전류 세기에 비례하여 크기 변화)
+      if (state.showMagneticField) {
+        drawStatorMagneticField(true, phys);
+      }
+
       if (state.showGreenForceArrows && phys.endAPole !== 0) {
         drawGreenForceArrows(phys);
       }
 
-      // 4) 오른손 법칙 반투명 일러스트 오버레이
       if (state.showRightHand) {
         drawTextbookRightHandOverlay(phys);
       }
 
-      // 5) 교과서 명칭 지시선 ('자석', '코일')
       if (state.showCallouts) {
-        drawTextbookCallouts(phys);
+        drawTextbookCallouts();
       }
 
-      // 6) 일시정지 중일 때 캔버스 상단에 직관적인 관찰 안내 뱃지 표시
       if (!state.isPlaying) {
         drawPausedCanvasIndicator(phys);
       }
@@ -1071,7 +814,6 @@
       const deg = Math.round(((phys.normAngle * 180) / Math.PI)) % 360;
       ctx.save();
       ctx.translate(0, -215);
-
       ctx.fillStyle = 'rgba(254, 243, 199, 0.96)';
       ctx.strokeStyle = '#d97706';
       ctx.lineWidth = 2.5;
@@ -1081,41 +823,30 @@
       ctx.stroke();
 
       ctx.fillStyle = '#78350f';
-      ctx.font = '700 16px "Pretendard", "Malgun Gothic", sans-serif';
+      ctx.font = '700 15px "Pretendard", "Malgun Gothic", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(
-        phys.endAPole === 0
-          ? `⏸️ 일시정지 중 (현재 ${deg}° · [▶️ 재생]을 누르면 전원이 켜지며 회전합니다)`
-          : `⏸️ 일시정지 관찰 모드 (현재 ${deg}° · 전류와 힘 화살표 유지 중)`,
-        0,
-        1
+        phys.endAPole === 0 ? `⏸️ 일시정지 중 (현재 ${deg}° · [▶️ 재생]을 누르면 회전합니다)` : `⏸️ 일시정지 관찰 모드 (현재 ${deg}° · 힘과 전류 방향 유지 중)`,
+        0, 1
       );
       ctx.restore();
     }
 
-    /**
-     * 양쪽 영구자석 렌더링 (왼쪽: 기본 빨간색 #E65132, 오른쪽: 기본 파란색 #5496D4, 안쪽 오목한 호)
-     */
     function drawTextbookStatorMagnets() {
       const leftIsN = state.statorPolarity > 0;
-
-      const leftFill = state.showPoleColors ? (leftIsN ? '#E65132' : '#5496D4') : '#F1F5F9';
-      const leftStroke = state.showPoleColors ? (leftIsN ? '#9E2412' : '#274F7D') : '#64748B';
+      const leftFill = leftIsN ? '#E65132' : '#5496D4';
+      const leftStroke = leftIsN ? '#9E2412' : '#274F7D';
       const leftLabel = leftIsN ? 'N' : 'S';
-
-      const rightFill = state.showPoleColors ? (leftIsN ? '#5496D4' : '#E65132') : '#F1F5F9';
-      const rightStroke = state.showPoleColors ? (leftIsN ? '#274F7D' : '#9E2412') : '#64748B';
+      const rightFill = leftIsN ? '#5496D4' : '#E65132';
+      const rightStroke = leftIsN ? '#274F7D' : '#9E2412';
       const rightLabel = leftIsN ? 'S' : 'N';
-
-      const textFill = state.showPoleColors ? '#FFFFFF' : '#0F172A';
 
       const outerX = 335;
       const innerTipX = 228;
       const topY = -140;
       const botY = 140;
 
-      // --- 왼쪽 자석 ---
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(-outerX, topY);
@@ -1123,22 +854,19 @@
       ctx.quadraticCurveTo(-innerTipX - 42, 0, -innerTipX, botY);
       ctx.lineTo(-outerX, botY);
       ctx.closePath();
-
       ctx.fillStyle = leftFill;
       ctx.fill();
       ctx.lineWidth = 4.5;
       ctx.strokeStyle = leftStroke;
-      ctx.lineJoin = 'round';
       ctx.stroke();
 
-      ctx.fillStyle = textFill;
-      ctx.font = '700 44px "Pretendard", "Malgun Gothic", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 44px "Pretendard", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(leftLabel, -292, 4);
       ctx.restore();
 
-      // --- 오른쪽 자석 ---
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(outerX, topY);
@@ -1146,66 +874,338 @@
       ctx.quadraticCurveTo(innerTipX + 42, 0, innerTipX, botY);
       ctx.lineTo(outerX, botY);
       ctx.closePath();
-
       ctx.fillStyle = rightFill;
       ctx.fill();
       ctx.lineWidth = 4.5;
       ctx.strokeStyle = rightStroke;
-      ctx.lineJoin = 'round';
       ctx.stroke();
 
-      ctx.fillStyle = textFill;
-      ctx.font = '700 44px "Pretendard", "Malgun Gothic", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 44px "Pretendard", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(rightLabel, 292, 4);
       ctx.restore();
     }
 
-    /**
-     * 코일 철심 + 노란 별표(★) + 6줄의 황금색 코일 도선 + 선명한 노란색 전류 화살표 + 중앙 분홍색 화살표
-     */
+    function drawStatorMagneticField(isForeground, phys) {
+      const endAPole = phys ? phys.endAPole : 0;
+      const normAngle = phys ? phys.normAngle : 0;
+      const statorPol = state.statorPolarity >= 0 ? 1 : -1;
+      const cosA = Math.cos(state.coilAngle);
+      const sinA = Math.sin(state.coilAngle);
+
+      if (endAPole === 0) {
+        const yLines = [-104, -52, 0, 52, 104];
+        ctx.save();
+        if (!isForeground) {
+          ctx.strokeStyle = 'rgba(2, 132, 199, 0.58)';
+          ctx.lineWidth = 2.6;
+          yLines.forEach(y => {
+            const t = (y + 140) / 280;
+            const xEdge = 228 + 84 * t * (1 - t);
+            ctx.beginPath();
+            ctx.moveTo(-xEdge, y);
+            ctx.lineTo(xEdge, y);
+            ctx.stroke();
+          });
+        } else {
+          yLines.forEach(y => {
+            const t = (y + 140) / 280;
+            const xEdge = 228 + 84 * t * (1 - t);
+            ctx.save();
+            ctx.strokeStyle = 'rgba(2, 132, 199, 0.25)';
+            ctx.lineWidth = 2.0;
+            ctx.setLineDash([7, 7]);
+            ctx.beginPath();
+            ctx.moveTo(-xEdge, y);
+            ctx.lineTo(xEdge, y);
+            ctx.stroke();
+            ctx.restore();
+            [-195, 0, 195].forEach((ax, idx) => {
+              drawFieldArrowhead(ax, y, statorPol > 0 ? 0 : Math.PI, idx === 1 ? 'rgba(2, 132, 199, 0.45)' : '#0284c7', idx !== 1);
+            });
+          });
+          drawMagneticFieldBanner('🧲 양쪽 자석의 자기력선 (전류 OFF : N극 ➔ S극)', '#0284c7', '#f0f9ff', '#0369a1');
+        }
+        ctx.restore();
+        return;
+      }
+
+      if (!isForeground) {
+        const ampRatio = 0.6 + 0.45 * (Math.min(28, Math.abs(state.instantCurrent)) / 28);
+        const poleSources = [];
+        for (let m = 0; m < 9; m++) {
+          const ym = -116 + 29 * m;
+          const t = (ym + 140) / 280;
+          const xInner = 228 + 84 * t * (1 - t);
+          poleSources.push({ x: -xInner - 22, y: ym, q: statorPol * 1.45, r2: 750 });
+          poleSources.push({ x: xInner + 22, y: ym, q: -statorPol * 1.45, r2: 750 });
+        }
+
+        for (let k = 0; k < 7; k++) {
+          const vk = -66 + 22 * k;
+          const uMax = 152 + 18 * (1 - (vk / 84) * (vk / 84));
+          const uA = -uMax + 20;
+          const uB = uMax - 20;
+          const xA = uA * cosA - vk * sinA;
+          const yA = uA * sinA + vk * cosA;
+          const xB = uB * cosA - vk * sinA;
+          const yB = uB * sinA + vk * cosA;
+          poleSources.push({ x: xA, y: yA, q: endAPole * 1.65 * ampRatio, r2: 520 });
+          poleSources.push({ x: xB, y: yB, q: -endAPole * 1.65 * ampRatio, r2: 520 });
+        }
+
+        function sampleCombinedField(x, y) {
+          let bx = statorPol * 0.015;
+          let by = 0;
+          for (let i = 0; i < poleSources.length; i++) {
+            const s = poleSources[i];
+            const dx = x - s.x;
+            const dy = y - s.y;
+            const d2 = dx * dx + dy * dy + s.r2;
+            const factor = s.q / (d2 * Math.sqrt(d2)) * 180;
+            bx += dx * factor;
+            by += dy * factor;
+          }
+          const u = x * cosA + y * sinA;
+          const v = -x * sinA + y * cosA;
+          if (Math.abs(u) < 138 && Math.abs(v) < 116) {
+            const wu = Math.max(0, Math.min(1, (138 - Math.abs(u)) / 20));
+            const wv = Math.max(0, Math.min(1, (116 - Math.abs(v)) / 30));
+            const damp = wu * wv;
+            let fu = bx * cosA + by * sinA;
+            let fv = -bx * sinA + by * cosA;
+            fv *= (1 - damp);
+            if (Math.abs(fu) < 0.008) fu = (fu >= 0 ? 1 : -1) * 0.008;
+            bx = fu * cosA - fv * sinA;
+            by = fu * sinA + fv * cosA;
+          }
+          return { bx, by };
+        }
+
+        function hitMagnetOrCoilBoundary(x, y) {
+          if (Math.abs(x) > 350 || Math.abs(y) > 205) return true;
+          if (Math.abs(y) <= 140) {
+            const t = (y + 140) / 280;
+            const xEdge = 228 + 84 * t * (1 - t);
+            if (x <= -xEdge + 1 || x >= xEdge - 1) return true;
+          }
+          const u = x * cosA + y * sinA;
+          const v = -x * sinA + y * cosA;
+          if (Math.abs(v) <= 84) {
+            const uMax = 152 + 18 * (1 - (v / 84) * (v / 84));
+            if (Math.abs(u) <= uMax - 1 && Math.abs(u) >= 126) return true;
+          }
+          return false;
+        }
+
+        function traceFieldLine(startX, startY, traceDir, sourceTag) {
+          const pts = [{ x: startX, y: startY }];
+          let cx = startX;
+          let cy = startY;
+          const stepSize = 5.0;
+          let prevUx = 0, prevUy = 0;
+
+          for (let step = 0; step < 165; step++) {
+            const f1 = sampleCombinedField(cx, cy);
+            const m1 = Math.hypot(f1.bx, f1.by);
+            if (m1 < 0.0012) break;
+            const ux1 = (f1.bx / m1) * traceDir;
+            const uy1 = (f1.by / m1) * traceDir;
+            if (step > 0 && (ux1 * prevUx + uy1 * prevUy) < -0.25) break;
+
+            const mx = cx + ux1 * (stepSize * 0.5);
+            const my = cy + uy1 * (stepSize * 0.5);
+            const f2 = sampleCombinedField(mx, my);
+            const m2 = Math.hypot(f2.bx, f2.by);
+            if (m2 < 0.0012) break;
+
+            const ux2 = (f2.bx / m2) * traceDir;
+            const uy2 = (f2.by / m2) * traceDir;
+            cx += ux2 * stepSize;
+            cy += uy2 * stepSize;
+            pts.push({ x: cx, y: cy });
+            prevUx = ux2;
+            prevUy = uy2;
+            if (step >= 3 && hitMagnetOrCoilBoundary(cx, cy)) break;
+          }
+          if (traceDir < 0) pts.reverse();
+          return { pts, sourceTag };
+        }
+
+        const tracedLines = [];
+        const statorN_XSign = statorPol > 0 ? -1 : 1;
+        [-112, -75, -37, 0, 37, 75, 112].forEach(sy => {
+          const t = (sy + 140) / 280;
+          const xEdge = 228 + 84 * t * (1 - t);
+          tracedLines.push(traceFieldLine(statorN_XSign * (xEdge - 3), sy, 1, 'stator'));
+        });
+
+        const coilN_USign = endAPole > 0 ? -1 : 1;
+        [-68, -45, -22, 0, 22, 45, 68].forEach(sv => {
+          const uMax = 152 + 18 * (1 - (sv / 84) * (sv / 84));
+          const su = coilN_USign * (uMax + 3);
+          const sx = su * cosA - sv * sinA;
+          const sy = su * sinA + sv * cosA;
+          if (!hitMagnetOrCoilBoundary(sx, sy)) {
+            tracedLines.push(traceFieldLine(sx, sy, 1, 'coil'));
+          }
+        });
+
+        function isNearExistingLine(px, py, minDist) {
+          const d2Max = minDist * minDist;
+          for (let i = 0; i < tracedLines.length; i++) {
+            const pts = tracedLines[i].pts;
+            for (let j = 0; j < pts.length; j += 2) {
+              const dx = pts[j].x - px;
+              const dy = pts[j].y - py;
+              if (dx * dx + dy * dy < d2Max) return true;
+            }
+          }
+          return false;
+        }
+
+        const statorS_XSign = -statorN_XSign;
+        [-112, -75, -37, 0, 37, 75, 112].forEach(sy => {
+          const t = (sy + 140) / 280;
+          const xEdge = 228 + 84 * t * (1 - t);
+          const sx = statorS_XSign * (xEdge - 3);
+          if (!isNearExistingLine(sx, sy, 22)) {
+            tracedLines.push(traceFieldLine(sx, sy, -1, 'stator'));
+          }
+        });
+
+        [-68, -45, -22, 0, 22, 45, 68].forEach(sv => {
+          const uMax = 152 + 18 * (1 - (sv / 84) * (sv / 84));
+          const su = -coilN_USign * (uMax + 3);
+          const sx = su * cosA - sv * sinA;
+          const sy = su * sinA + sv * cosA;
+          if (!hitMagnetOrCoilBoundary(sx, sy) && !isNearExistingLine(sx, sy, 20)) {
+            tracedLines.push(traceFieldLine(sx, sy, -1, 'coil'));
+          }
+        });
+
+        ctx.save();
+        tracedLines.forEach(line => {
+          const pts = line.pts;
+          if (pts.length < 4) return;
+          ctx.beginPath();
+          ctx.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.strokeStyle = line.sourceTag === 'coil' ? 'rgba(37, 99, 235, 0.78)' : 'rgba(2, 132, 199, 0.72)';
+          ctx.lineWidth = line.sourceTag === 'coil' ? 2.7 : 2.5;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.stroke();
+
+          const arrowIndices = pts.length > 26 ? [Math.floor(pts.length * 0.35), Math.floor(pts.length * 0.72)] : [Math.floor(pts.length * 0.52)];
+          arrowIndices.forEach(idx => {
+            if (idx > 0 && idx < pts.length - 1) {
+              const pPrev = pts[idx - 1];
+              const pNext = pts[idx + 1];
+              const ang = Math.atan2(pNext.y - pPrev.y, pNext.x - pPrev.x);
+              drawFieldArrowhead(pts[idx].x, pts[idx].y, ang, line.sourceTag === 'coil' ? '#2563eb' : '#0284c7', true);
+            }
+          });
+        });
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.rotate(state.coilAngle);
+        const internalDir = endAPole > 0 ? -1 : 1;
+        [-44, 0, 44].forEach(vLine => {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(37, 99, 235, 0.26)';
+          ctx.lineWidth = 2.0;
+          ctx.setLineDash([6, 6]);
+          ctx.beginPath();
+          ctx.moveTo(-132, vLine);
+          ctx.lineTo(132, vLine);
+          ctx.stroke();
+          ctx.restore();
+          drawFieldArrowhead(internalDir * 52, vLine, internalDir > 0 ? 0 : Math.PI, 'rgba(37, 99, 235, 0.42)', false);
+        });
+        ctx.restore();
+
+        const deg = (normAngle * 180) / Math.PI;
+        const nearHorizontal = deg < 12 || deg > 348 || Math.abs(deg - 180) < 12;
+        const leftEndPole = Math.cos(normAngle) >= 0 ? endAPole : -endAPole;
+        const isRepulsion = (leftEndPole * statorPol) > 0;
+
+        if (nearHorizontal) {
+          drawMagneticFieldBanner('⚡ 전류 방향 전환 순간 : 코일의 N·S극과 자기력선 반전!', '#d97706', 'rgba(254, 243, 199, 0.94)', '#92400e');
+        } else if (isRepulsion) {
+          drawMagneticFieldBanner('🧲 자기력선 상호작용 : 같은 극끼리 서로 밀어내어 휘어짐 (척력 ↔)', '#4d7c0f', 'rgba(247, 254, 231, 0.94)', '#3f6212');
+        } else {
+          drawMagneticFieldBanner('🧲 자기력선 상호작용 : 다른 극(N➔S)끼리 연결되어 당김 (인력 ➔⬅)', '#0284c7', 'rgba(240, 249, 255, 0.94)', '#0369a1');
+        }
+      }
+    }
+
+    function drawFieldArrowhead(x, y, angleRad, fillColor, withStroke) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angleRad);
+      ctx.beginPath();
+      ctx.moveTo(8.5, 0);
+      ctx.lineTo(-6.5, -5.8);
+      ctx.lineTo(-3.8, 0);
+      ctx.lineTo(-6.5, 5.8);
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+      if (withStroke) {
+        ctx.lineWidth = 1.1;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawMagneticFieldBanner(text, borderColor, bgColor, textColor) {
+      ctx.save();
+      ctx.translate(0, -172);
+      ctx.font = '700 13px "Pretendard", sans-serif';
+      const boxW = Math.max(260, ctx.measureText(text).width + 32);
+      ctx.fillStyle = bgColor;
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.roundRect(-boxW / 2, -14, boxW, 28, 14);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = textColor;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, 0, 1);
+      ctx.restore();
+    }
+
     function drawTextbookCoilAndCurrentArrows(phys) {
       const { endAPole } = phys;
-
       ctx.save();
       ctx.rotate(state.coilAngle);
 
       const halfLen = 152;
       const halfThick = 84;
-
-      // 1) 6줄의 황금색 코일 도선 중 철심 위/아래 바깥 고리 부분 먼저 그리기
       const wireXList = [-95, -57, -19, 19, 57, 95];
       const wireTilt = 14;
 
       wireXList.forEach(wx => {
         const topX = wx - wireTilt;
         const botX = wx + wireTilt;
-
-        // 위쪽 둥근 고리
         ctx.beginPath();
         ctx.arc(topX + 7, -halfThick, 10, Math.PI, 0, false);
-        ctx.lineWidth = 8.5;
-        ctx.strokeStyle = '#B88714';
-        ctx.lineCap = 'round';
-        ctx.stroke();
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = '#DEB12A';
-        ctx.stroke();
+        ctx.lineWidth = 8.5; ctx.strokeStyle = '#B88714'; ctx.lineCap = 'round'; ctx.stroke();
+        ctx.lineWidth = 6; ctx.strokeStyle = '#DEB12A'; ctx.stroke();
 
-        // 아래쪽 둥근 고리
         ctx.beginPath();
         ctx.arc(botX - 7, halfThick, 10, 0, Math.PI, false);
-        ctx.lineWidth = 8.5;
-        ctx.strokeStyle = '#B88714';
-        ctx.lineCap = 'round';
-        ctx.stroke();
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = '#DEB12A';
-        ctx.stroke();
+        ctx.lineWidth = 8.5; ctx.strokeStyle = '#B88714'; ctx.lineCap = 'round'; ctx.stroke();
+        ctx.lineWidth = 6; ctx.strokeStyle = '#DEB12A'; ctx.stroke();
       });
 
-      // 2) 코일 철심 본체
       ctx.beginPath();
       ctx.moveTo(-halfLen, -halfThick);
       ctx.lineTo(halfLen, -halfThick);
@@ -1219,67 +1219,40 @@
       } else {
         const grad = ctx.createLinearGradient(-halfLen - 25, 0, halfLen + 25, 0);
         if (endAPole > 0) {
-          grad.addColorStop(0.0, '#E65132');
-          grad.addColorStop(0.24, '#EB6E54');
-          grad.addColorStop(0.42, '#CCCCCC');
-          grad.addColorStop(0.58, '#CCCCCC');
-          grad.addColorStop(0.76, '#6BA5DC');
-          grad.addColorStop(1.0, '#4A8FD1');
+          grad.addColorStop(0.0, '#E65132'); grad.addColorStop(0.24, '#EB6E54');
+          grad.addColorStop(0.42, '#CCCCCC'); grad.addColorStop(0.58, '#CCCCCC');
+          grad.addColorStop(0.76, '#6BA5DC'); grad.addColorStop(1.0, '#4A8FD1');
         } else {
-          grad.addColorStop(0.0, '#4A8FD1');
-          grad.addColorStop(0.24, '#6BA5DC');
-          grad.addColorStop(0.42, '#CCCCCC');
-          grad.addColorStop(0.58, '#CCCCCC');
-          grad.addColorStop(0.76, '#EB6E54');
-          grad.addColorStop(1.0, '#E65132');
+          grad.addColorStop(0.0, '#4A8FD1'); grad.addColorStop(0.24, '#6BA5DC');
+          grad.addColorStop(0.42, '#CCCCCC'); grad.addColorStop(0.58, '#CCCCCC');
+          grad.addColorStop(0.76, '#EB6E54'); grad.addColorStop(1.0, '#E65132');
         }
         ctx.fillStyle = grad;
       }
       ctx.fill();
+      ctx.lineWidth = 3.5; ctx.strokeStyle = '#7F7F7F'; ctx.stroke();
 
-      ctx.lineWidth = 3.5;
-      ctx.strokeStyle = '#7F7F7F';
-      ctx.stroke();
-
-      // 3) 코일 A끝(-X) 모서리의 노란색 별표 (★)
       drawYellowStar(-halfLen + 22, -halfThick + 22, 11, 5);
 
-      // 4) 6줄의 황금색 코일 앞면 도선 줄기 그리기
       wireXList.forEach(wx => {
         const topX = wx - wireTilt;
         const botX = wx + wireTilt;
-
         ctx.beginPath();
-        ctx.moveTo(topX, -halfThick - 2);
-        ctx.lineTo(botX, halfThick + 2);
-        ctx.lineWidth = 9.5;
-        ctx.strokeStyle = '#B58410';
-        ctx.lineCap = 'round';
-        ctx.stroke();
-
+        ctx.moveTo(topX, -halfThick - 2); ctx.lineTo(botX, halfThick + 2);
+        ctx.lineWidth = 9.5; ctx.strokeStyle = '#B58410'; ctx.lineCap = 'round'; ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(topX, -halfThick - 2);
-        ctx.lineTo(botX, halfThick + 2);
-        ctx.lineWidth = 6.5;
-        ctx.strokeStyle = '#E2B42B';
-        ctx.lineCap = 'round';
-        ctx.stroke();
+        ctx.moveTo(topX, -halfThick - 2); ctx.lineTo(botX, halfThick + 2);
+        ctx.lineWidth = 6.5; ctx.strokeStyle = '#E2B42B'; ctx.lineCap = 'round'; ctx.stroke();
       });
 
-      // 5) 6줄의 코일 도선 위를 따라 흐르는 선명한 노란색 전류 화살표 (검은 테두리 + #FFEE00 노란색!)
       if (endAPole !== 0) {
         const flowUpward = endAPole > 0;
-
         wireXList.forEach((wx, idx) => {
           const topX = wx - wireTilt;
           const botX = wx + wireTilt;
-          const angle = flowUpward
-            ? Math.atan2(-halfThick - halfThick, topX - botX)
-            : Math.atan2(halfThick - (-halfThick), botX - topX);
-
-          const arrowsPerWire = 2;
-          for (let k = 0; k < arrowsPerWire; k++) {
-            let t = (state.wireArrowPhase + k / arrowsPerWire + (idx % 2) * 0.15) % 1;
+          const angle = flowUpward ? Math.atan2(-halfThick - halfThick, topX - botX) : Math.atan2(halfThick - (-halfThick), botX - topX);
+          for (let k = 0; k < 2; k++) {
+            let t = (state.wireArrowPhase + k / 2 + (idx % 2) * 0.15) % 1;
             if (!flowUpward) {
               const px = topX + (botX - topX) * t;
               const py = -halfThick + 22 + (halfThick * 2 - 44) * t;
@@ -1292,147 +1265,54 @@
           }
         });
 
-        // 6) 코일 양 끝의 'N', 'S' 글자
-        const labelAX = -halfLen + 18;
-        const labelAY = 12;
-        const labelBX = halfLen - 18;
-        const labelBY = 12;
-        const poleTextColor = state.showPoleColors ? '#FFFFFF' : '#0F172A';
+        if (state.showPoleColors) {
+          ctx.save();
+          ctx.translate(-halfLen + 18, 12); ctx.rotate(-state.coilAngle);
+          ctx.fillStyle = '#FFFFFF'; ctx.font = '700 38px "Pretendard", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(endAPole > 0 ? 'N' : 'S', 0, 0);
+          ctx.restore();
 
-        ctx.save();
-        ctx.translate(labelAX, labelAY);
-        ctx.rotate(-state.coilAngle);
-        ctx.fillStyle = poleTextColor;
-        ctx.font = '700 38px "Pretendard", "Malgun Gothic", sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(endAPole > 0 ? 'N' : 'S', 0, 0);
-        ctx.restore();
+          ctx.save();
+          ctx.translate(halfLen - 18, 12); ctx.rotate(-state.coilAngle);
+          ctx.fillStyle = '#FFFFFF'; ctx.font = '700 38px "Pretendard", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(endAPole > 0 ? 'S' : 'N', 0, 0);
+          ctx.restore();
+        }
 
-        ctx.save();
-        ctx.translate(labelBX, labelBY);
-        ctx.rotate(-state.coilAngle);
-        ctx.fillStyle = poleTextColor;
-        ctx.font = '700 38px "Pretendard", "Malgun Gothic", sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(endAPole > 0 ? 'S' : 'N', 0, 0);
-        ctx.restore();
-
-        // 7) 코일 정중앙의 교과서 스타일 분홍색 큰 전류 화살표
         if (state.showPinkCenterArrow) {
-          const centerArrowAngle = flowUpward
-            ? Math.atan2(-halfThick - halfThick, -wireTilt * 2)
-            : Math.atan2(halfThick - (-halfThick), wireTilt * 2);
-          drawTextbookPinkCenterArrow(0, 0, centerArrowAngle);
+          const centerAngle = flowUpward ? Math.atan2(-halfThick - halfThick, -wireTilt * 2) : Math.atan2(halfThick - (-halfThick), wireTilt * 2);
+          drawTextbookPinkCenterArrow(0, 0, centerAngle);
         }
       }
-
       ctx.restore();
     }
 
-    /**
-     * 코일 도선 위를 이동하는 선명한 노란색 전류 화살표 (길이 2배 확장: 검은색 테두리 + 밝은 노란색 채우기)
-     */
     function drawVividYellowCurrentArrow(x, y, angleRad) {
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(angleRad);
-
       ctx.beginPath();
+      // 화살표 길이를 2배로 확장 (기존 22 -> 44)
       ctx.moveTo(22, 0);
-      ctx.lineTo(4, -9.5);
-      ctx.lineTo(4, -4);
-      ctx.lineTo(-22, -4);
-      ctx.lineTo(-22, 4);
-      ctx.lineTo(4, 4);
-      ctx.lineTo(4, 9.5);
+      ctx.lineTo(8, -12);
+      ctx.lineTo(8, -5);
+      ctx.lineTo(-22, -5);
+      ctx.lineTo(-22, 5);
+      ctx.lineTo(8, 5);
+      ctx.lineTo(8, 12);
       ctx.closePath();
-
-      ctx.lineWidth = 3.8;
+      ctx.fillStyle = '#FFEE00';
+      ctx.fill();
+      ctx.lineWidth = 2.2;
       ctx.strokeStyle = '#111111';
       ctx.lineJoin = 'round';
       ctx.stroke();
-
-      ctx.fillStyle = '#FFEE00';
-      ctx.fill();
-
       ctx.restore();
     }
 
-    /**
-     * 교과서 그림 속 코일 중앙의 분홍색 입체 전류 화살표
-     */
-    function drawTextbookPinkCenterArrow(x, y, angleRad) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(angleRad);
-
-      ctx.beginPath();
-      ctx.moveTo(46, 0);
-      ctx.lineTo(6, -30);
-      ctx.lineTo(6, -15);
-      ctx.lineTo(-42, -15);
-      ctx.lineTo(-42, 15);
-      ctx.lineTo(6, 15);
-      ctx.lineTo(6, 30);
-      ctx.closePath();
-
-      ctx.fillStyle = '#F04E75';
-      ctx.fill();
-      ctx.lineWidth = 3.8;
-      ctx.strokeStyle = '#B81D48';
-      ctx.lineJoin = 'round';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(35, -2);
-      ctx.lineTo(13, -18);
-      ctx.lineWidth = 3.2;
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.lineCap = 'round';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(8, -22, 1.8, 0, Math.PI * 2);
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fill();
-
-      ctx.restore();
-    }
-
-    /**
-     * 코일 모서리의 노란색 별표 (★)
-     */
-    function drawYellowStar(cx, cy, outerR, innerR) {
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.beginPath();
-      for (let i = 0; i < 10; i++) {
-        const r = i % 2 === 0 ? outerR : innerR;
-        const a = (i * Math.PI) / 5 - Math.PI / 2;
-        const x = Math.cos(a) * r;
-        const y = Math.sin(a) * r;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.fillStyle = '#FEF08A';
-      ctx.fill();
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = '#CA8A04';
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    /**
-     * 자석과 코일 사이의 연두색 입체 힘 화살표 (전류 세기에 비례하여 화살표 크기 스케일링)
-     */
     function drawGreenForceArrows(phys) {
       const { endAPole, normAngle } = phys;
       const deg = (normAngle * 180) / Math.PI;
-
-      // 수평 순간(전류 전환 순간)에는 힘 화살표 숨김
       if (deg < 8 || deg > 352 || Math.abs(deg - 180) < 8) return;
 
       const endRadius = 158;
@@ -1441,13 +1321,8 @@
       const bx = Math.cos(state.coilAngle) * endRadius;
       const by = Math.sin(state.coilAngle) * endRadius;
 
-      const leftCoilEnd = ax < bx
-        ? { x: ax, y: ay, pole: endAPole }
-        : { x: bx, y: by, pole: -endAPole };
-
-      const rightCoilEnd = ax < bx
-        ? { x: bx, y: by, pole: -endAPole }
-        : { x: ax, y: ay, pole: endAPole };
+      const leftCoilEnd = ax < bx ? { x: ax, y: ay, pole: endAPole } : { x: bx, y: by, pole: -endAPole };
+      const rightCoilEnd = ax < bx ? { x: bx, y: by, pole: -endAPole } : { x: ax, y: ay, pole: endAPole };
 
       const leftMagAnchor = { x: -242, y: leftCoilEnd.y * 0.35 };
       const rightMagAnchor = { x: 242, y: rightCoilEnd.y * 0.35 };
@@ -1455,275 +1330,256 @@
       const leftIsRepel = (leftCoilEnd.pole * state.statorPolarity) > 0;
       const rightIsRepel = (rightCoilEnd.pole * (-state.statorPolarity)) > 0;
 
-      const arrowScale = 0.65 + (Math.min(20, Math.abs(state.instantCurrent)) / 20) * 0.85;
+      // 힘이 작을 때는 기본 짧은 길이(36px), 전류 세기에 따라 최대 94px까지 길어짐
+      const forceRatio = Math.min(1, Math.max(0.05, Math.abs(state.instantCurrent) / 28));
+      const arrowLen = 36 + forceRatio * 58;
 
-      drawForcePairBetween(leftMagAnchor, leftCoilEnd, leftIsRepel, arrowScale);
-      drawForcePairBetween(rightMagAnchor, rightCoilEnd, rightIsRepel, arrowScale);
+      drawForcePairBetween(leftMagAnchor, leftCoilEnd, leftIsRepel, arrowLen);
+      drawForcePairBetween(rightMagAnchor, rightCoilEnd, rightIsRepel, arrowLen);
     }
 
-    function drawForcePairBetween(magPt, coilPt, isRepel, arrowScale) {
+    function drawForcePairBetween(magPt, coilPt, isRepel, arrowLen) {
       const dx = coilPt.x - magPt.x;
       const dy = coilPt.y - magPt.y;
       const angleMagToCoil = Math.atan2(dy, dx);
       const angleCoilToMag = angleMagToCoil + Math.PI;
-
       const midX = (magPt.x + coilPt.x) * 0.5;
       const midY = (magPt.y + coilPt.y) * 0.5;
+      const halfLen = arrowLen * 0.5;
 
       if (isRepel) {
-        const p1x = midX - Math.cos(angleMagToCoil) * 26;
-        const p1y = midY - Math.sin(angleMagToCoil) * 26 + 14;
-        const p2x = midX + Math.cos(angleMagToCoil) * 26;
-        const p2y = midY + Math.sin(angleMagToCoil) * 26 - 14;
-
-        drawSingleGlossyGreenArrow(p1x, p1y, angleCoilToMag, arrowScale);
-        drawSingleGlossyGreenArrow(p2x, p2y, angleMagToCoil, arrowScale);
+        const offsetAlong = 8 + halfLen * 0.52;
+        const p1x = midX - Math.cos(angleMagToCoil) * offsetAlong;
+        const p1y = midY - Math.sin(angleMagToCoil) * offsetAlong + 15;
+        const p2x = midX + Math.cos(angleMagToCoil) * offsetAlong;
+        const p2y = midY + Math.sin(angleMagToCoil) * offsetAlong - 15;
+        drawSingleGlossyGreenArrow(p1x, p1y, angleCoilToMag, arrowLen);
+        drawSingleGlossyGreenArrow(p2x, p2y, angleMagToCoil, arrowLen);
       } else {
-        const p1x = magPt.x + Math.cos(angleMagToCoil) * 18;
-        const p1y = magPt.y + Math.sin(angleMagToCoil) * 18;
-        const p2x = coilPt.x - Math.cos(angleMagToCoil) * 22;
-        const p2y = coilPt.y - Math.sin(angleMagToCoil) * 22;
-
-        drawSingleGlossyGreenArrow(p1x, p1y, angleMagToCoil, arrowScale);
-        drawSingleGlossyGreenArrow(p2x, p2y, angleCoilToMag, arrowScale);
+        const p1x = magPt.x + Math.cos(angleMagToCoil) * (4 + halfLen * 0.55);
+        const p1y = magPt.y + Math.sin(angleMagToCoil) * (4 + halfLen * 0.55) + 13;
+        const p2x = coilPt.x - Math.cos(angleMagToCoil) * (4 + halfLen * 0.55);
+        const p2y = coilPt.y - Math.sin(angleMagToCoil) * (4 + halfLen * 0.55) - 13;
+        drawSingleGlossyGreenArrow(p1x, p1y, angleMagToCoil, arrowLen);
+        drawSingleGlossyGreenArrow(p2x, p2y, angleCoilToMag, arrowLen);
       }
     }
 
-    function drawSingleGlossyGreenArrow(x, y, angleRad, arrowScale = 1.0) {
+    function drawSingleGlossyGreenArrow(x, y, angleRad, arrowLen) {
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(angleRad);
-      ctx.scale(arrowScale, arrowScale);
+      const headLen = 19;
+      const headHalfW = 16.5;
+      const shaftHalfW = 8.2;
+      const halfTotal = arrowLen * 0.5;
+      const tipX = halfTotal;
+      const neckX = tipX - headLen;
+      const tailX = -halfTotal;
 
       ctx.beginPath();
-      ctx.moveTo(26, 0);
-      ctx.lineTo(2, -21);
-      ctx.lineTo(2, -10);
-      ctx.lineTo(-24, -10);
-      ctx.lineTo(-24, 10);
-      ctx.lineTo(2, 10);
-      ctx.lineTo(2, 21);
+      ctx.moveTo(tipX, 0);
+      ctx.lineTo(neckX, -headHalfW);
+      ctx.lineTo(neckX, -shaftHalfW);
+      ctx.lineTo(tailX, -shaftHalfW);
+      ctx.lineTo(tailX, shaftHalfW);
+      ctx.lineTo(neckX, shaftHalfW);
+      ctx.lineTo(neckX, headHalfW);
       ctx.closePath();
-
       ctx.fillStyle = '#8CE026';
       ctx.fill();
-      ctx.lineWidth = 3.2;
+      ctx.lineWidth = 2.8;
       ctx.strokeStyle = '#4E8F10';
       ctx.lineJoin = 'round';
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(18, -2);
-      ctx.lineTo(5, -13);
-      ctx.lineWidth = 2.6;
+      ctx.moveTo(tipX - 6, -2);
+      ctx.lineTo(neckX + 3, -headHalfW + 6);
+      ctx.lineWidth = 2.3;
       ctx.strokeStyle = '#FFFFFF';
       ctx.lineCap = 'round';
       ctx.stroke();
-
       ctx.restore();
     }
 
-    /**
-     * 오른손(전류의 방향 & 자기장의 방향) 일러스트 오버레이
-     */
     function drawTextbookRightHandOverlay(phys) {
       const { endAPole } = phys;
-      const nPoleOnLeft = endAPole >= 0;
+      if (endAPole === 0) return;
+      const cosA = Math.cos(state.coilAngle);
+      const sinA = Math.sin(state.coilAngle);
+      const uprightAngle = cosA >= 0 ? Math.atan2(sinA, cosA) : Math.atan2(-sinA, -cosA);
+      const nPoleOnLeft = (endAPole * (cosA >= 0 ? 1 : -1)) > 0;
 
       ctx.save();
-      ctx.translate(0, 15);
+      ctx.rotate(uprightAngle);
+      const skinFill = 'rgba(245, 203, 156, 0.88)';
+      const nailFill = 'rgba(253, 232, 209, 0.95)';
+      const outlineColor = '#786A5E';
 
-      if (!nPoleOnLeft) {
-        ctx.scale(-1, 1);
+      if (nPoleOnLeft) {
+        ctx.save();
+        ctx.fillStyle = skinFill;
+        ctx.strokeStyle = outlineColor;
+        ctx.lineWidth = 3.0;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(10, 205); ctx.lineTo(10, 152); ctx.lineTo(-22, 108); ctx.lineTo(-65, 68);
+        ctx.lineTo(-116, 40); ctx.lineTo(-152, 32); ctx.lineTo(-155, 16);
+        ctx.quadraticCurveTo(-132, 2, -104, 10); ctx.lineTo(-34, 34);
+        ctx.lineTo(-42, -55); ctx.lineTo(-45, -88); ctx.lineTo(-16, -102); ctx.lineTo(14, -92);
+        ctx.lineTo(24, -108); ctx.lineTo(48, -116); ctx.lineTo(74, -106); ctx.lineTo(84, -92);
+        ctx.lineTo(108, -90); ctx.lineTo(124, -72); ctx.lineTo(138, -62); ctx.lineTo(152, -38);
+        ctx.lineTo(158, 28); ctx.lineTo(146, 132); ctx.lineTo(148, 205);
+        ctx.closePath();
+        ctx.fill(); ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(-154, 21); ctx.lineTo(-128, 24); ctx.lineTo(-130, 32); ctx.lineTo(-152, 32);
+        ctx.closePath();
+        ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 2.0; ctx.stroke();
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-108, 84); ctx.quadraticCurveTo(-104, 132, -88, 165);
+        ctx.lineTo(-88, 205); ctx.lineTo(42, 205); ctx.lineTo(50, 145);
+        ctx.quadraticCurveTo(92, 96, 142, 62); ctx.lineTo(174, 58); ctx.lineTo(192, 60);
+        ctx.lineTo(196, 48); ctx.quadraticCurveTo(188, 24, 152, 16);
+        ctx.quadraticCurveTo(118, 14, 72, 34); ctx.lineTo(48, 34); ctx.lineTo(40, 84);
+        ctx.closePath();
+        ctx.fillStyle = skinFill; ctx.fill(); ctx.lineWidth = 3.0; ctx.strokeStyle = outlineColor; ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(168, 58); ctx.lineTo(175, 48); ctx.lineTo(195, 50); ctx.lineTo(192, 60);
+        ctx.closePath();
+        ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 2.0; ctx.stroke();
+
+        const curledFingers = [
+          { xL: -104, xR: -66, yTop: -116, yBot: -78, nail: [[-94, -95], [-82, -100], [-72, -92], [-96, -88]] },
+          { xL: -66, xR: -22, yTop: -126, yBot: -76, nail: [[-56, -98], [-44, -108], [-30, -96], [-58, -92]] },
+          { xL: -22, xR: 26, yTop: -134, yBot: -76, nail: [[-12, -102], [2, -114], [16, -98], [-14, -94]] },
+          { xL: 26, xR: 76, yTop: -130, yBot: -78, nail: [[36, -104], [52, -112], [66, -98], [36, -92]] }
+        ];
+
+        curledFingers.forEach((fg) => {
+          const midX = (fg.xL + fg.xR) * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(fg.xL, -84); ctx.lineTo(fg.xL + 3, fg.yTop + 14);
+          ctx.quadraticCurveTo(midX, fg.yTop, fg.xR - 4, fg.yTop + 12);
+          ctx.lineTo(fg.xR, -84); ctx.quadraticCurveTo(midX, fg.yBot + 8, fg.xL, -84);
+          ctx.closePath();
+          ctx.fillStyle = 'rgba(245, 203, 156, 0.96)'; ctx.fill(); ctx.lineWidth = 2.6; ctx.strokeStyle = outlineColor; ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(fg.nail[0][0], fg.nail[0][1]); ctx.lineTo(fg.nail[1][0], fg.nail[1][1]);
+          ctx.lineTo(fg.nail[2][0], fg.nail[2][1]); ctx.lineTo(fg.nail[3][0], fg.nail[3][1]);
+          ctx.closePath();
+          ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 1.8; ctx.stroke();
+        });
+        ctx.restore();
       }
-
-      // 1) 상단 '전류의 방향' 곡선 화살표
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(22, -105, 36, 0.2, Math.PI * 0.95, true);
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = 'rgba(244, 162, 140, 0.45)';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(-14, -100);
-      ctx.lineTo(-26, -118);
-      ctx.lineTo(-2, -118);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(244, 162, 140, 0.55)';
-      ctx.fill();
-      ctx.restore();
-
-      // 2) 오른손 손바닥·엄지·네 손가락 실루엣
-      ctx.save();
-      ctx.fillStyle = 'rgba(255, 228, 200, 0.88)';
-      ctx.strokeStyle = '#9A5B32';
-      ctx.lineWidth = 3.2;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-
-      ctx.beginPath();
-      ctx.moveTo(0, 145);
-      ctx.lineTo(-4, 72);
-      ctx.quadraticCurveTo(-45, 50, -95, 22);
-      ctx.quadraticCurveTo(-132, 0, -148, -14);
-      ctx.quadraticCurveTo(-152, -36, -120, -34);
-      ctx.quadraticCurveTo(-78, -28, -42, -2);
-      ctx.lineTo(-34, -68);
-      ctx.quadraticCurveTo(-18, -90, 2, -72);
-      ctx.quadraticCurveTo(18, -94, 38, -72);
-      ctx.quadraticCurveTo(56, -88, 72, -62);
-      ctx.quadraticCurveTo(88, -72, 96, -42);
-      ctx.quadraticCurveTo(104, 15, 84, 70);
-      ctx.lineTo(82, 145);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(2, -72);
-      ctx.lineTo(10, -20);
-      ctx.moveTo(38, -72);
-      ctx.lineTo(44, -22);
-      ctx.moveTo(72, -62);
-      ctx.lineTo(74, -18);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(-36, 32);
-      ctx.lineTo(-92, -6);
-      ctx.lineWidth = 12;
-      ctx.strokeStyle = 'rgba(148, 163, 184, 0.55)';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(-106, -16);
-      ctx.lineTo(-82, -16);
-      ctx.lineTo(-96, 4);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
-      ctx.fill();
-      ctx.restore();
-
-      ctx.restore();
-
-      ctx.save();
-      ctx.font = '700 22px "Pretendard", "Malgun Gothic", sans-serif';
-      ctx.fillStyle = 'rgba(100, 116, 139, 0.88)';
-      ctx.textAlign = 'center';
-      ctx.fillText('전류의 방향', nPoleOnLeft ? 135 : -135, -105);
-      ctx.fillText('자기장의 방향 (N극)', nPoleOnLeft ? -72 : 72, 74);
       ctx.restore();
     }
 
-    /**
-     * 교과서 명칭 지시선 ('자석', '코일')
-     */
+    function drawTextbookPinkCenterArrow(x, y, angleRad) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angleRad);
+      ctx.beginPath();
+      ctx.moveTo(46, 0); ctx.lineTo(6, -30); ctx.lineTo(6, -15);
+      ctx.lineTo(-42, -15); ctx.lineTo(-42, 15); ctx.lineTo(6, 15); ctx.lineTo(6, 30);
+      ctx.closePath();
+      ctx.fillStyle = '#F04E75'; ctx.fill();
+      ctx.lineWidth = 3.8; ctx.strokeStyle = '#B81D48'; ctx.lineJoin = 'round'; ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawYellowStar(cx, cy, outerR, innerR) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const r = i % 2 === 0 ? outerR : innerR;
+        const a = (i * Math.PI) / 5 - Math.PI / 2;
+        ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      }
+      ctx.closePath();
+      ctx.fillStyle = '#FEF08A'; ctx.fill();
+      ctx.lineWidth = 1.5; ctx.strokeStyle = '#CA8A04'; ctx.stroke();
+      ctx.restore();
+    }
+
     function drawTextbookCallouts() {
       ctx.save();
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1.8;
-      ctx.fillStyle = '#0f172a';
-      ctx.font = '700 26px "Pretendard", "Malgun Gothic", sans-serif';
-      ctx.textBaseline = 'middle';
+      ctx.strokeStyle = '#334155'; ctx.lineWidth = 1.8; ctx.fillStyle = '#0f172a';
+      ctx.font = '700 26px "Pretendard", sans-serif'; ctx.textBaseline = 'middle';
 
-      ctx.beginPath();
-      ctx.moveTo(-375, -75);
-      ctx.lineTo(-300, -75);
-      ctx.stroke();
-      ctx.textAlign = 'right';
-      ctx.fillText('자석', -384, -75);
+      ctx.beginPath(); ctx.moveTo(-375, -75); ctx.lineTo(-300, -75); ctx.stroke();
+      ctx.textAlign = 'right'; ctx.fillText('자석', -384, -75);
 
-      ctx.beginPath();
-      ctx.moveTo(300, -75);
-      ctx.lineTo(375, -75);
-      ctx.stroke();
-      ctx.textAlign = 'left';
-      ctx.fillText('자석', 384, -75);
+      ctx.beginPath(); ctx.moveTo(300, -75); ctx.lineTo(375, -75); ctx.stroke();
+      ctx.textAlign = 'left'; ctx.fillText('자석', 384, -75);
 
       const starWorldX = Math.cos(state.coilAngle) * (-130) - Math.sin(state.coilAngle) * (-62);
       const starWorldY = Math.sin(state.coilAngle) * (-130) + Math.cos(state.coilAngle) * (-62);
-
       const labelX = starWorldX < 0 ? starWorldX - 55 : starWorldX + 55;
       const labelY = starWorldY < 0 ? starWorldY - 42 : starWorldY + 42;
 
-      ctx.beginPath();
-      ctx.moveTo(starWorldX, starWorldY);
-      ctx.lineTo(labelX, labelY);
-      ctx.stroke();
-
+      ctx.beginPath(); ctx.moveTo(starWorldX, starWorldY); ctx.lineTo(labelX, labelY); ctx.stroke();
       ctx.textAlign = starWorldX < 0 ? 'right' : 'left';
       ctx.fillText('코일', starWorldX < 0 ? labelX - 8 : labelX + 8, labelY);
-
       ctx.restore();
     }
 
-    /********************************************************************
-     * 5. 통합 단일 [⏸️ 일시정지 / ▶️ 재생] 토글 버튼 & 미세 각도 조절 핸들러
-     ********************************************************************/
     function togglePlayPause(forcePlay) {
       state.isPlaying = typeof forcePlay === 'boolean' ? forcePlay : !state.isPlaying;
-
-      // 전원이 꺼진 상태(스위치 OFF 또는 0 OFF)에서 재생을 누르면 자동으로 전류가 켜지면서 회전 시작
       if (state.isPlaying) {
-        if (!state.switchOn) {
-          togglePowerSwitch();
-        }
-        if (state.currentLevel === 0 || state.currentAmp === 0) {
-          setCurrentLevel(3);
-        }
+        if (!state.switchOn) togglePowerSwitch();
+        if (state.currentLevel === 0) setCurrentLevel(3);
       }
 
-      // 1) 상단 헤더 단일 토글 버튼 동기화
       const topBtn = document.getElementById('topPlayPauseBtn');
       const topIcon = document.getElementById('topPlayPauseIcon');
       const topText = document.getElementById('topPlayPauseText');
       if (state.isPlaying) {
-        topIcon.textContent = '⏸️';
-        topText.textContent = '일시정지';
+        topIcon.textContent = '⏸️'; topText.textContent = '일시정지';
         topBtn.className = 'px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1';
       } else {
-        topIcon.textContent = '▶️';
-        topText.textContent = '재생 (계속 회전)';
+        topIcon.textContent = '▶️'; topText.textContent = '재생 (계속 회전)';
         topBtn.className = 'px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1 play-resume-pulse';
       }
 
-      // 2) 하단 중앙 플로팅 바의 단일 토글 버튼 동기화
       const btmBtn = document.getElementById('btmPlayPauseBtn');
       const btmIcon = document.getElementById('btmPlayPauseIcon');
       const btmText = document.getElementById('btmPlayPauseText');
       if (state.isPlaying) {
-        btmIcon.textContent = '⏸️';
-        btmText.textContent = '일시정지';
+        btmIcon.textContent = '⏸️'; btmText.textContent = '일시정지';
         btmBtn.className = 'px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-sm shadow-md flex items-center gap-2';
       } else {
-        btmIcon.textContent = '▶️';
-        btmText.textContent = '재생 (계속 회전)';
+        btmIcon.textContent = '▶️'; btmText.textContent = '재생 (계속 회전)';
         btmBtn.className = 'px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white border-2 border-slate-900 font-black text-sm shadow-md flex items-center gap-2 play-resume-pulse';
       }
 
-      // 3) 우측 설정창 최상단의 단일 토글 버튼 동기화
       const panelBadge = document.getElementById('panelPauseBadge');
       const panelBtn = document.getElementById('panelPlayPauseBtn');
       const panelIcon = document.getElementById('panelPlayPauseIcon');
       const panelText = document.getElementById('panelPlayPauseText');
       if (panelBadge && panelBtn) {
         if (state.isPlaying) {
-          panelBadge.textContent = '🔄 회전 중';
-          panelBadge.className = 'px-2 py-0.5 rounded bg-emerald-600 text-white font-black text-[10px]';
-          panelIcon.textContent = '⏸️';
-          panelText.textContent = '일시정지 (전류·힘 유지)';
+          panelBadge.textContent = '🔄 회전 중'; panelBadge.className = 'px-2 py-0.5 rounded bg-emerald-600 text-white font-black text-[10px]';
+          panelIcon.textContent = '⏸️'; panelText.textContent = '일시정지 (전류·힘 유지)';
           panelBtn.className = 'w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-md flex items-center justify-center gap-1.5';
         } else {
-          panelBadge.textContent = '⏸️ 일시정지됨';
-          panelBadge.className = 'px-2 py-0.5 rounded bg-rose-600 text-white font-black text-[10px]';
-          panelIcon.textContent = '▶️';
-          panelText.textContent = '재생 (계속 회전)';
+          panelBadge.textContent = '⏸️ 일시정지됨'; panelBadge.className = 'px-2 py-0.5 rounded bg-rose-600 text-white font-black text-[10px]';
+          panelIcon.textContent = '▶️'; panelText.textContent = '재생 (계속 회전)';
           panelBtn.className = 'w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-emerald-500 hover:bg-emerald-400 text-white shadow-md flex items-center justify-center gap-1.5 play-resume-pulse';
         }
       }
 
-      // 4) 상단 상태 배너의 회전 중 / 일시정지 배지 동기화
       const pausePill = document.getElementById('pauseStatePill');
       if (pausePill) {
         if (state.isPlaying) {
@@ -1736,104 +1592,61 @@
       }
     }
 
-    /**
-     * [⏪ -15°] / [⏩ +15°] 미세 각도 조절 버튼 (즉시 일시정지 상태에서 해당 각도만큼 회전)
-     */
     function rotateCoilByStep(deltaDeg) {
       if (!state.switchOn) togglePowerSwitch();
       if (state.currentLevel === 0) setCurrentLevel(3);
       togglePlayPause(false);
-
       const curDeg = (((state.coilAngle * 180) / Math.PI) % 360 + 360) % 360;
       const nextDeg = (Math.round(curDeg + deltaDeg) % 360 + 360) % 360;
       state.coilAngle = (nextDeg * Math.PI) / 180;
       state.angularVel = 0;
     }
 
-    /**
-     * 360° 각도 직접 조절 슬라이더 핸들러 (조작 즉시 일시정지 상태로 전환하여 정밀 관찰)
-     */
     function setCoilAngleFromSlider(degVal) {
       if (!state.switchOn) togglePowerSwitch();
       if (state.currentLevel === 0) setCurrentLevel(3);
       togglePlayPause(false);
-
       const deg = parseFloat(degVal) || 0;
       state.coilAngle = (deg * Math.PI) / 180;
       state.angularVel = 0;
       document.getElementById('angleReadoutBadge').textContent = `${Math.round(deg)}°`;
     }
 
-    /**
-     * 상단 교과서 순환 카드 선택 (① 미는 힘 ➔ ② 당기는 힘 ➔ ⚡ 전류 전환 ➔ ③ 미는 힘 ➔ ④ 당기는 힘 + ✋ 오른손 법칙 확인)
-     */
     function selectTextbookScene(sceneIdx) {
       state.activeSceneBtn = sceneIdx;
-
       [0, 1, 2, 3, 4, 5, 6].forEach(idx => {
         const btn = document.getElementById(`sceneBtn${idx}`);
         if (!btn) return;
-        if (idx === sceneIdx) {
-          btn.className = 'px-2.5 py-1 rounded-xl font-black text-[11px] bg-indigo-600 text-white shadow';
-        } else if (idx === 3) {
-          btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-900 bg-amber-100 hover:bg-amber-200';
-        } else if (idx === 6) {
-          btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-950 bg-amber-50 border border-amber-300 hover:bg-amber-100';
-        } else {
-          btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100';
-        }
+        if (idx === sceneIdx) btn.className = 'px-2.5 py-1 rounded-xl font-black text-[11px] bg-indigo-600 text-white shadow';
+        else if (idx === 3) btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-900 bg-amber-100 hover:bg-amber-200';
+        else if (idx === 6) btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-amber-950 bg-amber-50 border border-amber-300 hover:bg-amber-100';
+        else btn.className = 'px-2.5 py-1 rounded-xl font-bold text-[11px] text-slate-700 hover:bg-slate-100';
       });
 
       if (sceneIdx === 0) {
         if (state.switchOn) togglePowerSwitch();
-        state.coilAngle = (35 * Math.PI) / 180;
-        state.angularVel = 0;
-        toggleRightHandOverlay(false);
-        togglePlayPause(false);
+        state.coilAngle = (35 * Math.PI) / 180; toggleRightHandOverlay(false); togglePlayPause(false);
       } else if (sceneIdx === 1) {
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (35 * Math.PI) / 180;
-        state.angularVel = 0;
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (35 * Math.PI) / 180; togglePlayPause(false);
       } else if (sceneIdx === 2) {
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (145 * Math.PI) / 180;
-        state.angularVel = 0;
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (145 * Math.PI) / 180; togglePlayPause(false);
       } else if (sceneIdx === 3) {
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (180 * Math.PI) / 180;
-        state.angularVel = 0;
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (180 * Math.PI) / 180; togglePlayPause(false);
       } else if (sceneIdx === 4) {
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (215 * Math.PI) / 180;
-        state.angularVel = 0;
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (215 * Math.PI) / 180; togglePlayPause(false);
       } else if (sceneIdx === 5) {
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (325 * Math.PI) / 180;
-        state.angularVel = 0;
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (325 * Math.PI) / 180; togglePlayPause(false);
       } else if (sceneIdx === 6) {
-        // ✋ 오른손 법칙 확인: 코일을 수평(180°)으로 맞추고 오른손 일러스트 표시
-        if (!state.switchOn) togglePowerSwitch();
-        if (state.currentLevel === 0) setCurrentLevel(3);
-        state.coilAngle = (180 * Math.PI) / 180;
-        state.angularVel = 0;
-        toggleRightHandOverlay(true);
-        togglePlayPause(false);
+        if (!state.switchOn) togglePowerSwitch(); if (state.currentLevel === 0) setCurrentLevel(3);
+        state.coilAngle = (180 * Math.PI) / 180; toggleRightHandOverlay(true); togglePlayPause(false);
       }
     }
 
-    /**
-     * 설정창 닫기 / 열기 기능
-     */
     function toggleSettingsPanel(forceOpen) {
       state.settingsOpen = typeof forceOpen === 'boolean' ? forceOpen : !state.settingsOpen;
       const panel = document.getElementById('settingsPanel');
@@ -1845,23 +1658,19 @@
         panel.classList.remove('hidden');
         headerBtnText.textContent = '설정창 닫기 ✕';
         headerBtn.className = 'px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-md flex items-center gap-1.5';
-        floatingBtn.classList.add('hidden');
-        floatingBtn.classList.remove('flex');
+        floatingBtn.classList.add('hidden'); floatingBtn.classList.remove('flex');
       } else {
         panel.classList.add('hidden');
         headerBtnText.textContent = '설정창 열기 ◂';
         headerBtn.className = 'px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-md flex items-center gap-1.5';
-        floatingBtn.classList.remove('hidden');
-        floatingBtn.classList.add('flex');
+        floatingBtn.classList.remove('hidden'); floatingBtn.classList.add('flex');
       }
-
       setTimeout(resizeCanvas, 50);
     }
 
     function toggleRightHandOverlay(forceVal) {
       state.showRightHand = typeof forceVal === 'boolean' ? forceVal : !state.showRightHand;
       document.getElementById('chkRightHand').checked = state.showRightHand;
-
       const qBtn = document.getElementById('quickRightHandBtn');
       const qTxt = document.getElementById('quickRightHandText');
       if (state.showRightHand) {
@@ -1873,61 +1682,17 @@
       }
     }
 
-    function setSpeedMultiplier(mult) {
-      state.speedMultiplier = Math.min(1.0, Number(mult));
-      const labels = {
-        0.25: '0.25배속 (초저속)',
-        0.5: '0.5배속 (느리게)',
-        1: '1.0배속 (기본)'
-      };
-      document.getElementById('speedReadoutBadge').textContent = labels[state.speedMultiplier] || `${state.speedMultiplier}배속`;
-
-      const pBtns = [
-        { id: 'spdBtn025', val: 0.25 },
-        { id: 'spdBtn05', val: 0.5 },
-        { id: 'spdBtn10', val: 1.0 }
-      ];
-      pBtns.forEach(b => {
-        const el = document.getElementById(b.id);
-        if (!el) return;
-        if (Math.abs(state.speedMultiplier - b.val) < 0.01) {
-          el.className = 'py-1.5 px-1 rounded-xl font-black text-[11px] border-2 border-indigo-600 bg-indigo-600 text-white shadow flex flex-col items-center';
-        } else {
-          el.className = 'py-1.5 px-1 rounded-xl font-black text-[11px] border border-slate-300 bg-white text-slate-700 hover:bg-indigo-50 flex flex-col items-center';
-        }
-      });
-
-      const bBtns = [
-        { id: 'btmSpd025', val: 0.25 },
-        { id: 'btmSpd05', val: 0.5 },
-        { id: 'btmSpd10', val: 1.0 }
-      ];
-      bBtns.forEach(b => {
-        const el = document.getElementById(b.id);
-        if (!el) return;
-        if (Math.abs(state.speedMultiplier - b.val) < 0.01) {
-          el.className = 'px-2 py-1 rounded-lg font-black text-xs bg-indigo-600 text-white shadow';
-        } else {
-          el.className = 'px-2 py-1 rounded-lg font-bold text-xs text-slate-600 hover:bg-slate-100';
-        }
-      });
-    }
-
     function togglePowerSwitch() {
       state.switchOn = !state.switchOn;
       const blade = document.getElementById('svgSwitchBlade');
       const lbl = document.getElementById('svgSwitchLabel');
       if (state.switchOn) {
-        blade.setAttribute('y2', '74');
-        blade.setAttribute('stroke', '#15803d');
-        lbl.textContent = '스위치 닫힘 (전류 ON)';
-        lbl.setAttribute('fill', '#15803d');
+        blade.setAttribute('y2', '74'); blade.setAttribute('stroke', '#15803d');
+        lbl.textContent = '스위치 닫힘 (전류 ON)'; lbl.setAttribute('fill', '#15803d');
         if (state.currentLevel === 0) setCurrentLevel(3);
       } else {
-        blade.setAttribute('y2', '58');
-        blade.setAttribute('stroke', '#dc2626');
-        lbl.textContent = '스위치 열림 (전류 OFF)';
-        lbl.setAttribute('fill', '#dc2626');
+        blade.setAttribute('y2', '58'); blade.setAttribute('stroke', '#dc2626');
+        lbl.textContent = '스위치 열림 (전류 OFF)'; lbl.setAttribute('fill', '#dc2626');
       }
     }
 
@@ -1935,28 +1700,20 @@
       if (!state.switchOn) togglePowerSwitch();
       state.batteryPolarity = -state.batteryPolarity;
       updateCircuitDiagramBattery(state.batteryPolarity);
-
       const dirText = state.batteryPolarity > 0 ? '정방향 (↑)' : '역방향 (↓)';
       document.getElementById('currentBtnSub').textContent = `현재: ${dirText}`;
       const btmCurrentLabel = document.getElementById('btmCurrentLabel');
-      if (btmCurrentLabel) {
-        btmCurrentLabel.textContent = `전류 ${dirText}`;
-      }
+      if (btmCurrentLabel) btmCurrentLabel.textContent = `전류 ${dirText}`;
     }
 
     function updateCircuitDiagramBattery(pol) {
       const nub = document.getElementById('svgBatNub');
       const leftSign = document.getElementById('svgBatLeftSign');
       const rightSign = document.getElementById('svgBatRightSign');
-
       if (pol >= 0) {
-        nub.setAttribute('x', '170');
-        leftSign.textContent = '+';
-        rightSign.textContent = '-';
+        nub.setAttribute('x', '170'); leftSign.textContent = '+'; rightSign.textContent = '-';
       } else {
-        nub.setAttribute('x', '223');
-        leftSign.textContent = '-';
-        rightSign.textContent = '+';
+        nub.setAttribute('x', '223'); leftSign.textContent = '-'; rightSign.textContent = '+';
       }
     }
 
@@ -1964,33 +1721,28 @@
       state.statorPolarity = -state.statorPolarity;
       document.getElementById('miniLeftMag').textContent = state.statorPolarity > 0 ? 'N' : 'S';
       document.getElementById('miniRightMag').textContent = state.statorPolarity > 0 ? 'S' : 'N';
-
       const poleText = state.statorPolarity > 0 ? '[N] ⋯ [S]' : '[S] ⋯ [N]';
       document.getElementById('magnetBtnSub').textContent = `현재: ${poleText}`;
       const btmMagnetLabel = document.getElementById('btmMagnetLabel');
-      if (btmMagnetLabel) {
-        btmMagnetLabel.textContent = poleText;
-      }
+      if (btmMagnetLabel) btmMagnetLabel.textContent = poleText;
     }
 
     function setCurrentLevel(val) {
-      const lvl = Math.max(0, Math.min(5, Math.round(parseFloat(val) || 0)));
+      let lvl = Math.max(0, Math.min(5, parseFloat(val) || 0));
+      if (lvl < 0.04) lvl = 0;
       state.currentLevel = lvl;
-      state.currentAmp = LEVEL_TO_AMP[lvl];
-      document.getElementById('ampSlider').value = lvl;
-      document.getElementById('ampReadoutBadge').textContent = LEVEL_LABELS[lvl];
 
+      const lowIdx = Math.floor(lvl);
+      const highIdx = Math.min(5, Math.ceil(lvl));
+      const frac = lvl - lowIdx;
+      state.currentAmp = LEVEL_TO_AMP[lowIdx] + (LEVEL_TO_AMP[highIdx] - LEVEL_TO_AMP[lowIdx]) * frac;
+
+      const slider = document.getElementById('ampSlider');
+      if (slider && parseFloat(slider.value) !== lvl) slider.value = lvl;
+
+      const nearestStage = lvl === 0 ? 0 : Math.max(1, Math.round(lvl));
+      document.getElementById('ampReadoutBadge').textContent = LEVEL_LABELS[nearestStage];
       if (lvl > 0 && !state.switchOn) togglePowerSwitch();
-
-      [0, 1, 2, 3, 4, 5].forEach(p => {
-        const b = document.getElementById(`ampBtn${p}`);
-        if (!b) return;
-        if (lvl === p) {
-          b.className = 'py-1.5 rounded-lg font-black text-[10px] border-2 border-slate-900 bg-yellow-300 text-slate-950 shadow';
-        } else {
-          b.className = 'py-1.5 rounded-lg font-black text-[10px] border border-slate-300 bg-white text-slate-600 hover:bg-slate-100';
-        }
-      });
     }
 
     function setCommutatorMode(isOn) {
@@ -2000,53 +1752,31 @@
       const btmBtn = document.getElementById('btmCommutatorBtn');
 
       if (state.commutatorAutoFlip) {
-        if (toggleBtn) {
-          toggleBtn.className = 'w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm flex items-center justify-between';
-        }
-        if (toggleBadge) {
-          toggleBadge.textContent = 'ON';
-          toggleBadge.className = 'px-2 py-0.5 rounded bg-slate-900 text-yellow-300 text-[10px] font-black';
-        }
-        if (btmBtn) {
-          btmBtn.textContent = '🔄 반바퀴 자동 전환 ON';
-          btmBtn.className = 'px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 border border-slate-900 text-slate-950 font-black text-xs shadow-sm';
-        }
+        if (toggleBtn) toggleBtn.className = 'w-full py-2.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm flex items-center justify-between';
+        if (toggleBadge) { toggleBadge.textContent = 'ON'; toggleBadge.className = 'px-2 py-0.5 rounded bg-slate-900 text-yellow-300 text-[10px] font-black'; }
+        if (btmBtn) { btmBtn.textContent = '🔄 반바퀴 자동 전환 ON'; btmBtn.className = 'px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 border border-slate-900 text-slate-950 font-black text-xs shadow-sm'; }
       } else {
-        if (toggleBtn) {
-          toggleBtn.className = 'w-full py-2.5 px-3 rounded-xl font-bold text-xs border-2 border-slate-300 bg-white hover:bg-slate-100 text-slate-600 flex items-center justify-between';
-        }
-        if (toggleBadge) {
-          toggleBadge.textContent = 'OFF';
-          toggleBadge.className = 'px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[10px] font-black';
-        }
-        if (btmBtn) {
-          btmBtn.textContent = '🔄 반바퀴 자동 전환 OFF';
-          btmBtn.className = 'px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 border border-slate-400 text-slate-700 font-black text-xs shadow-sm';
-        }
+        if (toggleBtn) toggleBtn.className = 'w-full py-2.5 px-3 rounded-xl font-bold text-xs border-2 border-slate-300 bg-white hover:bg-slate-100 text-slate-600 flex items-center justify-between';
+        if (toggleBadge) { toggleBadge.textContent = 'OFF'; toggleBadge.className = 'px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[10px] font-black'; }
+        if (btmBtn) { btmBtn.textContent = '🔄 반바퀴 자동 전환 OFF'; btmBtn.className = 'px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 border border-slate-400 text-slate-700 font-black text-xs shadow-sm'; }
       }
     }
 
     function openModal(id) {
       const m = document.getElementById(id);
-      m.classList.remove('hidden');
-      m.classList.add('flex');
+      m.classList.remove('hidden'); m.classList.add('flex');
     }
 
     function closeModal(id) {
       const m = document.getElementById(id);
-      m.classList.add('hidden');
-      m.classList.remove('flex');
+      m.classList.add('hidden'); m.classList.remove('flex');
     }
 
-    /********************************************************************
-     * 6. 메인 애니메이션 루프
-     ********************************************************************/
     let prevTime = performance.now();
     function animate(now) {
       requestAnimationFrame(animate);
       const dt = Math.min(0.05, (now - prevTime) / 1000);
       prevTime = now;
-
       const phys = updatePhysics(dt);
       renderTextbookMotor(phys);
     }
