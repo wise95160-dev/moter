@@ -688,6 +688,10 @@
         drawStatorMagneticField(false, phys);
       }
 
+      if (state.showRightHand && phys.endAPole !== 0) {
+        drawTextbookRightHandBack(phys);
+      }
+
       drawTextbookCoilAndCurrentArrows(phys);
 
       if (state.showMagneticField) {
@@ -698,7 +702,7 @@
         drawGreenForceArrows(phys);
       }
 
-      if (state.showRightHand) {
+      if (state.showRightHand && phys.endAPole !== 0) {
         drawTextbookRightHandOverlay(phys);
       }
 
@@ -1277,7 +1281,70 @@
       ctx.restore();
     }
 
-    /* 교과서 & 참고 그림(오른손 손등 / 손바닥 감아쥐기)을 정확히 반영한 오른손 법칙 오버레이 */
+    /* N극이 오른쪽일 때 코일 뒤쪽에 위치하는 오른손 손바닥과 엄지 */
+    function drawTextbookRightHandBack(phys) {
+      const { endAPole } = phys;
+      if (endAPole === 0) return;
+
+      const cosA = Math.cos(state.coilAngle);
+      const sinA = Math.sin(state.coilAngle);
+      const uprightAngle = cosA >= 0 ? Math.atan2(sinA, cosA) : Math.atan2(-sinA, -cosA);
+      const nPoleOnLeft = (endAPole * (cosA >= 0 ? 1 : -1)) > 0;
+      if (nPoleOnLeft) return;
+
+      ctx.save();
+      ctx.rotate(uprightAngle);
+
+      const skinFill = '#F6CD96';
+      const nailFill = '#FBE6C9';
+      const outlineColor = '#93999E';
+
+      ctx.fillStyle = skinFill;
+      ctx.strokeStyle = outlineColor;
+      ctx.lineWidth = 2.8;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      /* 코일 뒤쪽 손바닥 및 오른쪽으로 뻗은 엄지 */
+      ctx.beginPath();
+      ctx.moveTo(-102, 220);
+      ctx.lineTo(-104, 152);
+      ctx.lineTo(-132, 54);
+      ctx.lineTo(-136, -12);
+      ctx.lineTo(-124, -84);
+      ctx.lineTo(54, -84);
+      ctx.lineTo(58, -14);
+      ctx.lineTo(74, -2);
+      ctx.lineTo(94, -2);
+      ctx.lineTo(148, -22);
+      ctx.lineTo(176, -24);
+      ctx.lineTo(198, -10);
+      ctx.lineTo(206, 12);
+      ctx.lineTo(198, 22);
+      ctx.lineTo(166, 20);
+      ctx.lineTo(132, 36);
+      ctx.lineTo(92, 74);
+      ctx.lineTo(48, 126);
+      ctx.lineTo(42, 220);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      /* 오른쪽 엄지 손톱 */
+      ctx.beginPath();
+      ctx.moveTo(166, 20);
+      ctx.lineTo(174, 8);
+      ctx.lineTo(203, 12);
+      ctx.lineTo(198, 22);
+      ctx.closePath();
+      ctx.fillStyle = nailFill;
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    /* 첨부 이미지(image_9d5d04.png / image_8ba17d.png)를 그대로 재현한 오른손 모양 */
     function drawTextbookRightHandOverlay(phys) {
       const { endAPole } = phys;
       if (endAPole === 0) return;
@@ -1290,182 +1357,136 @@
       ctx.save();
       ctx.rotate(uprightAngle);
 
-      const skinFill = 'rgba(248, 212, 174, 0.88)';
-      const nailFill = 'rgba(255, 239, 224, 0.96)';
-      const outlineColor = '#7C5A3F';
+      const skinFill = '#F6CD96';
+      const nailFill = '#FBE6C9';
+      const outlineColor = '#93999E';
+
+      ctx.fillStyle = skinFill;
+      ctx.strokeStyle = outlineColor;
+      ctx.lineWidth = 2.8;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
 
       if (nPoleOnLeft) {
-        /* 1) N극이 왼쪽일 때 (앞면 전류 ↑) : 오른손 손등이 보이며 네 손가락이 위로 감아쥐고 엄지가 왼쪽(N극)을 가리키는 모양 */
-        ctx.save();
-        ctx.fillStyle = skinFill;
-        ctx.strokeStyle = outlineColor;
-        ctx.lineWidth = 3.0;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-
+        /* 첨부 이미지(image_9d5d04.png) : 손등이 앞을 향하고 네 손가락이 코일 위쪽을 감싸며 엄지가 왼쪽(N극)을 가리키는 모양 */
         ctx.beginPath();
-        ctx.moveTo(-26, 178);
-        ctx.lineTo(-26, 98);
-        ctx.quadraticCurveTo(-52, 66, -86, 48);
-        ctx.lineTo(-148, 32);
-        ctx.quadraticCurveTo(-176, 26, -178, 12);
-        ctx.quadraticCurveTo(-176, -4, -144, -2);
-        ctx.lineTo(-76, 8);
-        ctx.quadraticCurveTo(-56, 10, -52, -16);
-        ctx.lineTo(-52, -74);
-        ctx.quadraticCurveTo(-52, -96, -30, -96);
-        ctx.quadraticCurveTo(-10, -96, -8, -78);
-        ctx.quadraticCurveTo(-6, -104, 16, -104);
-        ctx.quadraticCurveTo(38, -104, 40, -80);
-        ctx.quadraticCurveTo(42, -98, 62, -98);
-        ctx.quadraticCurveTo(82, -98, 84, -74);
-        ctx.quadraticCurveTo(86, -88, 104, -88);
-        ctx.quadraticCurveTo(124, -88, 124, -62);
-        ctx.lineTo(124, 24);
-        ctx.quadraticCurveTo(124, 82, 74, 126);
-        ctx.lineTo(68, 178);
+        ctx.moveTo(-2, 220);
+        ctx.lineTo(-10, 178);
+        ctx.lineTo(-28, 146);
+        ctx.lineTo(-60, 108);
+        ctx.lineTo(-92, 76);
+        ctx.lineTo(-126, 56);
+        ctx.lineTo(-154, 46);
+        ctx.lineTo(-188, 38);
+        ctx.lineTo(-186, 24);
+        ctx.lineTo(-164, 14);
+        ctx.lineTo(-114, 14);
+        ctx.lineTo(-42, 44);
+        ctx.lineTo(-32, -16);
+        ctx.lineTo(-40, -68);
+        ctx.lineTo(-46, -74);
+        ctx.lineTo(-44, -124);
+        ctx.lineTo(-4, -142);
+        ctx.lineTo(14, -135);
+        ctx.lineTo(24, -150);
+        ctx.lineTo(48, -156);
+        ctx.lineTo(74, -150);
+        ctx.lineTo(84, -134);
+        ctx.lineTo(112, -137);
+        ctx.lineTo(132, -134);
+        ctx.lineTo(144, -114);
+        ctx.lineTo(164, -104);
+        ctx.lineTo(188, -82);
+        ctx.lineTo(204, -16);
+        ctx.lineTo(212, 54);
+        ctx.lineTo(208, 114);
+        ctx.lineTo(196, 158);
+        ctx.lineTo(196, 220);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
 
-        /* 손가락 사이 구분선 */
+        /* 검지 끝 안쪽 접힘선 및 손가락 구분선 3줄 */
         ctx.beginPath();
-        ctx.moveTo(-8, -78); ctx.lineTo(-8, -12);
-        ctx.moveTo(40, -80); ctx.lineTo(40, -12);
-        ctx.moveTo(84, -74); ctx.lineTo(84, -8);
+        ctx.moveTo(-38, -102);
+        ctx.lineTo(-40, -68);
+
+        ctx.moveTo(14, -135);
+        ctx.lineTo(26, -130);
+        ctx.lineTo(36, -108);
+        ctx.lineTo(42, -36);
+
+        ctx.moveTo(84, -134);
+        ctx.lineTo(98, -70);
+        ctx.lineTo(116, -26);
+
+        ctx.moveTo(144, -114);
+        ctx.lineTo(156, -60);
+        ctx.lineTo(172, -14);
         ctx.stroke();
 
-        /* 엄지 손톱 */
+        /* 왼쪽 엄지 옆면 손톱 */
         ctx.beginPath();
-        ctx.ellipse(-162, 12, 8, 6, 0.08, 0, Math.PI * 2);
+        ctx.moveTo(-187, 29);
+        ctx.lineTo(-153, 35);
+        ctx.lineTo(-154, 46);
+        ctx.lineTo(-188, 38);
+        ctx.closePath();
         ctx.fillStyle = nailFill;
         ctx.fill();
         ctx.stroke();
-
-        /* 자기장(N극) 방향 및 전류 방향 안내 화살표 */
-        drawHandGuideArrow(-62, 24, -138, 16, '자기장의 방향 (N극)', -95, 52);
-        drawHandCurlArrow(36, -65, 36, -128, '전류의 방향');
-        ctx.restore();
       } else {
-        /* 2) N극이 오른쪽일 때 (앞면 전류 ↓) : 오른손이 코일 뒤에서 감아쥐어 손바닥이 보이고 위쪽에 네 손가락 끝(손톱 4개)이 내려오며 엄지가 오른쪽(N극)을 가리키는 모양 */
-        ctx.save();
-        ctx.fillStyle = skinFill;
-        ctx.strokeStyle = outlineColor;
-        ctx.lineWidth = 3.0;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-
-        /* 손바닥과 오른쪽 엄지 윤곽 */
+        /* N극이 오른쪽일 때 코일 위쪽 모서리를 감싸 쥐고 내려오는 네 손가락 끝과 손톱 */
         ctx.beginPath();
-        ctx.moveTo(-64, 178);
-        ctx.lineTo(-68, 118);
-        ctx.quadraticCurveTo(-112, 72, -112, 12);
-        ctx.lineTo(-112, -58);
-        ctx.lineTo(64, -58);
-        ctx.lineTo(64, -6);
-        ctx.quadraticCurveTo(72, 10, 96, 4);
-        ctx.lineTo(152, -6);
-        ctx.quadraticCurveTo(182, -8, 184, 8);
-        ctx.quadraticCurveTo(182, 24, 152, 30);
-        ctx.lineTo(92, 48);
-        ctx.quadraticCurveTo(56, 66, 32, 104);
-        ctx.lineTo(32, 178);
+        ctx.moveTo(-124, -84);
+        ctx.lineTo(-120, -118);
+        ctx.lineTo(-104, -132);
+        ctx.lineTo(-86, -124);
+        ctx.lineTo(-80, -138);
+        ctx.lineTo(-56, -144);
+        ctx.lineTo(-36, -134);
+        ctx.lineTo(-26, -148);
+        ctx.lineTo(0, -154);
+        ctx.lineTo(22, -140);
+        ctx.lineTo(44, -148);
+        ctx.lineTo(62, -136);
+        ctx.lineTo(68, -112);
+        ctx.lineTo(72, -84);
         ctx.closePath();
+        ctx.fillStyle = skinFill;
         ctx.fill();
         ctx.stroke();
 
-        /* 코일 위쪽 모서리를 감싸 쥐며 내려오는 네 손가락 끝 마디와 손톱 4개 */
-        const fingerCenters = [-88, -42, 4, 48];
-        fingerCenters.forEach((fx, i) => {
-          const topY = -102 - (i === 1 || i === 2 ? 6 : 0);
-          const botY = -44;
-          ctx.beginPath();
-          ctx.roundRect(fx - 21, topY, 42, botY - topY, 16);
-          ctx.fillStyle = skinFill;
-          ctx.fill();
-          ctx.stroke();
+        /* 네 손가락 마디 구분선 */
+        ctx.beginPath();
+        ctx.moveTo(-86, -124); ctx.lineTo(-86, -84);
+        ctx.moveTo(-36, -134); ctx.lineTo(-34, -84);
+        ctx.moveTo(22, -140); ctx.lineTo(18, -84);
 
-          /* 손톱 표현 */
+        ctx.moveTo(-120, -104); ctx.lineTo(-102, -94); ctx.lineTo(-86, -100);
+        ctx.moveTo(-86, -108); ctx.lineTo(-60, -96); ctx.lineTo(-35, -108);
+        ctx.moveTo(-35, -112); ctx.lineTo(-6, -100); ctx.lineTo(20, -116);
+        ctx.moveTo(20, -114); ctx.lineTo(46, -104); ctx.lineTo(68, -116);
+        ctx.stroke();
+
+        /* 네 손가락 손톱 */
+        const nails = [
+          [[-112, -109], [-104, -118], [-94, -114], [-92, -106]],
+          [[-76, -112], [-62, -124], [-48, -120], [-44, -110]],
+          [[-24, -120], [-8, -134], [8, -132], [12, -118]],
+          [[28, -120], [42, -132], [56, -128], [60, -116]]
+        ];
+        nails.forEach(pts => {
           ctx.beginPath();
-          ctx.roundRect(fx - 12, botY - 22, 24, 15, 6);
+          ctx.moveTo(pts[0][0], pts[0][1]);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+          ctx.closePath();
           ctx.fillStyle = nailFill;
           ctx.fill();
           ctx.stroke();
         });
-
-        /* 엄지 손톱 */
-        ctx.beginPath();
-        ctx.ellipse(168, 10, 8, 6, -0.08, 0, Math.PI * 2);
-        ctx.fillStyle = nailFill;
-        ctx.fill();
-        ctx.stroke();
-
-        /* 자기장(N극) 방향 및 전류 방향 안내 화살표 */
-        drawHandGuideArrow(62, 24, 138, 12, '자기장의 방향 (N극)', 95, 54);
-        drawHandCurlArrow(-20, -124, -20, -58, '전류의 방향');
-        ctx.restore();
       }
 
-      ctx.restore();
-    }
-
-    function drawHandGuideArrow(x1, y1, x2, y2, labelText, lx, ly) {
-      ctx.save();
-      const ang = Math.atan2(y2 - y1, x2 - x1);
-      ctx.strokeStyle = 'rgba(71, 85, 105, 0.78)';
-      ctx.lineWidth = 6;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-
-      ctx.translate(x2, y2);
-      ctx.rotate(ang);
-      ctx.beginPath();
-      ctx.moveTo(8, 0);
-      ctx.lineTo(-8, -8);
-      ctx.lineTo(-8, 8);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(71, 85, 105, 0.85)';
-      ctx.fill();
-      ctx.restore();
-
-      ctx.save();
-      ctx.font = '800 14px "Pretendard", sans-serif';
-      ctx.fillStyle = '#334155';
-      ctx.textAlign = 'center';
-      ctx.fillText(labelText, lx, ly);
-      ctx.restore();
-    }
-
-    function drawHandCurlArrow(x1, y1, x2, y2, labelText) {
-      ctx.save();
-      ctx.strokeStyle = 'rgba(225, 29, 72, 0.65)';
-      ctx.lineWidth = 5;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-
-      const ang = Math.atan2(y2 - y1, x2 - x1);
-      ctx.save();
-      ctx.translate(x2, y2);
-      ctx.rotate(ang);
-      ctx.beginPath();
-      ctx.moveTo(7, 0);
-      ctx.lineTo(-7, -7);
-      ctx.lineTo(-7, 7);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(225, 29, 72, 0.78)';
-      ctx.fill();
-      ctx.restore();
-
-      ctx.font = '800 14px "Pretendard", sans-serif';
-      ctx.fillStyle = '#be123c';
-      ctx.textAlign = 'left';
-      ctx.fillText(labelText, Math.max(x1, x2) + 18, Math.min(y1, y2) + 8);
       ctx.restore();
     }
 
@@ -1544,10 +1565,16 @@
     // ================= 5. 조작 인터랙션 및 상태 제어 =================
     function togglePlayPause() {
       state.isPlaying = !state.isPlaying;
-      if (state.isPlaying && (!state.switchOn || state.currentLevel <= 0.01)) {
+      if (state.isPlaying) {
         state.switchOn = true;
-        state.currentLevel = 1;
-        state.currentAmp = LEVEL_TO_AMP[1];
+        if (state.currentLevel <= 0.01) {
+          state.currentLevel = 1;
+          state.currentAmp = LEVEL_TO_AMP[1];
+        }
+      } else {
+        state.switchOn = false;
+        state.currentLevel = 0;
+        state.currentAmp = 0;
       }
       syncPowerSwitchUI();
       updatePlayPauseUI();
@@ -1588,14 +1615,19 @@
 
     function togglePowerSwitch() {
       state.switchOn = !state.switchOn;
-      if (state.switchOn && state.currentLevel <= 0.01) {
-        state.currentLevel = 1;
-        state.currentAmp = LEVEL_TO_AMP[1];
-      } else if (!state.switchOn) {
+      if (state.switchOn) {
+        if (state.currentLevel <= 0.01) {
+          state.currentLevel = 1;
+          state.currentAmp = LEVEL_TO_AMP[1];
+        }
+        state.isPlaying = true;
+      } else {
         state.currentLevel = 0;
         state.currentAmp = 0;
+        state.isPlaying = false;
       }
       syncPowerSwitchUI();
+      updatePlayPauseUI();
     }
 
     function syncPowerSwitchUI() {
@@ -1632,8 +1664,10 @@
         state.currentLevel = 0;
         state.switchOn = false;
         state.currentAmp = 0;
+        state.isPlaying = false;
       } else {
         state.switchOn = true;
+        state.isPlaying = true;
         const low = Math.floor(num);
         const high = Math.min(5, Math.ceil(num));
         const frac = num - low;
@@ -1642,6 +1676,7 @@
         state.currentAmp = ampLow + (ampHigh - ampLow) * frac;
       }
       syncPowerSwitchUI();
+      updatePlayPauseUI();
     }
 
     function flipCurrentDirection() {
