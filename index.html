@@ -526,8 +526,14 @@
       const stageBox = document.getElementById('stageBox');
       if (!stageBox || !canvas) return;
       const rect = stageBox.getBoundingClientRect();
-      canvas.width = Math.max(320, Math.floor(rect.width));
-      canvas.height = Math.max(240, Math.floor(rect.height));
+      const cssW = Math.max(320, Math.floor(rect.width));
+      const cssH = Math.max(240, Math.floor(rect.height));
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      canvas.dataset.cssW = cssW;
+      canvas.dataset.cssH = cssH;
+      canvas.dataset.dpr = dpr;
     }
 
     window.addEventListener('resize', resizeCanvas);
@@ -615,8 +621,10 @@
     }
 
     function renderTextbookMotor(phys) {
-      const w = canvas.width;
-      const h = canvas.height;
+      const dpr = parseFloat(canvas.dataset.dpr) || 1;
+      const w = parseFloat(canvas.dataset.cssW) || canvas.width;
+      const h = parseFloat(canvas.dataset.cssH) || canvas.height;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
       const baseW = state.showCallouts ? 780 : 690;
@@ -1679,6 +1687,11 @@
 
     window.onload = function() {
       resizeCanvas();
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => resizeCanvas());
+        const stageBox = document.getElementById('stageBox');
+        if (stageBox) ro.observe(stageBox);
+      }
       syncPowerSwitchUI();
       updatePlayPauseUI();
       setCommutatorMode(true);
