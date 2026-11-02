@@ -20,7 +20,7 @@
 
   <style>
     /* ==========================================================================
-       1. 기본 리셋 및 GitHub Pages 오프라인/온라인 독립형 스타일시트
+       1. 기본 리셋 및 독립형 전체 스타일시트 (외부 의존성 없이 100% 작동)
        ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -59,7 +59,7 @@
     }
 
     /* ==========================================================================
-       2. 레이아웃 및 유틸리티 클래스
+       2. 레이아웃 및 유틸리티 클래스 완벽 정의
        ========================================================================== */
     .relative { position: relative; }
     .fixed { position: fixed; }
@@ -83,6 +83,7 @@
     .items-center { align-items: center; }
     .justify-center { justify-content: center; }
     .justify-between { justify-content: space-between; }
+    .justify-start { justify-content: flex-start; }
 
     .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -92,183 +93,147 @@
 
     .w-full { width: 100%; }
     .h-full { height: 100%; }
+    .h-auto { height: auto; }
     .w-screen { width: 100vw; }
     .h-screen { height: 100vh; }
-    .w-4 { width: 16px; }
-    .h-4 { height: 16px; }
-    .w-9 { width: 36px; }
-    .h-9 { height: 36px; }
 
     .max-w-xl { max-width: 576px; }
     .max-w-5xl { max-width: 1024px; }
-    .min-w-slider { min-width: 250px; }
+    .min-w-slider { min-width: 260px; }
 
     .overflow-hidden { overflow: hidden; }
-    .overflow-y-auto { overflow-y: auto; }
+    .overflow-y-auto { overflow: auto; }
+    .whitespace-nowrap { white-space: nowrap; }
+    .cursor-pointer { cursor: pointer; }
 
+    /* 여백(Padding / Margin) 유틸리티 */
+    .p-0\.5 { padding: 2px; }
     .p-2 { padding: 8px; }
+    .p-2\.5 { padding: 10px; }
     .p-3 { padding: 12px; }
     .p-3\.5 { padding: 14px; }
-    .p-4 { padding: 16px; }
-    .p-6 { padding: 24px; }
-
+    .px-0\.5 { padding-left: 2px; padding-right: 2px; }
+    .px-1 { padding-left: 4px; padding-right: 4px; }
+    .px-1\.5 { padding-left: 6px; padding-right: 6px; }
     .px-2 { padding-left: 8px; padding-right: 8px; }
     .px-2\.5 { padding-left: 10px; padding-right: 10px; }
     .px-3 { padding-left: 12px; padding-right: 12px; }
-    .px-3\.5 { padding-left: 14px; padding-right: 14px; }
     .px-4 { padding-left: 16px; padding-right: 16px; }
-    .px-5 { padding-left: 20px; padding-right: 20px; }
-
+    .py-0\.5 { padding-top: 2px; padding-bottom: 2px; }
     .py-1 { padding-top: 4px; padding-bottom: 4px; }
     .py-1\.5 { padding-top: 6px; padding-bottom: 6px; }
-    .py-2 { padding-top: 8px; padding-bottom: 8px; }
-    .py-2\.5 { padding-top: 10px; padding-bottom: 10px; }
-
-    .pt-3 { padding-top: 12px; }
-    .pb-3 { padding-bottom: 12px; }
-
+    .pt-0\.5 { padding-top: 2px; }
+    .pb-0\.5 { padding-bottom: 2px; }
+    .pb-1 { padding-bottom: 4px; }
+    .mb-0\.5 { margin-bottom: 2px; }
     .mb-1 { margin-bottom: 4px; }
-    .mb-1\.5 { margin-bottom: 6px; }
-    .mb-4 { margin-bottom: 16px; }
     .mt-1 { margin-top: 4px; }
-    .mt-5 { margin-top: 20px; }
 
-    .space-y-1\.5 > * + * { margin-top: 6px; }
-    .space-y-2 > * + * { margin-top: 8px; }
-    .space-y-3 > * + * { margin-top: 12px; }
-
-    .rounded { border-radius: 4px; }
-    .rounded-lg { border-radius: 8px; }
-    .rounded-xl { border-radius: 12px; }
-    .rounded-2xl { border-radius: 16px; }
-    .rounded-3xl { border-radius: 24px; }
-    .rounded-full { border-radius: 9999px; }
-
-    .border { border: 1px solid #cbd5e1; }
-    .border-2 { border: 2px solid #0f172a; }
-    .border-b { border-bottom: 1px solid #e2e8f0; }
-    .border-t { border-top: 1px solid #fde68a; }
-    .border-l { border-left: 1px solid #e2e8f0; }
-
-    .border-slate-200 { border-color: #e2e8f0; }
-    .border-slate-300 { border-color: #cbd5e1; }
-    .border-slate-600 { border-color: #475569; }
-    .border-slate-900 { border-color: #0f172a; }
-    .border-amber-200 { border-color: #fde68a; }
-    .border-amber-300 { border-color: #fcd34d; }
-    .border-amber-400 { border-color: #fbbf24; }
-
+    /* 색상, 배경, 테두리, 둥근 모서리, 그림자 유틸리티 */
     .bg-white { background-color: #ffffff; }
     .bg-slate-50 { background-color: #f8fafc; }
     .bg-slate-100 { background-color: #f1f5f9; }
     .bg-slate-200 { background-color: #e2e8f0; }
     .bg-slate-900 { background-color: #0f172a; }
-    .bg-amber-50 { background-color: #fffbeb; }
-    .bg-amber-100 { background-color: #fef3c7; }
-    .bg-amber-400 { background-color: #fbbf24; }
     .bg-yellow-300 { background-color: #fde047; }
-    .bg-lime-400 { background-color: #a3e635; }
+    .bg-amber-50 { background-color: #fffbeb; }
+    .bg-amber-500 { background-color: #f59e0b; }
     .bg-emerald-600 { background-color: #059669; }
-    .bg-indigo-600 { background-color: #4f46e5; }
-    .bg-rose-600 { background-color: #e11d48; }
-    .bg-backdrop { background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); }
 
     .hover\:bg-slate-100:hover { background-color: #f1f5f9; }
     .hover\:bg-slate-800:hover { background-color: #1e293b; }
-    .hover\:bg-amber-100:hover { background-color: #fef3c7; }
-    .hover\:bg-amber-200:hover { background-color: #fde68a; }
     .hover\:bg-yellow-400:hover { background-color: #facc15; }
+    .hover\:bg-amber-100:hover { background-color: #fef3c7; }
+    .hover\:bg-amber-400:hover { background-color: #fbbf24; }
     .hover\:bg-emerald-500:hover { background-color: #10b981; }
-    .hover\:bg-indigo-500:hover { background-color: #6366f1; }
+    .hover\:bg-indigo-100:hover { background-color: #e0e7ff; }
     .hover\:bg-rose-100:hover { background-color: #ffe4e6; }
-    .hover\:text-rose-700:hover { color: #be123c; }
 
     .text-white { color: #ffffff; }
+    .text-slate-400 { color: #94a3b8; }
     .text-slate-500 { color: #64748b; }
     .text-slate-600 { color: #475569; }
     .text-slate-700 { color: #334155; }
     .text-slate-800 { color: #1e293b; }
     .text-slate-900 { color: #0f172a; }
-    .text-amber-600 { color: #d97706; }
-    .text-amber-900 { color: #78350f; }
+    .text-slate-950 { color: #020617; }
+    .text-yellow-300 { color: #fde047; }
     .text-amber-950 { color: #451a03; }
-    .text-lime-700 { color: #4d7c0f; }
-    .text-sky-700 { color: #0369a1; }
-    .text-indigo-700 { color: #4338ca; }
-    .text-rose-600 { color: #e11d48; }
 
-    .text-xs { font-size: 12px; }
-    .text-sm { font-size: 14px; }
-    .text-base { font-size: 16px; }
-    .text-lg { font-size: 18px; }
-    .text-xl { font-size: 20px; }
+    .hover\:text-slate-900:hover { color: #0f172a; }
+    .hover\:text-rose-700:hover { color: #be123c; }
 
-    .font-bold { font-weight: 700; }
-    .font-extrabold { font-weight: 800; }
-    .font-black { font-weight: 900; }
+    .border { border: 1px solid #e2e8f0; }
+    .border-b { border-bottom: 1px solid #e2e8f0; }
+    .border-2 { border: 2px solid #0f172a; }
+    .border-slate-200 { border-color: #e2e8f0; }
+    .border-slate-300 { border-color: #cbd5e1; }
+    .border-slate-900 { border-color: #0f172a; }
+    .border-amber-200 { border-color: #fde68a; }
 
-    .tracking-tight { letter-spacing: -0.025em; }
-    .underline { text-decoration: underline; text-underline-offset: 3px; }
-    .text-right { text-align: right; }
-    .leading-relaxed { line-height: 1.6; }
+    .rounded { border-radius: 4px; }
+    .rounded-lg { border-radius: 8px; }
+    .rounded-xl { border-radius: 12px; }
+    .rounded-2xl { border-radius: 16px; }
+    .rounded-full { border-radius: 9999px; }
 
     .shadow-sm { box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.06); }
-    .shadow { box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.12); }
-    .shadow-md { box-shadow: 0 4px 10px -2px rgba(15, 23, 42, 0.15); }
-    .shadow-lg { box-shadow: 0 10px 20px -4px rgba(15, 23, 42, 0.14); }
-    .shadow-2xl { box-shadow: 0 20px 35px -8px rgba(15, 23, 42, 0.25); }
-    .shadow-inner { box-shadow: inset 0 1px 3px 0 rgba(15, 23, 42, 0.08); }
+    .shadow-md { box-shadow: 0 4px 10px -1px rgba(15, 23, 42, 0.08); }
+    .shadow-xl { box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.12); }
+    .shadow-inner { box-shadow: inset 0 1px 3px 0 rgba(15, 23, 42, 0.06); }
 
-    .pointer-events-none { pointer-events: none; }
-    .pointer-events-auto { pointer-events: auto; }
-    /* 우측 설정창 고정 폭 및 내용물 높이에 맞춘 컴팩트 박스 (아래 빈 공간 제거) */
+    .text-base { font-size: 15px; }
+    .text-xs { font-size: 12px; }
+    .text-\[11px\] { font-size: 11px; }
+    .text-\[10\.5px\] { font-size: 10.5px; }
+    .text-\[10px\] { font-size: 10px; }
+    .font-bold { font-weight: 700; }
+    .font-black { font-weight: 800; }
+    .tracking-tight { letter-spacing: -0.025em; }
+
+    /* 크롬북 최적화 컴팩트 설정창 (하단 여백 완전 제거 및 높이 fit-content) */
     .settings-drawer {
       width: 256px;
       max-width: 78vw;
       height: fit-content;
-      max-height: calc(100vh - 52px);
+      max-height: calc(100vh - 50px);
       align-self: flex-start;
-      margin: 8px 10px 8px 0;
+      margin: 6px 10px 0 0;
       border: 1.5px solid #cbd5e1;
       border-radius: 16px;
       font-size: 85%;
     }
     .settings-drawer .p-3\.5 { padding: 6px 8px; }
-    .settings-drawer .p-3 { padding: 4px 6px; }
-    .settings-drawer .p-2\.5 { padding: 4px 6px; }
-    .settings-drawer .space-y-3 > * + * { margin-top: 3px; }
-    .settings-drawer .space-y-2 > * + * { margin-top: 2px; }
-    .settings-drawer .space-y-1\.5 > * + * { margin-top: 1.5px; }
-    .settings-drawer .space-y-1 > * + * { margin-top: 1.5px; }
-    .settings-drawer .py-2\.5 { padding-top: 4px; padding-bottom: 4px; }
-    .settings-drawer .py-2 { padding-top: 3.5px; padding-bottom: 3.5px; }
-    .settings-drawer .py-1\.5 { padding-top: 2.5px; padding-bottom: 2.5px; }
-    .settings-drawer .px-4 { padding-left: 10px; padding-right: 10px; }
-    .settings-drawer .px-3 { padding-left: 8px; padding-right: 8px; }
-    .settings-drawer .rounded-2xl { border-radius: 10px; }
-    .settings-drawer .text-sm { font-size: 12px; }
-    .settings-drawer .text-xs { font-size: 10.5px; }
+    .settings-drawer .p-3 { padding: 5px 7px; }
+    .settings-drawer .p-2\.5 { padding: 5px 7px; }
+    .settings-drawer .p-2 { padding: 5px 7px; }
+    .settings-drawer .space-y-3 > * + * { margin-top: 3.5px; }
+    .settings-drawer .space-y-2 > * + * { margin-top: 3.5px; }
+    .settings-drawer .space-y-1\.5 > * + * { margin-top: 2.5px; }
+    .settings-drawer .space-y-1 > * + * { margin-top: 2px; }
 
     /* 표시 옵션 사각형 높이 70% 축소 전용 클래스 */
     .opt-item-compact {
       padding: 2px 6px !important;
       min-height: 20px;
-      border-radius: 7px !important;
+      border-radius: 6px !important;
     }
     .opt-item-compact input[type="checkbox"] {
       width: 13px !important;
       height: 13px !important;
+      margin: 0;
+      cursor: pointer;
     }
 
     /* 방향 바꾸기 버튼 (글씨 크게, 높이 낮게) */
     .dir-btn-compact {
-      padding: 3.5px 6px !important;
-      font-size: 13px !important;
-      line-height: 1.15 !important;
+      padding: 4px 6px !important;
+      font-size: 13.5px !important;
+      line-height: 1.18 !important;
       border-radius: 9px !important;
     }
 
-    /* 전류 세기 슬라이더 */
+    /* 전류 세기 및 각도 슬라이더 */
     .amp-slider, .angle-slider {
       -webkit-appearance: none;
       appearance: none;
@@ -282,12 +247,12 @@
     .amp-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: #facc15;
-      border: 3px solid #0f172a;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
+      border: 2.5px solid #0f172a;
+      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.28);
       cursor: pointer;
       transition: transform 0.1s ease;
     }
@@ -296,12 +261,12 @@
     .angle-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #4f46e5;
       border: 2.5px solid #ffffff;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.35);
+      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.35);
       cursor: pointer;
     }
 
@@ -311,13 +276,13 @@
     .accent-sky { accent-color: #0284c7; }
     .accent-slate { accent-color: #334155; }
 
-    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar { width: 5px; }
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
 
     @keyframes pulse-play {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
-      50% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
     }
     .play-resume-pulse { animation: pulse-play 1.4s infinite; }
 
@@ -326,9 +291,9 @@
       .settings-drawer {
         position: fixed;
         right: 8px;
-        top: 50px;
+        top: 46px;
         margin: 0;
-        max-height: calc(100vh - 60px);
+        max-height: calc(100vh - 54px);
         z-index: 40;
       }
     }
@@ -336,27 +301,29 @@
 </head>
 <body class="relative flex flex-col h-screen w-screen overflow-hidden bg-white">
 
-  <!-- ================= 1. 상단 헤더 바 (제목 + 설정창 닫기/열기 버튼만 간결하게 배치) ================= -->
+  <!-- ================= 1. 상단 헤더 바 (제목 옆 설정창 닫기 버튼 배치) ================= -->
   <header class="w-full bg-slate-50 border-b border-slate-200 px-3 py-1.5 flex items-center justify-between gap-2 z-30 shrink-0">
     <div class="flex items-center gap-2">
       <span class="px-2 py-0.5 rounded-lg bg-yellow-300 border-2 border-slate-900 text-slate-950 font-black text-xs shadow-sm">
         중2 과학 7-3-2
       </span>
       <h1 class="text-base font-black tracking-tight text-slate-900" style="margin:0;">전동기의 원리</h1>
-      <button id="headerSettingsBtn" onclick="toggleSettingsPanel()" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm flex items-center gap-1" style="margin-left: 6px;">
-        <span>⚙️</span>
-        <span id="headerSettingsBtnText">설정창 닫기 ✕</span>
-      </button>
     </div>
+    <button id="headerSettingsBtn" onclick="toggleSettingsPanel()" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm flex items-center gap-1">
+      <span>⚙️</span>
+      <span id="headerSettingsBtnText">설정창 닫기 ✕</span>
+    </button>
   </header>
 
   <!-- ================= 2. 메인 영역 ================= -->
   <div class="relative flex-1 flex overflow-hidden w-full bg-white">
     <main id="canvasWrapper" class="relative flex-1 h-full flex flex-col items-center justify-start overflow-hidden bg-white">
-      <div id="stageBox" class="relative w-full flex items-center justify-center overflow-hidden" style="height: min(calc(100vh - 96px), 52vw); min-height: 290px; max-height: 460px;">
+      <!-- 전동기 캔버스 스테이지 (하단 컨트롤 바와 간격 밀착) -->
+      <div id="stageBox" class="relative w-full flex items-center justify-center overflow-hidden" style="height: min(calc(100vh - 86px), 52vw); min-height: 290px; max-height: 460px;">
         <canvas id="motorCanvas" class="block w-full h-full"></canvas>
       </div>
 
+      <!-- 하단 컨트롤 바 (전동기 그림 바로 아래 밀착 배치) -->
       <div class="w-full max-w-5xl px-3 pb-1 z-10 shrink-0" style="margin-top: -8px;">
         <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl px-3 py-1.5 shadow-md">
           <div class="flex flex-wrap items-center justify-between gap-2">
@@ -380,7 +347,7 @@
       </div>
     </main>
 
-    <!-- ================= 3. 우측 설정창 (내용물 높이에 딱 맞게 축소, 하단 여백 제거) ================= -->
+    <!-- ================= 3. 우측 설정창 (크롬북 한 화면 최적화 및 하단 빈 여백 제거) ================= -->
     <aside id="settingsPanel" class="settings-drawer bg-slate-50 shadow-xl flex flex-col z-20 shrink-0 overflow-hidden">
       <div class="px-3 py-1.5 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-1">
@@ -392,18 +359,18 @@
         </button>
       </div>
 
-      <div class="p-3.5 space-y-3 overflow-y-auto custom-scroll flex flex-col justify-start">
-        <!-- 첨부1: 실행/일시정지 버튼 하나로 간단히 하기 -->
+      <div class="p-3.5 space-y-2 overflow-y-auto custom-scroll flex flex-col justify-start">
+        <!-- 실행 / 일시정지 단일 토글 버튼 -->
         <button id="panelPlayPauseBtn" onclick="togglePlayPause()" class="w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm flex items-center justify-center gap-1.5 play-resume-pulse">
           <span id="panelPlayPauseIcon">▶️</span> <span id="panelPlayPauseText">실행</span>
         </button>
 
         <!-- 전류 회로도 (초기 상태: 스위치 열림 OFF) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-2.5 shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
           <div class="flex items-center justify-between text-[11px] font-bold mb-0.5">
             <span class="text-slate-800">🔌 전류 회로도 (클릭 조작)</span>
           </div>
-          <svg viewBox="0 0 280 90" class="w-full h-auto" style="max-height: 76px;">
+          <svg viewBox="0 0 280 90" class="w-full h-auto" style="max-height: 70px;">
             <rect x="52" y="6" width="22" height="22" rx="3" fill="#E65132" stroke="#9E2412" stroke-width="1.8" />
             <text id="miniLeftMag" x="63" y="21" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">N</text>
             <rect x="206" y="6" width="22" height="22" rx="3" fill="#5496D4" stroke="#274F7D" stroke-width="1.8" />
@@ -431,7 +398,7 @@
           </svg>
         </div>
 
-        <!-- 첨부2: 자석 & 전류 방향 조절 (글씨 크게, 사각형 높이 줄이기) -->
+        <!-- 자석 방향 바꾸기 / 전류 방향 바꾸기 버튼 2개 -->
         <div class="bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
           <div class="grid grid-cols-2 gap-1.5">
             <button onclick="flipMagnetPoles()" class="dir-btn-compact border-2 border-slate-900 bg-slate-50 hover:bg-slate-100 text-slate-950 font-black shadow-sm flex flex-col items-center justify-center">
@@ -445,8 +412,8 @@
           </div>
         </div>
 
-        <!-- ③ 전류의 세기 조절 (초기값 0 OFF, 연속 슬라이드바) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-2.5 shadow-sm">
+        <!-- 전류의 세기 조절 (끊김 없는 연속형 슬라이더, 초기값 0 OFF) -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
           <div class="flex items-center justify-between gap-1 mb-1">
             <span class="text-xs font-black text-slate-800">🎚️ 전류의 세기 조절</span>
             <span id="ampReadoutBadge" class="px-2 py-0.5 rounded-full bg-slate-200 border border-slate-900 text-slate-900 font-black text-[10px] shrink-0">0 OFF</span>
@@ -464,7 +431,7 @@
           </div>
         </div>
 
-        <!-- 첨부3: 사각형 위 제목 없애기, ON/OFF 둘 다 보이는 상태로 설정된 부분 나타내기 -->
+        <!-- 반바퀴마다 전류 전환 ON / OFF 동시 표시 토글 버튼 -->
         <button id="btnCommutatorToggle" onclick="setCommutatorMode(!state.commutatorAutoFlip)" class="w-full py-1.5 px-2.5 rounded-xl font-black text-xs border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm flex items-center justify-between gap-1">
           <span class="flex items-center gap-1 whitespace-nowrap"><span>🔄</span> 반바퀴마다 전류 전환</span>
           <span class="inline-flex items-center bg-white border border-slate-900 rounded-lg p-0.5 text-[10px] font-black shrink-0">
@@ -473,7 +440,7 @@
           </span>
         </button>
 
-        <!-- 👁️ 표시 옵션 (사각형들 높이 70%로 축소) -->
+        <!-- 👁️ 표시 옵션 (모두 초기 OFF, 명칭 없애기 최상단) -->
         <div class="bg-white border border-slate-200 rounded-2xl p-2 space-y-1 shadow-sm">
           <div class="text-xs font-black text-slate-800 mb-0.5">👁️ 표시 옵션</div>
 
@@ -512,7 +479,7 @@
     </aside>
   </div>
 
-  <!-- ================= 4. 시뮬레이션 엔진 스크립트 ================= -->
+  <!-- ================= 4. 시뮬레이터 엔진 스크립트 ================= -->
   <script>
     const LEVEL_TO_AMP = { 0: 0, 1: 1.5, 2: 5.0, 3: 11.0, 4: 18.0, 5: 28.0 };
     const LEVEL_LABELS = { 0: '0 OFF', 1: '1 미약', 2: '2 약', 3: '3 중', 4: '4 강', 5: '5 초강' };
@@ -581,7 +548,7 @@
 
     function updatePhysics(dt) {
       let iExt = 0;
-      if (!state.switchOn || state.currentLevel === 0 || state.currentAmp === 0) {
+      if (!state.switchOn || state.currentLevel <= 0.01 || state.currentAmp <= 0.01) {
         iExt = 0;
       } else {
         iExt = state.currentAmp * state.batteryPolarity;
@@ -594,17 +561,17 @@
       const iCoilLocal = iExt * commFactor;
 
       let endAPole = 0;
-      if (Math.abs(iCoilLocal) > 0.08) {
+      if (Math.abs(iCoilLocal) > 0.05) {
         endAPole = iCoilLocal >= 0 ? 1 : -1;
       }
 
-      if (Math.abs(iCoilLocal) > 0.08) {
+      if (Math.abs(iCoilLocal) > 0.05) {
         const arrowSpeed = (iCoilLocal / 5.0) * 1.45 * (state.isPlaying ? 1.0 : 0.45);
         state.wireArrowPhase = ((state.wireArrowPhase + arrowSpeed * dt) % 1 + 1) % 1;
       }
 
       if (state.isPlaying) {
-        if (Math.abs(iExt) < 0.08) {
+        if (Math.abs(iExt) < 0.05) {
           state.angularVel *= Math.pow(0.05, dt);
         } else if (state.commutatorAutoFlip) {
           const prevHalf = Math.floor(normAngle / Math.PI);
@@ -652,7 +619,6 @@
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // 크롬북 화면에서 전동기 움직임이 큼직하고 선명하게 보이도록 화면 비율 최적화
       const baseW = state.showCallouts ? 780 : 690;
       const baseH = 340;
       const scale = Math.min(w / baseW, h / baseH) * 0.98;
@@ -1147,7 +1113,6 @@
       ctx.translate(x, y);
       ctx.rotate(angleRad);
       ctx.beginPath();
-      // 화살표 길이를 2배로 확장 (기존 22 -> 44)
       ctx.moveTo(22, 0);
       ctx.lineTo(8, -12);
       ctx.lineTo(8, -5);
@@ -1185,7 +1150,6 @@
       const leftIsRepel = (leftCoilEnd.pole * state.statorPolarity) > 0;
       const rightIsRepel = (rightCoilEnd.pole * (-state.statorPolarity)) > 0;
 
-      // 힘이 작을 때는 기본 짧은 길이(36px), 전류 세기에 따라 최대 94px까지 길어짐
       const forceRatio = Math.min(1, Math.max(0.05, Math.abs(state.instantCurrent) / 28));
       const arrowLen = 36 + forceRatio * 58;
 
@@ -1258,9 +1222,11 @@
       ctx.restore();
     }
 
+    /* 교과서 & 참고 그림(오른손 손등 / 손바닥 감아쥐기)을 정확히 반영한 오른손 법칙 오버레이 */
     function drawTextbookRightHandOverlay(phys) {
       const { endAPole } = phys;
       if (endAPole === 0) return;
+
       const cosA = Math.cos(state.coilAngle);
       const sinA = Math.sin(state.coilAngle);
       const uprightAngle = cosA >= 0 ? Math.atan2(sinA, cosA) : Math.atan2(-sinA, -cosA);
@@ -1268,11 +1234,13 @@
 
       ctx.save();
       ctx.rotate(uprightAngle);
-      const skinFill = 'rgba(245, 203, 156, 0.88)';
-      const nailFill = 'rgba(253, 232, 209, 0.95)';
-      const outlineColor = '#786A5E';
+
+      const skinFill = 'rgba(248, 212, 174, 0.88)';
+      const nailFill = 'rgba(255, 239, 224, 0.96)';
+      const outlineColor = '#7C5A3F';
 
       if (nPoleOnLeft) {
+        /* 1) N극이 왼쪽일 때 (앞면 전류 ↑) : 오른손 손등이 보이며 네 손가락이 위로 감아쥐고 엄지가 왼쪽(N극)을 가리키는 모양 */
         ctx.save();
         ctx.fillStyle = skinFill;
         ctx.strokeStyle = outlineColor;
@@ -1281,282 +1249,440 @@
         ctx.lineCap = 'round';
 
         ctx.beginPath();
-        ctx.moveTo(10, 205); ctx.lineTo(10, 152); ctx.lineTo(-22, 108); ctx.lineTo(-65, 68);
-        ctx.lineTo(-116, 40); ctx.lineTo(-152, 32); ctx.lineTo(-155, 16);
-        ctx.quadraticCurveTo(-132, 2, -104, 10); ctx.lineTo(-34, 34);
-        ctx.lineTo(-42, -55); ctx.lineTo(-45, -88); ctx.lineTo(-16, -102); ctx.lineTo(14, -92);
-        ctx.lineTo(24, -108); ctx.lineTo(48, -116); ctx.lineTo(74, -106); ctx.lineTo(84, -92);
-        ctx.lineTo(108, -90); ctx.lineTo(124, -72); ctx.lineTo(138, -62); ctx.lineTo(152, -38);
-        ctx.lineTo(158, 28); ctx.lineTo(146, 132); ctx.lineTo(148, 205);
+        ctx.moveTo(-26, 178);
+        ctx.lineTo(-26, 98);
+        ctx.quadraticCurveTo(-52, 66, -86, 48);
+        ctx.lineTo(-148, 32);
+        ctx.quadraticCurveTo(-176, 26, -178, 12);
+        ctx.quadraticCurveTo(-176, -4, -144, -2);
+        ctx.lineTo(-76, 8);
+        ctx.quadraticCurveTo(-56, 10, -52, -16);
+        ctx.lineTo(-52, -74);
+        ctx.quadraticCurveTo(-52, -96, -30, -96);
+        ctx.quadraticCurveTo(-10, -96, -8, -78);
+        ctx.quadraticCurveTo(-6, -104, 16, -104);
+        ctx.quadraticCurveTo(38, -104, 40, -80);
+        ctx.quadraticCurveTo(42, -98, 62, -98);
+        ctx.quadraticCurveTo(82, -98, 84, -74);
+        ctx.quadraticCurveTo(86, -88, 104, -88);
+        ctx.quadraticCurveTo(124, -88, 124, -62);
+        ctx.lineTo(124, 24);
+        ctx.quadraticCurveTo(124, 82, 74, 126);
+        ctx.lineTo(68, 178);
         ctx.closePath();
-        ctx.fill(); ctx.stroke();
+        ctx.fill();
+        ctx.stroke();
 
+        /* 손가락 사이 구분선 */
         ctx.beginPath();
-        ctx.moveTo(-154, 21); ctx.lineTo(-128, 24); ctx.lineTo(-130, 32); ctx.lineTo(-152, 32);
-        ctx.closePath();
-        ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 2.0; ctx.stroke();
+        ctx.moveTo(-8, -78); ctx.lineTo(-8, -12);
+        ctx.moveTo(40, -80); ctx.lineTo(40, -12);
+        ctx.moveTo(84, -74); ctx.lineTo(84, -8);
+        ctx.stroke();
+
+        /* 엄지 손톱 */
+        ctx.beginPath();
+        ctx.ellipse(-162, 12, 8, 6, 0.08, 0, Math.PI * 2);
+        ctx.fillStyle = nailFill;
+        ctx.fill();
+        ctx.stroke();
+
+        /* 자기장(N극) 방향 및 전류 방향 안내 화살표 */
+        drawHandGuideArrow(-62, 24, -138, 16, '자기장의 방향 (N극)', -95, 52);
+        drawHandCurlArrow(36, -65, 36, -128, '전류의 방향');
         ctx.restore();
       } else {
+        /* 2) N극이 오른쪽일 때 (앞면 전류 ↓) : 오른손이 코일 뒤에서 감아쥐어 손바닥이 보이고 위쪽에 네 손가락 끝(손톱 4개)이 내려오며 엄지가 오른쪽(N극)을 가리키는 모양 */
         ctx.save();
-        ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+        ctx.fillStyle = skinFill;
+        ctx.strokeStyle = outlineColor;
+        ctx.lineWidth = 3.0;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        /* 손바닥과 오른쪽 엄지 윤곽 */
         ctx.beginPath();
-        ctx.moveTo(-108, 84); ctx.quadraticCurveTo(-104, 132, -88, 165);
-        ctx.lineTo(-88, 205); ctx.lineTo(42, 205); ctx.lineTo(50, 145);
-        ctx.quadraticCurveTo(92, 96, 142, 62); ctx.lineTo(174, 58); ctx.lineTo(192, 60);
-        ctx.lineTo(196, 48); ctx.quadraticCurveTo(188, 24, 152, 16);
-        ctx.quadraticCurveTo(118, 14, 72, 34); ctx.lineTo(48, 34); ctx.lineTo(40, 84);
+        ctx.moveTo(-64, 178);
+        ctx.lineTo(-68, 118);
+        ctx.quadraticCurveTo(-112, 72, -112, 12);
+        ctx.lineTo(-112, -58);
+        ctx.lineTo(64, -58);
+        ctx.lineTo(64, -6);
+        ctx.quadraticCurveTo(72, 10, 96, 4);
+        ctx.lineTo(152, -6);
+        ctx.quadraticCurveTo(182, -8, 184, 8);
+        ctx.quadraticCurveTo(182, 24, 152, 30);
+        ctx.lineTo(92, 48);
+        ctx.quadraticCurveTo(56, 66, 32, 104);
+        ctx.lineTo(32, 178);
         ctx.closePath();
-        ctx.fillStyle = skinFill; ctx.fill(); ctx.lineWidth = 3.0; ctx.strokeStyle = outlineColor; ctx.stroke();
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.beginPath();
-        ctx.moveTo(168, 58); ctx.lineTo(175, 48); ctx.lineTo(195, 50); ctx.lineTo(192, 60);
-        ctx.closePath();
-        ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 2.0; ctx.stroke();
-
-        const curledFingers = [
-          { xL: -104, xR: -66, yTop: -116, yBot: -78, nail: [[-94, -95], [-82, -100], [-72, -92], [-96, -88]] },
-          { xL: -66, xR: -22, yTop: -126, yBot: -76, nail: [[-56, -98], [-44, -108], [-30, -96], [-58, -92]] },
-          { xL: -22, xR: 26, yTop: -134, yBot: -76, nail: [[-12, -102], [2, -114], [16, -98], [-14, -94]] },
-          { xL: 26, xR: 76, yTop: -130, yBot: -78, nail: [[36, -104], [52, -112], [66, -98], [36, -92]] }
-        ];
-
-        curledFingers.forEach((fg) => {
-          const midX = (fg.xL + fg.xR) * 0.5;
+        /* 코일 위쪽 모서리를 감싸 쥐며 내려오는 네 손가락 끝 마디와 손톱 4개 */
+        const fingerCenters = [-88, -42, 4, 48];
+        fingerCenters.forEach((fx, i) => {
+          const topY = -102 - (i === 1 || i === 2 ? 6 : 0);
+          const botY = -44;
           ctx.beginPath();
-          ctx.moveTo(fg.xL, -84); ctx.lineTo(fg.xL + 3, fg.yTop + 14);
-          ctx.quadraticCurveTo(midX, fg.yTop, fg.xR - 4, fg.yTop + 12);
-          ctx.lineTo(fg.xR, -84); ctx.quadraticCurveTo(midX, fg.yBot + 8, fg.xL, -84);
-          ctx.closePath();
-          ctx.fillStyle = 'rgba(245, 203, 156, 0.96)'; ctx.fill(); ctx.lineWidth = 2.6; ctx.strokeStyle = outlineColor; ctx.stroke();
+          ctx.roundRect(fx - 21, topY, 42, botY - topY, 16);
+          ctx.fillStyle = skinFill;
+          ctx.fill();
+          ctx.stroke();
 
+          /* 손톱 표현 */
           ctx.beginPath();
-          ctx.moveTo(fg.nail[0][0], fg.nail[0][1]); ctx.lineTo(fg.nail[1][0], fg.nail[1][1]);
-          ctx.lineTo(fg.nail[2][0], fg.nail[2][1]); ctx.lineTo(fg.nail[3][0], fg.nail[3][1]);
-          ctx.closePath();
-          ctx.fillStyle = nailFill; ctx.fill(); ctx.lineWidth = 1.8; ctx.stroke();
+          ctx.roundRect(fx - 12, botY - 22, 24, 15, 6);
+          ctx.fillStyle = nailFill;
+          ctx.fill();
+          ctx.stroke();
         });
+
+        /* 엄지 손톱 */
+        ctx.beginPath();
+        ctx.ellipse(168, 10, 8, 6, -0.08, 0, Math.PI * 2);
+        ctx.fillStyle = nailFill;
+        ctx.fill();
+        ctx.stroke();
+
+        /* 자기장(N극) 방향 및 전류 방향 안내 화살표 */
+        drawHandGuideArrow(62, 24, 138, 12, '자기장의 방향 (N극)', 95, 54);
+        drawHandCurlArrow(-20, -124, -20, -58, '전류의 방향');
         ctx.restore();
       }
+
       ctx.restore();
     }
 
-    function drawTextbookPinkCenterArrow(x, y, angleRad) {
+    function drawHandGuideArrow(x1, y1, x2, y2, labelText, lx, ly) {
       ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(angleRad);
+      const ang = Math.atan2(y2 - y1, x2 - x1);
+      ctx.strokeStyle = 'rgba(71, 85, 105, 0.78)';
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(46, 0); ctx.lineTo(6, -30); ctx.lineTo(6, -15);
-      ctx.lineTo(-42, -15); ctx.lineTo(-42, 15); ctx.lineTo(6, 15); ctx.lineTo(6, 30);
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+
+      ctx.translate(x2, y2);
+      ctx.rotate(ang);
+      ctx.beginPath();
+      ctx.moveTo(8, 0);
+      ctx.lineTo(-8, -8);
+      ctx.lineTo(-8, 8);
       ctx.closePath();
-      ctx.fillStyle = '#F04E75'; ctx.fill();
-      ctx.lineWidth = 3.8; ctx.strokeStyle = '#B81D48'; ctx.lineJoin = 'round'; ctx.stroke();
+      ctx.fillStyle = 'rgba(71, 85, 105, 0.85)';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.font = '800 14px "Pretendard", sans-serif';
+      ctx.fillStyle = '#334155';
+      ctx.textAlign = 'center';
+      ctx.fillText(labelText, lx, ly);
       ctx.restore();
     }
 
-    function drawYellowStar(cx, cy, outerR, innerR) {
+    function drawHandCurlArrow(x1, y1, x2, y2, labelText) {
       ctx.save();
-      ctx.translate(cx, cy);
+      ctx.strokeStyle = 'rgba(225, 29, 72, 0.65)';
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
       ctx.beginPath();
-      for (let i = 0; i < 10; i++) {
-        const r = i % 2 === 0 ? outerR : innerR;
-        const a = (i * Math.PI) / 5 - Math.PI / 2;
-        ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+
+      const ang = Math.atan2(y2 - y1, x2 - x1);
+      ctx.save();
+      ctx.translate(x2, y2);
+      ctx.rotate(ang);
+      ctx.beginPath();
+      ctx.moveTo(7, 0);
+      ctx.lineTo(-7, -7);
+      ctx.lineTo(-7, 7);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(225, 29, 72, 0.78)';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.font = '800 14px "Pretendard", sans-serif';
+      ctx.fillStyle = '#be123c';
+      ctx.textAlign = 'left';
+      ctx.fillText(labelText, Math.max(x1, x2) + 18, Math.min(y1, y2) + 8);
+      ctx.restore();
+    }
+
+    function drawYellowStar(cx, cy, r, n) {
+      ctx.save();
+      ctx.beginPath();
+      for (let i = 0; i < 2 * n; i++) {
+        const l = i % 2 === 0 ? r : r * 0.45;
+        const a = (i * Math.PI) / n - Math.PI / 2;
+        const x = cx + Math.cos(a) * l;
+        const y = cy + Math.sin(a) * l;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
       ctx.closePath();
-      ctx.fillStyle = '#FEF08A'; ctx.fill();
-      ctx.lineWidth = 1.5; ctx.strokeStyle = '#CA8A04'; ctx.stroke();
+      ctx.fillStyle = '#FFEE00'; ctx.fill();
+      ctx.lineWidth = 1.2; ctx.strokeStyle = '#D97706'; ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawTextbookPinkCenterArrow(cx, cy, angleRad) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angleRad);
+      ctx.beginPath();
+      ctx.moveTo(38, 0);
+      ctx.lineTo(12, -22);
+      ctx.lineTo(12, -10);
+      ctx.lineTo(-38, -10);
+      ctx.lineTo(-38, 10);
+      ctx.lineTo(12, 10);
+      ctx.lineTo(12, 22);
+      ctx.closePath();
+      ctx.fillStyle = '#F43F5E'; ctx.fill();
+      ctx.lineWidth = 2.5; ctx.strokeStyle = '#881337'; ctx.lineJoin = 'round'; ctx.stroke();
       ctx.restore();
     }
 
     function drawTextbookCallouts() {
       ctx.save();
-      ctx.strokeStyle = '#334155'; ctx.lineWidth = 1.8; ctx.fillStyle = '#0f172a';
-      ctx.font = '700 26px "Pretendard", sans-serif'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#0f172a';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 2.0;
 
-      ctx.beginPath(); ctx.moveTo(-375, -75); ctx.lineTo(-300, -75); ctx.stroke();
-      ctx.textAlign = 'right'; ctx.fillText('자석', -384, -75);
+      /* 왼쪽 자석 지시선 */
+      ctx.beginPath(); ctx.moveTo(-352, -78); ctx.lineTo(-295, -78); ctx.stroke();
+      ctx.font = '800 18px "Pretendard", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('자석', -360, -78);
 
-      ctx.beginPath(); ctx.moveTo(300, -75); ctx.lineTo(375, -75); ctx.stroke();
-      ctx.textAlign = 'left'; ctx.fillText('자석', 384, -75);
+      /* 오른쪽 자석 지시선 */
+      ctx.beginPath(); ctx.moveTo(295, -78); ctx.lineTo(352, -78); ctx.stroke();
+      ctx.textAlign = 'left';
+      ctx.fillText('자석', 360, -78);
 
-      const starWorldX = Math.cos(state.coilAngle) * (-130) - Math.sin(state.coilAngle) * (-62);
-      const starWorldY = Math.sin(state.coilAngle) * (-130) + Math.cos(state.coilAngle) * (-62);
-      const labelX = starWorldX < 0 ? starWorldX - 55 : starWorldX + 55;
-      const labelY = starWorldY < 0 ? starWorldY - 42 : starWorldY + 42;
+      /* 코일 지시선 */
+      const cosA = Math.cos(state.coilAngle);
+      const sinA = Math.sin(state.coilAngle);
+      const starLocalX = -152 + 22;
+      const starLocalY = -84 + 22;
+      const sx = starLocalX * cosA - starLocalY * sinA;
+      const sy = starLocalX * sinA + starLocalY * cosA;
+      const labelX = sx - 44;
+      const labelY = sy - 36;
 
-      ctx.beginPath(); ctx.moveTo(starWorldX, starWorldY); ctx.lineTo(labelX, labelY); ctx.stroke();
-      ctx.textAlign = starWorldX < 0 ? 'right' : 'left';
-      ctx.fillText('코일', starWorldX < 0 ? labelX - 8 : labelX + 8, labelY);
+      ctx.beginPath();
+      ctx.moveTo(sx - 8, sy - 6);
+      ctx.lineTo(labelX, labelY);
+      ctx.stroke();
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText('코일', labelX - 4, labelY + 4);
       ctx.restore();
     }
 
-    function togglePlayPause(forcePlay) {
-      state.isPlaying = typeof forcePlay === 'boolean' ? forcePlay : !state.isPlaying;
-      if (state.isPlaying) {
-        if (!state.switchOn) togglePowerSwitch(true);
-        if (state.currentLevel === 0) setCurrentLevel(1);
+    // ================= 5. 조작 인터랙션 및 상태 제어 =================
+    function togglePlayPause() {
+      state.isPlaying = !state.isPlaying;
+      if (state.isPlaying && (!state.switchOn || state.currentLevel <= 0.01)) {
+        state.switchOn = true;
+        state.currentLevel = 1;
+        state.currentAmp = LEVEL_TO_AMP[1];
       }
+      syncPowerSwitchUI();
+      updatePlayPauseUI();
+    }
 
+    function updatePlayPauseUI() {
+      const topBtn = document.getElementById('panelPlayPauseBtn');
+      const topIcon = document.getElementById('panelPlayPauseIcon');
+      const topText = document.getElementById('panelPlayPauseText');
       const btmBtn = document.getElementById('btmPlayPauseBtn');
       const btmIcon = document.getElementById('btmPlayPauseIcon');
       const btmText = document.getElementById('btmPlayPauseText');
-      if (btmBtn) {
-        if (state.isPlaying) {
-          btmIcon.textContent = '⏸️'; btmText.textContent = '일시정지';
-          btmBtn.className = 'px-4 py-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5';
-        } else {
-          btmIcon.textContent = '▶️'; btmText.textContent = '실행';
-          btmBtn.className = 'px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse';
+
+      if (state.isPlaying) {
+        if (topBtn) {
+          topBtn.className = "w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm flex items-center justify-center gap-1.5";
+          topIcon.textContent = '⏸️';
+          topText.textContent = '일시정지';
         }
-      }
-
-      const panelBtn = document.getElementById('panelPlayPauseBtn');
-      const panelIcon = document.getElementById('panelPlayPauseIcon');
-      const panelText = document.getElementById('panelPlayPauseText');
-      if (panelBtn) {
-        if (state.isPlaying) {
-          panelIcon.textContent = '⏸️'; panelText.textContent = '일시정지';
-          panelBtn.className = 'w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-sm flex items-center justify-center gap-1.5';
-        } else {
-          panelIcon.textContent = '▶️'; panelText.textContent = '실행';
-          panelBtn.className = 'w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm flex items-center justify-center gap-1.5 play-resume-pulse';
+        if (btmBtn) {
+          btmBtn.className = "px-4 py-1 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5";
+          btmIcon.textContent = '⏸️';
+          btmText.textContent = '일시정지';
         }
-      }
-    }
-
-    function setCoilAngleFromSlider(degVal) {
-      togglePlayPause(false);
-      const deg = parseFloat(degVal) || 0;
-      state.coilAngle = (deg * Math.PI) / 180;
-      state.angularVel = 0;
-    }
-
-    function rotateCoilByStep(deltaDeg) {
-      togglePlayPause(false);
-      state.coilAngle += (deltaDeg * Math.PI) / 180;
-      state.angularVel = 0;
-    }
-
-    function toggleSettingsPanel(forceOpen) {
-      state.settingsOpen = typeof forceOpen === 'boolean' ? forceOpen : !state.settingsOpen;
-      const panel = document.getElementById('settingsPanel');
-      const headerBtnText = document.getElementById('headerSettingsBtnText');
-      const headerBtn = document.getElementById('headerSettingsBtn');
-
-      if (state.settingsOpen) {
-        panel.classList.remove('hidden');
-        headerBtnText.textContent = '설정창 닫기 ✕';
-        headerBtn.className = 'px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm flex items-center gap-1';
       } else {
-        panel.classList.add('hidden');
-        headerBtnText.textContent = '설정창 열기 ◂';
-        headerBtn.className = 'px-2.5 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-sm flex items-center gap-1';
+        if (topBtn) {
+          topBtn.className = "w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm flex items-center justify-center gap-1.5 play-resume-pulse";
+          topIcon.textContent = '▶️';
+          topText.textContent = '실행';
+        }
+        if (btmBtn) {
+          btmBtn.className = "px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse";
+          btmIcon.textContent = '▶️';
+          btmText.textContent = '실행';
+        }
       }
-      setTimeout(resizeCanvas, 50);
     }
 
-    function toggleRightHandOverlay(forceVal) {
-      state.showRightHand = typeof forceVal === 'boolean' ? forceVal : !state.showRightHand;
-      const chk = document.getElementById('chkRightHand');
-      if (chk) chk.checked = state.showRightHand;
+    function togglePowerSwitch() {
+      state.switchOn = !state.switchOn;
+      if (state.switchOn && state.currentLevel <= 0.01) {
+        state.currentLevel = 1;
+        state.currentAmp = LEVEL_TO_AMP[1];
+      } else if (!state.switchOn) {
+        state.currentLevel = 0;
+        state.currentAmp = 0;
+      }
+      syncPowerSwitchUI();
     }
 
-    function togglePowerSwitch(forceOn) {
-      state.switchOn = typeof forceOn === 'boolean' ? forceOn : !state.switchOn;
+    function syncPowerSwitchUI() {
       const blade = document.getElementById('svgSwitchBlade');
-      const lbl = document.getElementById('svgSwitchLabel');
-      if (state.switchOn) {
-        blade.setAttribute('y2', '68'); blade.setAttribute('stroke', '#15803d');
-        lbl.textContent = '스위치 닫힘 (전류 ON)'; lbl.setAttribute('fill', '#15803d');
-        if (state.currentLevel === 0) setCurrentLevel(1);
-      } else {
-        blade.setAttribute('y2', '53'); blade.setAttribute('stroke', '#dc2626');
-        lbl.textContent = '스위치 열림 (전류 OFF)'; lbl.setAttribute('fill', '#dc2626');
-        if (state.isPlaying) togglePlayPause(false);
+      const label = document.getElementById('svgSwitchLabel');
+      const ampSlider = document.getElementById('ampSlider');
+      const badge = document.getElementById('ampReadoutBadge');
+
+      if (ampSlider && document.activeElement !== ampSlider) {
+        ampSlider.value = state.currentLevel;
       }
+      if (badge) {
+        const nearestIdx = Math.round(state.currentLevel);
+        badge.textContent = state.currentLevel <= 0.02 ? '0 OFF' : (LEVEL_LABELS[nearestIdx] || '1 미약');
+        badge.className = state.currentLevel <= 0.02
+          ? "px-2 py-0.5 rounded-full bg-slate-200 border border-slate-900 text-slate-900 font-black text-[10px] shrink-0"
+          : "px-2 py-0.5 rounded-full bg-yellow-300 border border-slate-900 text-slate-950 font-black text-[10px] shrink-0";
+      }
+
+      if (state.switchOn && state.currentLevel > 0.01) {
+        if (blade) { blade.setAttribute('x2', '122'); blade.setAttribute('y2', '68'); blade.setAttribute('stroke', '#16a34a'); }
+        if (label) { label.textContent = '스위치 닫힘 (전류 ON)'; label.setAttribute('fill', '#16a34a'); }
+      } else {
+        if (blade) { blade.setAttribute('x2', '122'); blade.setAttribute('y2', '53'); blade.setAttribute('stroke', '#dc2626'); }
+        if (label) { label.textContent = '스위치 열림 (전류 OFF)'; label.setAttribute('fill', '#dc2626'); }
+      }
+    }
+
+    /* 끊김 없이 부드럽게 전류 세기를 보간하는 슬라이더 핸들러 */
+    function setCurrentLevel(val) {
+      const num = Math.max(0, Math.min(5, parseFloat(val) || 0));
+      state.currentLevel = num;
+      if (num <= 0.02) {
+        state.currentLevel = 0;
+        state.switchOn = false;
+        state.currentAmp = 0;
+      } else {
+        state.switchOn = true;
+        const low = Math.floor(num);
+        const high = Math.min(5, Math.ceil(num));
+        const frac = num - low;
+        const ampLow = LEVEL_TO_AMP[low] !== undefined ? LEVEL_TO_AMP[low] : 0;
+        const ampHigh = LEVEL_TO_AMP[high] !== undefined ? LEVEL_TO_AMP[high] : 28.0;
+        state.currentAmp = ampLow + (ampHigh - ampLow) * frac;
+      }
+      syncPowerSwitchUI();
     }
 
     function flipCurrentDirection() {
-      state.batteryPolarity = -state.batteryPolarity;
-      updateCircuitDiagramBattery(state.batteryPolarity);
-    }
-
-    function updateCircuitDiagramBattery(pol) {
+      state.batteryPolarity *= -1;
       const nub = document.getElementById('svgBatNub');
       const leftSign = document.getElementById('svgBatLeftSign');
       const rightSign = document.getElementById('svgBatRightSign');
-      if (pol >= 0) {
-        nub.setAttribute('x', '170'); leftSign.textContent = '+'; rightSign.textContent = '-';
+      if (state.batteryPolarity > 0) {
+        if (nub) nub.setAttribute('x', '170');
+        if (leftSign) leftSign.textContent = '+';
+        if (rightSign) rightSign.textContent = '-';
       } else {
-        nub.setAttribute('x', '223'); leftSign.textContent = '-'; rightSign.textContent = '+';
+        if (nub) nub.setAttribute('x', '223');
+        if (leftSign) leftSign.textContent = '-';
+        if (rightSign) rightSign.textContent = '+';
       }
     }
 
     function flipMagnetPoles() {
-      state.statorPolarity = -state.statorPolarity;
-      document.getElementById('miniLeftMag').textContent = state.statorPolarity > 0 ? 'N' : 'S';
-      document.getElementById('miniRightMag').textContent = state.statorPolarity > 0 ? 'S' : 'N';
-    }
-
-    function setCurrentLevel(val) {
-      let lvl = Math.max(0, Math.min(5, parseFloat(val) || 0));
-      if (lvl < 0.04) lvl = 0;
-      state.currentLevel = lvl;
-
-      const lowIdx = Math.floor(lvl);
-      const highIdx = Math.min(5, Math.ceil(lvl));
-      const frac = lvl - lowIdx;
-      state.currentAmp = LEVEL_TO_AMP[lowIdx] + (LEVEL_TO_AMP[highIdx] - LEVEL_TO_AMP[lowIdx]) * frac;
-
-      const slider = document.getElementById('ampSlider');
-      if (slider && parseFloat(slider.value) !== lvl) slider.value = lvl;
-
-      const nearestStage = lvl === 0 ? 0 : Math.max(1, Math.round(lvl));
-      const badge = document.getElementById('ampReadoutBadge');
-      if (badge) {
-        badge.textContent = LEVEL_LABELS[nearestStage];
-        badge.className = lvl === 0
-          ? 'px-2 py-0.5 rounded-full bg-slate-200 border border-slate-900 text-slate-900 font-black text-[10px] shrink-0'
-          : 'px-2 py-0.5 rounded-full bg-yellow-300 border border-slate-900 text-slate-950 font-black text-[10px] shrink-0';
-      }
-
-      if (lvl > 0) {
-        if (!state.switchOn) togglePowerSwitch(true);
-        if (!state.isPlaying) togglePlayPause(true);
+      state.statorPolarity *= -1;
+      const leftMag = document.getElementById('miniLeftMag');
+      const rightMag = document.getElementById('miniRightMag');
+      if (state.statorPolarity > 0) {
+        if (leftMag) leftMag.textContent = 'N';
+        if (rightMag) rightMag.textContent = 'S';
       } else {
-        if (state.switchOn) togglePowerSwitch(false);
+        if (leftMag) leftMag.textContent = 'S';
+        if (rightMag) rightMag.textContent = 'N';
       }
     }
 
-    function setCommutatorMode(isOn) {
-      state.commutatorAutoFlip = Boolean(isOn);
-      const toggleBtn = document.getElementById('btnCommutatorToggle');
+    function setCommutatorMode(autoFlag) {
+      state.commutatorAutoFlip = autoFlag;
       const onPill = document.getElementById('commOnPill');
       const offPill = document.getElementById('commOffPill');
-
-      if (state.commutatorAutoFlip) {
-        if (toggleBtn) toggleBtn.className = 'w-full py-1.5 px-2.5 rounded-xl font-black text-xs border-2 border-slate-900 bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm flex items-center justify-between gap-1';
-        if (onPill) onPill.className = 'px-1.5 py-0.5 rounded bg-slate-900 text-yellow-300 font-black';
-        if (offPill) offPill.className = 'px-1.5 py-0.5 rounded text-slate-400 font-bold';
+      if (autoFlag) {
+        if (onPill) onPill.className = "px-1.5 py-0.5 rounded bg-slate-900 text-yellow-300";
+        if (offPill) offPill.className = "px-1.5 py-0.5 rounded text-slate-400";
       } else {
-        if (toggleBtn) toggleBtn.className = 'w-full py-1.5 px-2.5 rounded-xl font-bold text-xs border-2 border-slate-400 bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-between gap-1';
-        if (onPill) onPill.className = 'px-1.5 py-0.5 rounded text-slate-400 font-bold';
-        if (offPill) offPill.className = 'px-1.5 py-0.5 rounded bg-slate-800 text-white font-black';
+        if (onPill) onPill.className = "px-1.5 py-0.5 rounded text-slate-400";
+        if (offPill) offPill.className = "px-1.5 py-0.5 rounded bg-slate-900 text-yellow-300";
       }
     }
 
-    let prevTime = performance.now();
-    function animate(now) {
-      requestAnimationFrame(animate);
-      const dt = Math.min(0.05, (now - prevTime) / 1000);
-      prevTime = now;
-      const phys = updatePhysics(dt);
-      renderTextbookMotor(phys);
+    function setCoilAngleFromSlider(val) {
+      state.isPlaying = false;
+      updatePlayPauseUI();
+      const deg = parseFloat(val);
+      state.coilAngle = (deg * Math.PI) / 180;
     }
 
-    window.onload = function () {
+    function rotateCoilByStep(deltaDeg) {
+      state.isPlaying = false;
+      updatePlayPauseUI();
+      let deg = (state.coilAngle * 180) / Math.PI + deltaDeg;
+      deg = (deg % 360 + 360) % 360;
+      state.coilAngle = (deg * Math.PI) / 180;
+    }
+
+    function toggleRightHandOverlay(isChecked) {
+      state.showRightHand = isChecked;
+    }
+
+    function toggleSettingsPanel(forceState) {
+      const panel = document.getElementById('settingsPanel');
+      const btnText = document.getElementById('headerSettingsBtnText');
+      if (!panel) return;
+      const shouldOpen = forceState !== undefined ? forceState : panel.classList.contains('hidden');
+      if (shouldOpen) {
+        panel.classList.remove('hidden');
+        if (btnText) btnText.textContent = '설정창 닫기 ✕';
+      } else {
+        panel.classList.add('hidden');
+        if (btnText) btnText.textContent = '설정창 열기 ⚙️';
+      }
+      setTimeout(resizeCanvas, 50);
+    }
+
+    // ================= 6. 애니메이션 루프 =================
+    let lastTime = performance.now();
+    function mainLoop(now) {
+      const dt = Math.min(0.05, (now - lastTime) / 1000);
+      lastTime = now;
+
+      const phys = updatePhysics(dt);
+      renderTextbookMotor(phys);
+
+      requestAnimationFrame(mainLoop);
+    }
+
+    window.onload = function() {
       resizeCanvas();
-      requestAnimationFrame(animate);
+      syncPowerSwitchUI();
+      updatePlayPauseUI();
+      setCommutatorMode(true);
+      requestAnimationFrame(mainLoop);
     };
   </script>
 </body>
