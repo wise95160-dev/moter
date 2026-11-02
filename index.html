@@ -317,6 +317,11 @@
       cursor: pointer;
     }
 
+    #angleSlider {
+      width: 115px !important;
+      flex: 0 0 115px !important;
+    }
+
     .accent-amber { accent-color: #d97706; }
     .accent-rose { accent-color: #e11d48; }
     .accent-lime { accent-color: #65a30d; }
@@ -371,24 +376,20 @@
       </div>
 
       <!-- 하단 컨트롤 바 (전동기 그림 바로 아래 밀착 배치) -->
-      <div class="w-full max-w-5xl px-3 pb-1 z-10 shrink-0" style="margin-top: -8px;">
-        <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl px-3 py-1.5 shadow-md">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse">
-                <span id="btmPlayPauseIcon">▶️</span> <span id="btmPlayPauseText">실행</span>
-              </button>
-              <span class="hide-mobile text-[11px] font-bold text-slate-500">(단축키: Space)</span>
-            </div>
+      <div class=" px-3 pb-1 z-10 shrink-0" style="margin-top: -8px;">
+        <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl px-3 py-1.5 shadow-md inline-flex flex-wrap items-center justify-center gap-2">
+          <div class="flex items-center gap-2">
+            <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse">
+              <span id="btmPlayPauseIcon">▶️</span> <span id="btmPlayPauseText">실행</span>
+            </button>
+            <span class="hide-mobile text-[11px] font-bold text-slate-500">(단축키: Space)</span>
+          </div>
 
-            <div class="flex flex-1 min-w-slider max-w-xl items-center gap-2 bg-white border border-slate-300 rounded-xl px-2.5 py-1 shadow-inner">
-              <button onclick="rotateCoilByStep(-15)" class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">⏪ 회전</button>
-              <div class="flex-1 flex items-center gap-2 px-1">
-                <span class="text-[10px] font-black text-slate-600 shrink-0">코일 각도 조절</span>
-                <input type="range" id="angleSlider" min="0" max="360" step="1" value="35" oninput="setCoilAngleFromSlider(this.value)" class="angle-slider" />
-              </div>
-              <button onclick="rotateCoilByStep(15)" class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">회전 ⏩</button>
-            </div>
+          <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-2.5 py-1 shadow-inner" style="width: fit-content; display: inline-flex; align-items: center; gap: 6px;">
+            <span class="text-[10px] font-black text-slate-600 shrink-0">코일 각도 조절</span>
+            <input type="range" id="angleSlider" min="0" max="360" step="1" value="35" oninput="setCoilAngleFromSlider(this.value)" class="angle-slider" style="width: 115px !important; flex: 0 0 115px !important;" />
+            <button onclick="rotateCoilByStep(-15)" class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">⏪ 회전</button>
+            <button onclick="rotateCoilByStep(15)" class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-indigo-100 text-slate-900 font-black text-xs border border-slate-300 shrink-0">회전 ⏩</button>
           </div>
         </div>
       </div>
