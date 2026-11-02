@@ -1294,6 +1294,7 @@
       if (nPoleOnLeft) return;
 
       ctx.save();
+      ctx.globalAlpha = 0.70;
       ctx.rotate(uprightAngle);
 
       const skinFill = '#F6CD96';
@@ -1356,6 +1357,7 @@
       const nPoleOnLeft = (endAPole * (cosA >= 0 ? 1 : -1)) > 0;
 
       ctx.save();
+      ctx.globalAlpha = 0.70;
       ctx.rotate(uprightAngle);
 
       const skinFill = '#F6CD96';
