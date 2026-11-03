@@ -322,6 +322,23 @@
       flex: 0 0 115px !important;
     }
 
+    /* 하단 실행 버튼 & 화면 정지 버튼 동일 크기 고정 */
+    .btm-action-btn {
+      width: 102px !important;
+      height: 34px !important;
+      border-radius: 9999px !important;
+      font-size: 12.5px !important;
+      font-weight: 900 !important;
+      border: 2px solid #0f172a !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+      padding: 0 8px !important;
+    }
+
     .accent-amber { accent-color: #d97706; }
     .accent-rose { accent-color: #e11d48; }
     .accent-lime { accent-color: #65a30d; }
@@ -379,10 +396,12 @@
       <div class=" px-3 pb-1 z-10 shrink-0" style="margin-top: -8px;">
         <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl px-3 py-1.5 shadow-md inline-flex flex-wrap items-center justify-center gap-2">
           <div class="flex items-center gap-2">
-            <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse">
+            <button id="btmPlayPauseBtn" onclick="togglePlayPause()" class="btm-action-btn bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm play-resume-pulse">
               <span id="btmPlayPauseIcon">▶️</span> <span id="btmPlayPauseText">실행</span>
             </button>
-            <span class="hide-mobile text-[11px] font-bold text-slate-500">(단축키: Space)</span>
+            <button id="btnScreenFreeze" onclick="toggleScreenFreeze()" class="btm-action-btn bg-white hover:bg-amber-100 text-slate-900 shadow-sm">
+              <span id="screenFreezeIcon">⏸️</span> <span id="screenFreezeText">화면 정지</span>
+            </button>
           </div>
 
           <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-2.5 py-1 shadow-inner" style="width: fit-content; display: inline-flex; align-items: center; gap: 6px;">
@@ -463,7 +482,7 @@
         <!-- 전류의 세기 조절 (끊김 없는 연속형 슬라이더, 초기값 0 OFF) -->
         <div class="bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
           <div class="flex items-center justify-between gap-1 mb-1">
-            <span class="text-xs font-black text-slate-800">🎚️ 전류의 세기 조절</span>
+            <span class="text-xs font-black text-slate-800">🎛️ ③ 전류의 세기 조절</span>
             <span id="ampReadoutBadge" class="px-2 py-0.5 rounded-full bg-slate-200 border border-slate-900 text-slate-900 font-black text-[10px] shrink-0">0 OFF</span>
           </div>
           <div class="px-1 pt-0.5 pb-0.5">
@@ -499,7 +518,7 @@
 
           <label class="opt-item-compact flex items-center gap-1.5 bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100">
             <input type="checkbox" id="chkPinkCenterArrow" onchange="state.showPinkCenterArrow = this.checked" class="accent-rose rounded shrink-0" />
-            <span class="text-[10.5px] font-bold text-slate-800" style="white-space: nowrap;">🩷 중앙 큰 전류 화살표 표시</span>
+            <span class="text-[10.5px] font-bold text-slate-800" style="white-space: nowrap;">🩷 중앙 분홍색 큰 전류 화살표 표시</span>
           </label>
 
           <label class="opt-item-compact flex items-center gap-1.5 bg-amber-50 border border-amber-200 cursor-pointer hover:bg-amber-100">
@@ -534,6 +553,7 @@
 
     const state = {
       isPlaying: false,
+      isScreenFrozen: false,
       switchOn: false,
       currentLevel: 0,
       currentAmp: 0,
@@ -556,6 +576,12 @@
 
     const canvas = document.getElementById('motorCanvas');
     const ctx = canvas.getContext('2d');
+
+    // 오프스크린 캔버스 (오른손 법칙 일러스트를 100% 불투명으로 먼저 그린 뒤 캔버스에 균일한 투명도로 합성)
+    const handOffscreenCanvas = document.createElement('canvas');
+    handOffscreenCanvas.width = 640;
+    handOffscreenCanvas.height = 640;
+    const handCtx = handOffscreenCanvas.getContext('2d');
 
     if (!CanvasRenderingContext2D.prototype.roundRect) {
       CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -620,11 +646,11 @@
       }
 
       if (Math.abs(iCoilLocal) > 0.05) {
-        const arrowSpeed = (iCoilLocal / 5.0) * 1.45 * (state.isPlaying ? 1.0 : 0.45);
+        const arrowSpeed = (iCoilLocal / 5.0) * 1.45 * ((state.isPlaying && !state.isScreenFrozen) ? 1.0 : 0.42);
         state.wireArrowPhase = ((state.wireArrowPhase + arrowSpeed * dt) % 1 + 1) % 1;
       }
 
-      if (state.isPlaying) {
+      if (state.isPlaying && !state.isScreenFrozen) {
         if (Math.abs(iExt) < 0.05) {
           state.angularVel *= Math.pow(0.05, dt);
         } else if (state.commutatorAutoFlip) {
@@ -689,10 +715,6 @@
         drawStatorMagneticField(false, phys);
       }
 
-      if (state.showRightHand && phys.endAPole !== 0) {
-        drawTextbookRightHandBack(phys);
-      }
-
       drawTextbookCoilAndCurrentArrows(phys);
 
       if (state.showMagneticField) {
@@ -708,7 +730,7 @@
       }
 
       if (state.showCallouts) {
-        drawTextbookCallouts();
+        drawTextbookCallouts(phys);
       }
 
       ctx.restore();
@@ -814,7 +836,8 @@
       }
 
       if (!isForeground) {
-        const ampRatio = 0.6 + 0.45 * (Math.min(28, Math.abs(state.instantCurrent)) / 28);
+        const curLv = Math.max(0.2, state.currentLevel || 1);
+        const ampRatio = 0.55 + 0.55 * (Math.min(28, Math.abs(state.instantCurrent)) / 28);
         const poleSources = [];
         for (let m = 0; m < 9; m++) {
           const ym = -116 + 29 * m;
@@ -833,8 +856,8 @@
           const yA = uA * sinA + vk * cosA;
           const xB = uB * cosA - vk * sinA;
           const yB = uB * sinA + vk * cosA;
-          poleSources.push({ x: xA, y: yA, q: endAPole * 1.65 * ampRatio, r2: 520 });
-          poleSources.push({ x: xB, y: yB, q: -endAPole * 1.65 * ampRatio, r2: 520 });
+          poleSources.push({ x: xA, y: yA, q: endAPole * 1.75 * ampRatio, r2: 520 });
+          poleSources.push({ x: xB, y: yB, q: -endAPole * 1.75 * ampRatio, r2: 520 });
         }
 
         function sampleCombinedField(x, y) {
@@ -915,16 +938,33 @@
           return { pts, sourceTag };
         }
 
+        /* 전류의 세기(curLv: 0~5)에 비례하여 자기력선 시드 개수 동적 생성 */
+        const numStatorSeeds = Math.max(3, Math.round(2 + curLv * 1.8));
+        const statorSeedYs = [];
+        for (let i = 0; i < numStatorSeeds; i++) {
+          const frac = numStatorSeeds === 1 ? 0.5 : i / (numStatorSeeds - 1);
+          statorSeedYs.push(-114 + frac * 228);
+        }
+
+        const numCoilSeeds = Math.max(2, Math.round(1 + curLv * 2.0));
+        const coilSeedVs = [];
+        for (let i = 0; i < numCoilSeeds; i++) {
+          const frac = numCoilSeeds === 1 ? 0.5 : i / (numCoilSeeds - 1);
+          coilSeedVs.push(-70 + frac * 140);
+        }
+
+        const minGap = Math.max(8, 25 - curLv * 3.2);
+
         const tracedLines = [];
         const statorN_XSign = statorPol > 0 ? -1 : 1;
-        [-112, -75, -37, 0, 37, 75, 112].forEach(sy => {
+        statorSeedYs.forEach(sy => {
           const t = (sy + 140) / 280;
           const xEdge = 228 + 84 * t * (1 - t);
           tracedLines.push(traceFieldLine(statorN_XSign * (xEdge - 3), sy, 1, 'stator'));
         });
 
         const coilN_USign = endAPole > 0 ? -1 : 1;
-        [-68, -45, -22, 0, 22, 45, 68].forEach(sv => {
+        coilSeedVs.forEach(sv => {
           const uMax = 152 + 18 * (1 - (sv / 84) * (sv / 84));
           const su = coilN_USign * (uMax + 3);
           const sx = su * cosA - sv * sinA;
@@ -948,24 +988,49 @@
         }
 
         const statorS_XSign = -statorN_XSign;
-        [-112, -75, -37, 0, 37, 75, 112].forEach(sy => {
+        statorSeedYs.forEach(sy => {
           const t = (sy + 140) / 280;
           const xEdge = 228 + 84 * t * (1 - t);
           const sx = statorS_XSign * (xEdge - 3);
-          if (!isNearExistingLine(sx, sy, 22)) {
+          if (!isNearExistingLine(sx, sy, minGap)) {
             tracedLines.push(traceFieldLine(sx, sy, -1, 'stator'));
           }
         });
 
-        [-68, -45, -22, 0, 22, 45, 68].forEach(sv => {
+        coilSeedVs.forEach(sv => {
           const uMax = 152 + 18 * (1 - (sv / 84) * (sv / 84));
           const su = -coilN_USign * (uMax + 3);
           const sx = su * cosA - sv * sinA;
           const sy = su * sinA + sv * cosA;
-          if (!hitMagnetOrCoilBoundary(sx, sy) && !isNearExistingLine(sx, sy, 20)) {
+          if (!hitMagnetOrCoilBoundary(sx, sy) && !isNearExistingLine(sx, sy, minGap * 0.9)) {
             tracedLines.push(traceFieldLine(sx, sy, -1, 'coil'));
           }
         });
+
+        /* 코일 위·아래를 감싸 도는 자체 자기력선 루프도 전류 세기에 비례하여 추가 */
+        const numCoilLoops = Math.max(1, Math.round(curLv * 1.2));
+        ctx.save();
+        ctx.rotate(state.coilAngle);
+        for (let lp = 1; lp <= numCoilLoops; lp++) {
+          const archH = 104 + lp * 18;
+          const uSpan = 148 + lp * 4;
+          [-1, 1].forEach(vSign => {
+            ctx.beginPath();
+            ctx.moveTo(coilN_USign * uSpan, vSign * 70);
+            ctx.bezierCurveTo(
+              coilN_USign * (uSpan + 16), vSign * archH,
+              -coilN_USign * (uSpan + 16), vSign * archH,
+              -coilN_USign * uSpan, vSign * 70
+            );
+            ctx.strokeStyle = 'rgba(37, 99, 235, 0.52)';
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            const arrowDir = coilN_USign > 0 ? Math.PI : 0;
+            drawFieldArrowhead(0, vSign * (70 * 0.25 + archH * 0.75), arrowDir, '#2563eb', true);
+          });
+        }
+        ctx.restore();
 
         ctx.save();
         tracedLines.forEach(line => {
@@ -992,12 +1057,20 @@
         });
         ctx.restore();
       } else {
+        const curLv = Math.max(0.2, state.currentLevel || 1);
+        const numInternal = Math.max(2, Math.round(1 + curLv * 1.6));
+        const internalVs = [];
+        for (let i = 0; i < numInternal; i++) {
+          const frac = numInternal === 1 ? 0.5 : i / (numInternal - 1);
+          internalVs.push(-60 + frac * 120);
+        }
+
         ctx.save();
         ctx.rotate(state.coilAngle);
         const internalDir = endAPole > 0 ? -1 : 1;
-        [-44, 0, 44].forEach(vLine => {
+        internalVs.forEach(vLine => {
           ctx.save();
-          ctx.strokeStyle = 'rgba(37, 99, 235, 0.26)';
+          ctx.strokeStyle = 'rgba(37, 99, 235, 0.28)';
           ctx.lineWidth = 2.0;
           ctx.setLineDash([6, 6]);
           ctx.beginPath();
@@ -1005,7 +1078,7 @@
           ctx.lineTo(132, vLine);
           ctx.stroke();
           ctx.restore();
-          drawFieldArrowhead(internalDir * 52, vLine, internalDir > 0 ? 0 : Math.PI, 'rgba(37, 99, 235, 0.42)', false);
+          drawFieldArrowhead(internalDir * 52, vLine, internalDir > 0 ? 0 : Math.PI, 'rgba(37, 99, 235, 0.45)', false);
         });
         ctx.restore();
 
@@ -1282,71 +1355,7 @@
       ctx.restore();
     }
 
-    /* N극이 오른쪽일 때 코일 뒤쪽에 위치하는 오른손 손바닥과 엄지 */
-    function drawTextbookRightHandBack(phys) {
-      const { endAPole } = phys;
-      if (endAPole === 0) return;
-
-      const cosA = Math.cos(state.coilAngle);
-      const sinA = Math.sin(state.coilAngle);
-      const uprightAngle = cosA >= 0 ? Math.atan2(sinA, cosA) : Math.atan2(-sinA, -cosA);
-      const nPoleOnLeft = (endAPole * (cosA >= 0 ? 1 : -1)) > 0;
-      if (nPoleOnLeft) return;
-
-      ctx.save();
-      ctx.globalAlpha = 0.70;
-      ctx.rotate(uprightAngle);
-
-      const skinFill = '#F6CD96';
-      const nailFill = '#FBE6C9';
-      const outlineColor = '#93999E';
-
-      ctx.fillStyle = skinFill;
-      ctx.strokeStyle = outlineColor;
-      ctx.lineWidth = 2.8;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-
-      /* 코일 뒤쪽 손바닥 및 오른쪽으로 뻗은 엄지 */
-      ctx.beginPath();
-      ctx.moveTo(-102, 220);
-      ctx.lineTo(-104, 152);
-      ctx.lineTo(-132, 54);
-      ctx.lineTo(-136, -12);
-      ctx.lineTo(-124, -84);
-      ctx.lineTo(54, -84);
-      ctx.lineTo(58, -14);
-      ctx.lineTo(74, -2);
-      ctx.lineTo(94, -2);
-      ctx.lineTo(148, -22);
-      ctx.lineTo(176, -24);
-      ctx.lineTo(198, -10);
-      ctx.lineTo(206, 12);
-      ctx.lineTo(198, 22);
-      ctx.lineTo(166, 20);
-      ctx.lineTo(132, 36);
-      ctx.lineTo(92, 74);
-      ctx.lineTo(48, 126);
-      ctx.lineTo(42, 220);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      /* 오른쪽 엄지 손톱 */
-      ctx.beginPath();
-      ctx.moveTo(166, 20);
-      ctx.lineTo(174, 8);
-      ctx.lineTo(203, 12);
-      ctx.lineTo(198, 22);
-      ctx.closePath();
-      ctx.fillStyle = nailFill;
-      ctx.fill();
-      ctx.stroke();
-
-      ctx.restore();
-    }
-
-    /* 첨부 이미지(image_9d5d04.png / image_8ba17d.png)를 그대로 재현한 오른손 모양 */
+    /* 오프스크린 캔버스 합성을 통해 모든 브라우저(GitHub Pages 포함)에서 완벽한 투명도(30%~35% 투과)로 표시되는 오른손 모양 */
     function drawTextbookRightHandOverlay(phys) {
       const { endAPole } = phys;
       if (endAPole === 0) return;
@@ -1356,121 +1365,162 @@
       const uprightAngle = cosA >= 0 ? Math.atan2(sinA, cosA) : Math.atan2(-sinA, -cosA);
       const nPoleOnLeft = (endAPole * (cosA >= 0 ? 1 : -1)) > 0;
 
-      ctx.save();
-      ctx.globalAlpha = 0.70;
-      ctx.rotate(uprightAngle);
+      const ow = handOffscreenCanvas.width;
+      const oh = handOffscreenCanvas.height;
+      handCtx.setTransform(1, 0, 0, 1, 0, 0);
+      handCtx.clearRect(0, 0, ow, oh);
+
+      handCtx.save();
+      handCtx.translate(ow / 2, oh / 2);
 
       const skinFill = '#F6CD96';
       const nailFill = '#FBE6C9';
-      const outlineColor = '#93999E';
+      const outlineColor = '#787E85';
 
-      ctx.fillStyle = skinFill;
-      ctx.strokeStyle = outlineColor;
-      ctx.lineWidth = 2.8;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
+      handCtx.fillStyle = skinFill;
+      handCtx.strokeStyle = outlineColor;
+      handCtx.lineWidth = 3.0;
+      handCtx.lineJoin = 'round';
+      handCtx.lineCap = 'round';
 
       if (nPoleOnLeft) {
         /* 첨부 이미지(image_9d5d04.png) : 손등이 앞을 향하고 네 손가락이 코일 위쪽을 감싸며 엄지가 왼쪽(N극)을 가리키는 모양 */
-        ctx.beginPath();
-        ctx.moveTo(-2, 220);
-        ctx.lineTo(-10, 178);
-        ctx.lineTo(-28, 146);
-        ctx.lineTo(-60, 108);
-        ctx.lineTo(-92, 76);
-        ctx.lineTo(-126, 56);
-        ctx.lineTo(-154, 46);
-        ctx.lineTo(-188, 38);
-        ctx.lineTo(-186, 24);
-        ctx.lineTo(-164, 14);
-        ctx.lineTo(-114, 14);
-        ctx.lineTo(-42, 44);
-        ctx.lineTo(-32, -16);
-        ctx.lineTo(-40, -68);
-        ctx.lineTo(-46, -74);
-        ctx.lineTo(-44, -124);
-        ctx.lineTo(-4, -142);
-        ctx.lineTo(14, -135);
-        ctx.lineTo(24, -150);
-        ctx.lineTo(48, -156);
-        ctx.lineTo(74, -150);
-        ctx.lineTo(84, -134);
-        ctx.lineTo(112, -137);
-        ctx.lineTo(132, -134);
-        ctx.lineTo(144, -114);
-        ctx.lineTo(164, -104);
-        ctx.lineTo(188, -82);
-        ctx.lineTo(204, -16);
-        ctx.lineTo(212, 54);
-        ctx.lineTo(208, 114);
-        ctx.lineTo(196, 158);
-        ctx.lineTo(196, 220);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+        handCtx.beginPath();
+        handCtx.moveTo(-2, 220);
+        handCtx.lineTo(-10, 178);
+        handCtx.lineTo(-28, 146);
+        handCtx.lineTo(-60, 108);
+        handCtx.lineTo(-92, 76);
+        handCtx.lineTo(-126, 56);
+        handCtx.lineTo(-154, 46);
+        handCtx.lineTo(-188, 38);
+        handCtx.lineTo(-186, 24);
+        handCtx.lineTo(-164, 14);
+        handCtx.lineTo(-114, 14);
+        handCtx.lineTo(-42, 44);
+        handCtx.lineTo(-32, -16);
+        handCtx.lineTo(-40, -68);
+        handCtx.lineTo(-46, -74);
+        handCtx.lineTo(-44, -124);
+        handCtx.lineTo(-4, -142);
+        handCtx.lineTo(14, -135);
+        handCtx.lineTo(24, -150);
+        handCtx.lineTo(48, -156);
+        handCtx.lineTo(74, -150);
+        handCtx.lineTo(84, -134);
+        handCtx.lineTo(112, -137);
+        handCtx.lineTo(132, -134);
+        handCtx.lineTo(144, -114);
+        handCtx.lineTo(164, -104);
+        handCtx.lineTo(188, -82);
+        handCtx.lineTo(204, -16);
+        handCtx.lineTo(212, 54);
+        handCtx.lineTo(208, 114);
+        handCtx.lineTo(196, 158);
+        handCtx.lineTo(196, 220);
+        handCtx.closePath();
+        handCtx.fill();
+        handCtx.stroke();
 
         /* 검지 끝 안쪽 접힘선 및 손가락 구분선 3줄 */
-        ctx.beginPath();
-        ctx.moveTo(-38, -102);
-        ctx.lineTo(-40, -68);
+        handCtx.beginPath();
+        handCtx.moveTo(-38, -102);
+        handCtx.lineTo(-40, -68);
 
-        ctx.moveTo(14, -135);
-        ctx.lineTo(26, -130);
-        ctx.lineTo(36, -108);
-        ctx.lineTo(42, -36);
+        handCtx.moveTo(14, -135);
+        handCtx.moveTo(26, -130);
+        handCtx.lineTo(36, -108);
+        handCtx.lineTo(42, -36);
 
-        ctx.moveTo(84, -134);
-        ctx.lineTo(98, -70);
-        ctx.lineTo(116, -26);
+        handCtx.moveTo(84, -134);
+        handCtx.lineTo(98, -70);
+        handCtx.lineTo(116, -26);
 
-        ctx.moveTo(144, -114);
-        ctx.lineTo(156, -60);
-        ctx.lineTo(172, -14);
-        ctx.stroke();
+        handCtx.moveTo(144, -114);
+        handCtx.lineTo(156, -60);
+        handCtx.lineTo(172, -14);
+        handCtx.stroke();
 
         /* 왼쪽 엄지 옆면 손톱 */
-        ctx.beginPath();
-        ctx.moveTo(-187, 29);
-        ctx.lineTo(-153, 35);
-        ctx.lineTo(-154, 46);
-        ctx.lineTo(-188, 38);
-        ctx.closePath();
-        ctx.fillStyle = nailFill;
-        ctx.fill();
-        ctx.stroke();
+        handCtx.beginPath();
+        handCtx.moveTo(-187, 29);
+        handCtx.lineTo(-153, 35);
+        handCtx.lineTo(-154, 46);
+        handCtx.lineTo(-188, 38);
+        handCtx.closePath();
+        handCtx.fillStyle = nailFill;
+        handCtx.fill();
+        handCtx.stroke();
       } else {
-        /* N극이 오른쪽일 때 코일 위쪽 모서리를 감싸 쥐고 내려오는 네 손가락 끝과 손톱 */
-        ctx.beginPath();
-        ctx.moveTo(-124, -84);
-        ctx.lineTo(-120, -118);
-        ctx.lineTo(-104, -132);
-        ctx.lineTo(-86, -124);
-        ctx.lineTo(-80, -138);
-        ctx.lineTo(-56, -144);
-        ctx.lineTo(-36, -134);
-        ctx.lineTo(-26, -148);
-        ctx.lineTo(0, -154);
-        ctx.lineTo(22, -140);
-        ctx.lineTo(44, -148);
-        ctx.lineTo(62, -136);
-        ctx.lineTo(68, -112);
-        ctx.lineTo(72, -84);
-        ctx.closePath();
-        ctx.fillStyle = skinFill;
-        ctx.fill();
-        ctx.stroke();
+        /* 첨부 이미지(image_8ba17d.png) : 손바닥과 오른쪽 엄지 + 코일 위쪽 모서리를 감싸 쥐고 내려오는 네 손가락 끝과 손톱 */
+        handCtx.beginPath();
+        handCtx.moveTo(-102, 220);
+        handCtx.lineTo(-104, 152);
+        handCtx.lineTo(-132, 54);
+        handCtx.lineTo(-136, -12);
+        handCtx.lineTo(-124, -84);
+        handCtx.lineTo(54, -84);
+        handCtx.lineTo(58, -14);
+        handCtx.lineTo(74, -2);
+        handCtx.lineTo(94, -2);
+        handCtx.lineTo(148, -22);
+        handCtx.lineTo(176, -24);
+        handCtx.lineTo(198, -10);
+        handCtx.lineTo(206, 12);
+        handCtx.lineTo(198, 22);
+        handCtx.lineTo(166, 20);
+        handCtx.lineTo(132, 36);
+        handCtx.lineTo(92, 74);
+        handCtx.lineTo(48, 126);
+        handCtx.lineTo(42, 220);
+        handCtx.closePath();
+        handCtx.fillStyle = skinFill;
+        handCtx.fill();
+        handCtx.stroke();
+
+        /* 오른쪽 엄지 손톱 */
+        handCtx.beginPath();
+        handCtx.moveTo(166, 20);
+        handCtx.lineTo(174, 8);
+        handCtx.lineTo(203, 12);
+        handCtx.lineTo(198, 22);
+        handCtx.closePath();
+        handCtx.fillStyle = nailFill;
+        handCtx.fill();
+        handCtx.stroke();
+
+        /* 코일 위쪽 모서리를 감싸 쥐고 내려오는 네 손가락 끝 */
+        handCtx.beginPath();
+        handCtx.moveTo(-124, -84);
+        handCtx.lineTo(-120, -118);
+        handCtx.lineTo(-104, -132);
+        handCtx.lineTo(-86, -124);
+        handCtx.lineTo(-80, -138);
+        handCtx.lineTo(-56, -144);
+        handCtx.lineTo(-36, -134);
+        handCtx.lineTo(-26, -148);
+        handCtx.lineTo(0, -154);
+        handCtx.lineTo(22, -140);
+        handCtx.lineTo(44, -148);
+        handCtx.lineTo(62, -136);
+        handCtx.lineTo(68, -112);
+        handCtx.lineTo(72, -84);
+        handCtx.closePath();
+        handCtx.fillStyle = skinFill;
+        handCtx.fill();
+        handCtx.stroke();
 
         /* 네 손가락 마디 구분선 */
-        ctx.beginPath();
-        ctx.moveTo(-86, -124); ctx.lineTo(-86, -84);
-        ctx.moveTo(-36, -134); ctx.lineTo(-34, -84);
-        ctx.moveTo(22, -140); ctx.lineTo(18, -84);
+        handCtx.beginPath();
+        handCtx.moveTo(-86, -124); handCtx.lineTo(-86, -84);
+        handCtx.moveTo(-36, -134); handCtx.lineTo(-34, -84);
+        handCtx.moveTo(22, -140); handCtx.lineTo(18, -84);
 
-        ctx.moveTo(-120, -104); ctx.lineTo(-102, -94); ctx.lineTo(-86, -100);
-        ctx.moveTo(-86, -108); ctx.lineTo(-60, -96); ctx.lineTo(-35, -108);
-        ctx.moveTo(-35, -112); ctx.lineTo(-6, -100); ctx.lineTo(20, -116);
-        ctx.moveTo(20, -114); ctx.lineTo(46, -104); ctx.lineTo(68, -116);
-        ctx.stroke();
+        handCtx.moveTo(-120, -104); handCtx.lineTo(-102, -94); handCtx.lineTo(-86, -100);
+        handCtx.moveTo(-86, -108); handCtx.lineTo(-60, -96); handCtx.lineTo(-35, -108);
+        handCtx.moveTo(-35, -112); handCtx.lineTo(-6, -100); handCtx.lineTo(20, -116);
+        handCtx.moveTo(20, -114); handCtx.lineTo(46, -104); handCtx.lineTo(68, -116);
+        handCtx.stroke();
 
         /* 네 손가락 손톱 */
         const nails = [
@@ -1480,16 +1530,23 @@
           [[28, -120], [42, -132], [56, -128], [60, -116]]
         ];
         nails.forEach(pts => {
-          ctx.beginPath();
-          ctx.moveTo(pts[0][0], pts[0][1]);
-          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-          ctx.closePath();
-          ctx.fillStyle = nailFill;
-          ctx.fill();
-          ctx.stroke();
+          handCtx.beginPath();
+          handCtx.moveTo(pts[0][0], pts[0][1]);
+          for (let i = 1; i < pts.length; i++) handCtx.lineTo(pts[i][0], pts[i][1]);
+          handCtx.closePath();
+          handCtx.fillStyle = nailFill;
+          handCtx.fill();
+          handCtx.stroke();
         });
       }
 
+      handCtx.restore();
+
+      /* 메인 캔버스에 오프스크린 손 레이어를 투명도(globalAlpha = 0.65)로 일괄 합성 */
+      ctx.save();
+      ctx.rotate(uprightAngle);
+      ctx.globalAlpha = 0.65;
+      ctx.drawImage(handOffscreenCanvas, -ow / 2, -oh / 2, ow, oh);
       ctx.restore();
     }
 
@@ -1514,20 +1571,24 @@
       ctx.translate(cx, cy);
       ctx.rotate(angleRad);
       ctx.beginPath();
-      ctx.moveTo(38, 0);
-      ctx.lineTo(12, -22);
-      ctx.lineTo(12, -10);
-      ctx.lineTo(-38, -10);
-      ctx.lineTo(-38, 10);
-      ctx.lineTo(12, 10);
-      ctx.lineTo(12, 22);
+      ctx.moveTo(46, 0);
+      ctx.lineTo(10, -28);
+      ctx.lineTo(10, -12);
+      ctx.lineTo(-46, -12);
+      ctx.lineTo(-46, 12);
+      ctx.lineTo(10, 12);
+      ctx.lineTo(10, 28);
       ctx.closePath();
-      ctx.fillStyle = '#F43F5E'; ctx.fill();
-      ctx.lineWidth = 2.5; ctx.strokeStyle = '#881337'; ctx.lineJoin = 'round'; ctx.stroke();
+      ctx.fillStyle = 'rgba(244, 63, 94, 0.88)';
+      ctx.fill();
+      ctx.lineWidth = 3.0;
+      ctx.strokeStyle = '#881337';
+      ctx.lineJoin = 'round';
+      ctx.stroke();
       ctx.restore();
     }
 
-    function drawTextbookCallouts() {
+    function drawTextbookCallouts(phys) {
       ctx.save();
       ctx.fillStyle = '#0f172a';
       ctx.strokeStyle = '#334155';
@@ -1562,22 +1623,70 @@
       ctx.textAlign = 'right';
       ctx.textBaseline = 'bottom';
       ctx.fillText('코일', labelX - 4, labelY + 4);
+
+      /* 전류의 방향 지시선 (전류가 흐를 때 표시) */
+      if (phys && phys.endAPole !== 0) {
+        const curLocalX = 19;
+        const curLocalY = 0;
+        const cx = curLocalX * cosA - curLocalY * sinA;
+        const cy = curLocalX * sinA + curLocalY * cosA;
+        const cLabelX = cx + 52;
+        const cLabelY = cy - 92;
+        ctx.beginPath();
+        ctx.moveTo(cx + 8, cy - 12);
+        ctx.lineTo(cLabelX, cLabelY);
+        ctx.stroke();
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('전류의 방향', cLabelX + 4, cLabelY + 4);
+      }
       ctx.restore();
     }
 
     // ================= 5. 조작 인터랙션 및 상태 제어 =================
     function togglePlayPause() {
-      state.isPlaying = !state.isPlaying;
-      if (state.isPlaying) {
+      if (state.isScreenFrozen) {
+        /* 화면 정지 상태에서 실행을 누르면 정지를 해제하고 회전 재개 */
+        state.isScreenFrozen = false;
+        state.isPlaying = true;
         state.switchOn = true;
         if (state.currentLevel <= 0.01) {
           state.currentLevel = 1;
           state.currentAmp = LEVEL_TO_AMP[1];
         }
       } else {
-        state.switchOn = false;
-        state.currentLevel = 0;
-        state.currentAmp = 0;
+        state.isPlaying = !state.isPlaying;
+        if (state.isPlaying) {
+          state.switchOn = true;
+          if (state.currentLevel <= 0.01) {
+            state.currentLevel = 1;
+            state.currentAmp = LEVEL_TO_AMP[1];
+          }
+        } else {
+          state.switchOn = false;
+          state.currentLevel = 0;
+          state.currentAmp = 0;
+        }
+      }
+      syncPowerSwitchUI();
+      updatePlayPauseUI();
+    }
+
+    /* 전류가 흐르는 상태를 유지한 채 코일 회전만 멈추는 '화면 정지' 토글 */
+    function toggleScreenFreeze() {
+      state.isScreenFrozen = !state.isScreenFrozen;
+      if (state.isScreenFrozen) {
+        state.switchOn = true;
+        if (state.currentLevel <= 0.01) {
+          state.currentLevel = 1;
+          state.currentAmp = LEVEL_TO_AMP[1];
+        }
+        state.isPlaying = false;
+        state.angularVel = 0;
+      } else {
+        if (state.switchOn && state.currentLevel > 0.01) {
+          state.isPlaying = true;
+        }
       }
       syncPowerSwitchUI();
       updatePlayPauseUI();
@@ -1590,15 +1699,20 @@
       const btmBtn = document.getElementById('btmPlayPauseBtn');
       const btmIcon = document.getElementById('btmPlayPauseIcon');
       const btmText = document.getElementById('btmPlayPauseText');
+      const freezeBtn = document.getElementById('btnScreenFreeze');
+      const freezeIcon = document.getElementById('screenFreezeIcon');
+      const freezeText = document.getElementById('screenFreezeText');
 
-      if (state.isPlaying) {
+      const activelyRotating = state.isPlaying && !state.isScreenFrozen;
+
+      if (activelyRotating) {
         if (topBtn) {
           topBtn.className = "w-full py-1.5 px-3 rounded-xl font-black text-xs border-2 border-slate-900 bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm flex items-center justify-center gap-1.5";
           topIcon.textContent = '⏸️';
           topText.textContent = '일시정지';
         }
         if (btmBtn) {
-          btmBtn.className = "px-4 py-1 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5";
+          btmBtn.className = "btm-action-btn bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm";
           btmIcon.textContent = '⏸️';
           btmText.textContent = '일시정지';
         }
@@ -1609,9 +1723,21 @@
           topText.textContent = '실행';
         }
         if (btmBtn) {
-          btmBtn.className = "px-4 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white border-2 border-slate-900 font-black text-xs shadow-sm flex items-center gap-1.5 play-resume-pulse";
+          btmBtn.className = "btm-action-btn bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm play-resume-pulse";
           btmIcon.textContent = '▶️';
           btmText.textContent = '실행';
+        }
+      }
+
+      if (freezeBtn) {
+        if (state.isScreenFrozen) {
+          freezeBtn.className = "btm-action-btn bg-yellow-300 hover:bg-yellow-400 text-slate-950 shadow-sm";
+          if (freezeIcon) freezeIcon.textContent = '🔒';
+          if (freezeText) freezeText.textContent = '화면 정지중';
+        } else {
+          freezeBtn.className = "btm-action-btn bg-white hover:bg-amber-100 text-slate-900 shadow-sm";
+          if (freezeIcon) freezeIcon.textContent = '⏸️';
+          if (freezeText) freezeText.textContent = '화면 정지';
         }
       }
     }
@@ -1623,10 +1749,12 @@
           state.currentLevel = 1;
           state.currentAmp = LEVEL_TO_AMP[1];
         }
+        state.isScreenFrozen = false;
         state.isPlaying = true;
       } else {
         state.currentLevel = 0;
         state.currentAmp = 0;
+        state.isScreenFrozen = false;
         state.isPlaying = false;
       }
       syncPowerSwitchUI();
@@ -1667,10 +1795,13 @@
         state.currentLevel = 0;
         state.switchOn = false;
         state.currentAmp = 0;
+        state.isScreenFrozen = false;
         state.isPlaying = false;
       } else {
         state.switchOn = true;
-        state.isPlaying = true;
+        if (!state.isScreenFrozen) {
+          state.isPlaying = true;
+        }
         const low = Math.floor(num);
         const high = Math.min(5, Math.ceil(num));
         const frac = num - low;
@@ -1725,6 +1856,9 @@
     }
 
     function setCoilAngleFromSlider(val) {
+      if (state.switchOn && state.currentLevel > 0.01) {
+        state.isScreenFrozen = true;
+      }
       state.isPlaying = false;
       updatePlayPauseUI();
       const deg = parseFloat(val);
@@ -1732,6 +1866,9 @@
     }
 
     function rotateCoilByStep(deltaDeg) {
+      if (state.switchOn && state.currentLevel > 0.01) {
+        state.isScreenFrozen = true;
+      }
       state.isPlaying = false;
       updatePlayPauseUI();
       let deg = (state.coilAngle * 180) / Math.PI + deltaDeg;
@@ -1753,7 +1890,7 @@
         if (btnText) btnText.textContent = '설정창 닫기 ✕';
       } else {
         panel.classList.add('hidden');
-        if (btnText) btnText.textContent = '설정창 열기 ⚙️';
+        if (btnText) btnText.textContent = '설정창 열기';
       }
       setTimeout(resizeCanvas, 50);
     }
